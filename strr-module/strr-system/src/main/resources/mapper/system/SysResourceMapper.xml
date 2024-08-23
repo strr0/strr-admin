@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.strr.system.mapper.SysResourceMapper">
+    <select id="listByUserId" resultType="com.strr.system.model.SysResource">
+        select t3.id, t3.name, t3.path, t3.component, t3.title, t3.type, t3.icon, t3.hide, t3.parent_id, t3.`order`,
+          t3.creator, t3.create_time, t3.updator, t3.update_time, t3.status
+        from (select distinct t1.resource_id from sys_rel_role_resource t1 left join sys_rel_user_role t2 on t1.role_id = t2.role_id where t2.user_id = #{userId}) t
+        left join sys_resource t3 on t.resource_id = t3.id
+    </select>
+</mapper>

@@ -67,14 +67,14 @@ public class CustomInterceptor implements Interceptor {
 
         // 基础参数
         ParameterUtils.getBaseModel(parameter).ifPresent(model -> {
-            if (model.getCreator() == null) {
-                model.setCreator(1);
+            if (model.getCreateBy() == null) {
+                model.setCreateBy(1);
             }
             if (model.getCreateTime() == null) {
                 model.setCreateTime(new Date());
             }
-            if (model.getUpdator() == null) {
-                model.setUpdator(1);
+            if (model.getUpdateBy() == null) {
+                model.setUpdateBy(1);
             }
             if (model.getUpdateTime() == null) {
                 model.setUpdateTime(new Date());

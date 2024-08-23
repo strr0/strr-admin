@@ -23,7 +23,7 @@ public class ModelUtil {
      * 获取表名
      */
     public static String getTable(Class<?> clazz) {
-        return getTableOpt(clazz).map(Table::value).orElse(clazz.getSimpleName());
+        return getTableOpt(clazz).map(Table::value).orElse(toUnderscore(clazz.getSimpleName()));
     }
 
     /**
@@ -37,7 +37,7 @@ public class ModelUtil {
      * 获取字段名
      */
     public static String getColumn(Field field) {
-        return getColumnOpt(field).map(Column::value).filter(str -> str.length() > 0).orElse(field.getName());
+        return getColumnOpt(field).map(Column::value).filter(str -> str.length() > 0).orElse(toUnderscore(field.getName()));
     }
 
     /**
@@ -76,5 +76,12 @@ public class ModelUtil {
             }
         }
         throw new KeyNotFoundException();
+    }
+
+    /**
+     * 驼峰转下划线
+     */
+    public static String toUnderscore(String str) {
+        return str.replaceAll("([a-z])([A-Z])", "$1_$2").toLowerCase();
     }
 }

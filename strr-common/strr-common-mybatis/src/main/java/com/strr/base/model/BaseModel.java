@@ -10,7 +10,7 @@ public class BaseModel {
     /**
      * 创建人
      */
-    private Integer creator;
+    private Integer createBy;
 
     /**
      * 创建时间
@@ -23,7 +23,7 @@ public class BaseModel {
     /**
      * 更新人
      */
-    private Integer updator;
+    private Integer updateBy;
 
     /**
      * 更新时间
@@ -33,17 +33,12 @@ public class BaseModel {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
-    /**
-     * 状态
-     */
-    private Integer status;
-
-    public Integer getCreator() {
-        return creator;
+    public Integer getCreateBy() {
+        return createBy;
     }
 
-    public void setCreator(Integer creator) {
-        this.creator = creator;
+    public void setCreateBy(Integer createBy) {
+        this.createBy = createBy;
     }
 
     public Date getCreateTime() {
@@ -54,12 +49,12 @@ public class BaseModel {
         this.createTime = createTime;
     }
 
-    public Integer getUpdator() {
-        return updator;
+    public Integer getUpdateBy() {
+        return updateBy;
     }
 
-    public void setUpdator(Integer updator) {
-        this.updator = updator;
+    public void setUpdateBy(Integer updateBy) {
+        this.updateBy = updateBy;
     }
 
     public Date getUpdateTime() {
@@ -68,13 +63,5 @@ public class BaseModel {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
     }
 }

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.strr.system.mapper.SysUserRoleMapper">
+    <insert id="batchSave">
+        insert into sys_rel_user_role(user_id, role_id) values
+        <foreach collection="roleIds" item="roleId" separator=",">
+            (#{userId}, #{roleId})
+        </foreach>
+    </insert>
+
+    <select id="listByUserId" resultType="java.lang.Integer">
+        select role_id from sys_rel_user_role where user_id = #{userId}
+    </select>
+
+    <delete id="removeByUserId">
+        delete from sys_rel_user_role where user_id = #{userId}
+    </delete>
+
+    <delete id="removeByRoleId">
+        delete from sys_rel_user_role where role_id = #{roleId}
+    </delete>
+</mapper>
