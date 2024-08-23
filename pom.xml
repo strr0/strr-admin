@@ -11,6 +11,7 @@
     <modules>
         <module>strr-common</module>
         <module>strr-module</module>
+        <module>strr-visual</module>
     </modules>
 
     <properties>
