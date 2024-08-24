@@ -3,22 +3,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>strr-admin</artifactId>
+        <artifactId>strr-api</artifactId>
         <groupId>com.strr</groupId>
         <version>${revision}</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>strr-common</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>strr-common-core</module>
-        <module>strr-common-mybatis</module>
-        <module>strr-common-web</module>
-        <module>strr-common-bom</module>
-        <module>strr-common-alibaba-bom</module>
-        <module>strr-common-dubbo</module>
-    </modules>
+    <artifactId>strr-api-system</artifactId>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>

@@ -9,15 +9,11 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>strr-common</artifactId>
+    <artifactId>strr-api</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>strr-common-core</module>
-        <module>strr-common-mybatis</module>
-        <module>strr-common-web</module>
-        <module>strr-common-bom</module>
-        <module>strr-common-alibaba-bom</module>
-        <module>strr-common-dubbo</module>
+        <module>strr-api-system</module>
+        <module>strr-api-bom</module>
     </modules>
 
     <properties>
