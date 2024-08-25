@@ -44,6 +44,13 @@
                 <artifactId>strr-common-dubbo</artifactId>
                 <version>${revision}</version>
             </dependency>
+
+            <!-- security 服务 -->
+            <dependency>
+                <groupId>com.strr</groupId>
+                <artifactId>strr-common-security</artifactId>
+                <version>${revision}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 </project>

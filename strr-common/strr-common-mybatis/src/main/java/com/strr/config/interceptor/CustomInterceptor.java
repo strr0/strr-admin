@@ -2,6 +2,7 @@ package com.strr.config.interceptor;
 
 import com.strr.base.model.Page;
 import com.strr.base.model.Pageable;
+import com.strr.base.util.LoginUtil;
 import com.strr.config.interceptor.page.IDialect;
 import com.strr.config.interceptor.page.MySqlDialect;
 import com.strr.util.ParameterUtils;
@@ -67,14 +68,15 @@ public class CustomInterceptor implements Interceptor {
 
         // 基础参数
         ParameterUtils.getBaseModel(parameter).ifPresent(model -> {
+            Integer userId = LoginUtil.getLoginId();
             if (model.getCreateBy() == null) {
-                model.setCreateBy(1);
+                model.setCreateBy(userId);
             }
             if (model.getCreateTime() == null) {
                 model.setCreateTime(new Date());
             }
             if (model.getUpdateBy() == null) {
-                model.setUpdateBy(1);
+                model.setUpdateBy(userId);
             }
             if (model.getUpdateTime() == null) {
                 model.setUpdateTime(new Date());
