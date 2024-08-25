@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/system/role")
+@RequestMapping("/role")
 public class SysRoleController extends CrudController<SysRole, Integer> {
     private final SysRoleService sysRoleService;
 

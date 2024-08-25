@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/system/user")
+@RequestMapping("/user")
 public class SysUserController extends CrudController<SysUser, Integer> {
     private final SysUserService sysUserService;
 
