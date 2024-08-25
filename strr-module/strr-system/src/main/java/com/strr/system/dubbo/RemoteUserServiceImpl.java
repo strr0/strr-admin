@@ -1,5 +1,6 @@
 package com.strr.system.dubbo;
 
+import com.strr.constant.Constant;
 import com.strr.system.api.RemoteUserService;
 import com.strr.system.api.model.LoginUser;
 import com.strr.system.mapper.SysResourceMapper;
@@ -38,7 +39,7 @@ public class RemoteUserServiceImpl implements RemoteUserService {
             loginUser.setUsername(user.getUsername());
             loginUser.setPassword(user.getPassword());
             loginUser.setNickname(user.getNickname());
-            loginUser.setResources(sysResourceMapper.listByUserId(user.getId())
+            loginUser.setResources(sysResourceMapper.listByUserId(user.getId(), Constant.NO)
                     .stream().map(SysResource::getPerms).filter(Objects::nonNull)
                     .collect(Collectors.toList()));
             return loginUser;

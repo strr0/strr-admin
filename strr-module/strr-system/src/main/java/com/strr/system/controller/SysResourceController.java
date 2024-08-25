@@ -1,7 +1,9 @@
 package com.strr.system.controller;
 
+import com.strr.base.util.LoginUtil;
 import com.strr.system.model.SysResource;
 import com.strr.system.model.vo.SysResourceVo;
+import com.strr.system.model.vo.SysRouteVo;
 import com.strr.system.service.SysResourceService;
 import com.strr.system.util.MenuUtil;
 import com.strr.base.controller.CrudController;
@@ -34,6 +36,18 @@ public class SysResourceController extends CrudController<SysResource, Integer> 
     public Result<List<SysResourceVo>> menuTree(SysResource param) {
         List<SysResource> sysResourceList = sysResourceService.listByParam(param);
         return Result.ok(MenuUtil.buildMenuTree(sysResourceList));
+    }
+
+    /**
+     * 获取路由
+     */
+    @GetMapping("/getRoutes")
+    public Result<List<SysRouteVo>> getRoutes() {
+        Integer userId = LoginUtil.getLoginId();
+        if (userId == null) {
+            return Result.error();
+        }
+        return Result.ok(MenuUtil.buildRouteTree(sysResourceService.listByUserId(userId)));
     }
 
     /**

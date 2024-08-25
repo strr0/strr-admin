@@ -1,5 +1,6 @@
 package com.strr.system.service.impl;
 
+import com.strr.constant.Constant;
 import com.strr.system.mapper.SysRoleResourceMapper;
 import com.strr.system.mapper.SysResourceMapper;
 import com.strr.system.model.SysResource;
@@ -37,7 +38,7 @@ public class SysResourceServiceImpl extends CrudServiceImpl<SysResource, Integer
      */
     @Override
     public List<SysResource> listByUserId(Integer userId) {
-        return sysResourceMapper.listByUserId(userId);
+        return sysResourceMapper.listByUserId(userId, Constant.YES);
     }
 
     /**
