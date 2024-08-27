@@ -4,6 +4,7 @@ import com.strr.system.model.SysRole;
 import com.strr.system.service.SysRoleService;
 import com.strr.base.controller.CrudController;
 import com.strr.base.model.Result;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,6 +26,7 @@ public class SysRoleController extends CrudController<SysRole, Integer> {
     /**
      * 获取角色列表
      */
+    @PreAuthorize("@pms.hasPermission('system:role:list')")
     @GetMapping("/list")
     public Result<List<SysRole>> list(SysRole param) {
         List<SysRole> list = sysRoleService.listByParam(param);
@@ -32,8 +34,29 @@ public class SysRoleController extends CrudController<SysRole, Integer> {
     }
 
     /**
-     * 更新角色权限
+     * 保存角色
      */
+    @Override
+    @PreAuthorize("@pms.hasPermission('system:role:save')")
+    @PostMapping
+    public Result<SysRole> save(@RequestBody SysRole sysRole) {
+        return super.save(sysRole);
+    }
+
+    /**
+     * 修改角色
+     */
+    @Override
+    @PreAuthorize("@pms.hasPermission('system:role:update')")
+    @PutMapping
+    public Result<SysRole> update(SysRole sysRole) {
+        return super.update(sysRole);
+    }
+
+    /**
+     * 更新角色资源
+     */
+    @PreAuthorize("@pms.hasPermission('system:role:update')")
     @PostMapping("/updateRel")
     public Result<Void> updateRel(Integer roleId, Integer[] resourceIds) {
         sysRoleService.updateRel(roleId, resourceIds);
@@ -41,8 +64,9 @@ public class SysRoleController extends CrudController<SysRole, Integer> {
     }
 
     /**
-     * 获取角色权限
+     * 获取角色资源
      */
+    @PreAuthorize("@pms.hasPermission('system:role:query')")
     @GetMapping("/listResourceId")
     public Result<List<Integer>> listResourceId(Integer roleId) {
         List<Integer> data = sysRoleService.listResourceId(roleId);
@@ -54,9 +78,21 @@ public class SysRoleController extends CrudController<SysRole, Integer> {
      * @param id
      * @return
      */
-    @DeleteMapping("/removeInfo")
-    public Result<Void> removeInfo(Integer id) {
+    @Override
+    @PreAuthorize("@pms.hasPermission('system:role:remove')")
+    @DeleteMapping("/{id}")
+    public Result<Void> remove(@PathVariable Integer id) {
         sysRoleService.removeInfo(id);
         return Result.ok();
+    }
+
+    /**
+     * 获取角色详情
+     */
+    @Override
+    @PreAuthorize("@pms.hasPermission('system:role:query')")
+    @GetMapping("/{id}")
+    public Result<SysRole> get(Integer id) {
+        return super.get(id);
     }
 }

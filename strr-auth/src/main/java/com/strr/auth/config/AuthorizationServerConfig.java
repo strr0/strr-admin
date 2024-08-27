@@ -8,14 +8,17 @@ import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
 import com.strr.auth.jose.Jwks;
+import com.strr.auth.model.LoginToken;
 import com.strr.auth.model.LoginUserDetails;
+import com.strr.auth.util.ResponseUtil;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
-import org.springframework.security.oauth2.core.OAuth2Token;
+import org.springframework.security.oauth2.core.*;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
 import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 import org.springframework.security.oauth2.server.authorization.*;
+import org.springframework.security.oauth2.server.authorization.authentication.OAuth2AccessTokenAuthenticationToken;
 import org.springframework.security.oauth2.server.authorization.authentication.OAuth2PasswordAuthenticationProvider;
 import org.springframework.security.oauth2.server.authorization.client.InMemoryRegisteredClientRepository;
 import org.springframework.security.oauth2.server.authorization.token.*;
@@ -24,11 +27,8 @@ import org.springframework.security.oauth2.server.authorization.web.authenticati
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
-import org.springframework.http.MediaType;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.oauth2.core.AuthorizationGrantType;
-import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 import org.springframework.security.oauth2.core.oidc.OidcScopes;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
@@ -38,8 +38,6 @@ import org.springframework.security.oauth2.server.authorization.config.annotatio
 import org.springframework.security.oauth2.server.authorization.settings.AuthorizationServerSettings;
 import org.springframework.security.oauth2.server.authorization.settings.TokenSettings;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
-import org.springframework.security.web.util.matcher.MediaTypeRequestMatcher;
 
 /**
  * 授權中心配置
@@ -64,20 +62,39 @@ public class AuthorizationServerConfig {
                     converters.add(new OAuth2PasswordAuthenticationConverter());
                 })
                 .authenticationProvider(new OAuth2PasswordAuthenticationProvider(authenticationManager, authorizationService, tokenGenerator))
+                .accessTokenResponseHandler((request, response, authentication) -> {
+                    OAuth2AccessTokenAuthenticationToken accessTokenAuthentication = (OAuth2AccessTokenAuthenticationToken) authentication;
+                    OAuth2AccessToken accessToken = accessTokenAuthentication.getAccessToken();
+                    OAuth2RefreshToken refreshToken = accessTokenAuthentication.getRefreshToken();
+
+                    LoginToken loginToken = new LoginToken();
+                    if (accessToken.getIssuedAt() != null && accessToken.getExpiresAt() != null) {
+                        loginToken.setAccessToken(accessToken.getTokenValue());
+                    }
+                    if (refreshToken != null) {
+                        loginToken.setRefreshToken(refreshToken.getTokenValue());
+                    }
+                    ResponseUtil.writeResult(response, loginToken);
+                })
+                .errorResponseHandler((request, response, exception) -> {
+                    ResponseUtil.writeResult(response, exception.getMessage());
+                })
             )
+            .clientAuthentication(configurer -> {
+                configurer.errorResponseHandler((request, response, exception) -> {
+                    ResponseUtil.writeResult(response, exception.getMessage());
+                });
+            })
             .oidc(Customizer.withDefaults());    // Enable OpenID Connect 1.0
         // @formatter:on
 
         // @formatter:off
         http
             .exceptionHandling((exceptions) -> exceptions
-                .defaultAuthenticationEntryPointFor(
-                    new LoginUrlAuthenticationEntryPoint("/login"),
-                    new MediaTypeRequestMatcher(MediaType.TEXT_HTML)
-                )
-            )
-            .oauth2ResourceServer(oauth2ResourceServer ->
-                oauth2ResourceServer.jwt(Customizer.withDefaults()));
+                .accessDeniedHandler((request, response, exception) -> {
+                    ResponseUtil.writeResult(response, exception.getMessage());
+                })
+            );
         // @formatter:on
         return http.build();
     }

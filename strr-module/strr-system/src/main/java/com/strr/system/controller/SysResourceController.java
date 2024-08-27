@@ -8,10 +8,8 @@ import com.strr.system.service.SysResourceService;
 import com.strr.system.util.MenuUtil;
 import com.strr.base.controller.CrudController;
 import com.strr.base.model.Result;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,6 +30,7 @@ public class SysResourceController extends CrudController<SysResource, Integer> 
     /**
      * 菜单树
      */
+    @PreAuthorize("@pms.hasPermission('system:resource:list')")
     @GetMapping("/menuTree")
     public Result<List<SysResourceVo>> menuTree(SysResource param) {
         List<SysResource> sysResourceList = sysResourceService.listByParam(param);
@@ -51,11 +50,43 @@ public class SysResourceController extends CrudController<SysResource, Integer> 
     }
 
     /**
-     * 删除权限
+     * 保存资源
      */
-    @DeleteMapping("/removeInfo")
-    public Result<Void> removeInfo(Integer id) {
+    @Override
+    @PreAuthorize("@pms.hasPermission('system:resource:save')")
+    @PostMapping
+    public Result<SysResource> save(@RequestBody SysResource sysResource) {
+        return super.save(sysResource);
+    }
+
+    /**
+     * 修改资源
+     */
+    @Override
+    @PreAuthorize("@pms.hasPermission('system:resource:update')")
+    @PutMapping
+    public Result<SysResource> update(@RequestBody SysResource sysResource) {
+        return super.update(sysResource);
+    }
+
+    /**
+     * 删除资源
+     */
+    @Override
+    @PreAuthorize("@pms.hasPermission('system:resource:remove')")
+    @DeleteMapping("/{id}")
+    public Result<Void> remove(@PathVariable Integer id) {
         sysResourceService.removeInfo(id);
         return Result.ok();
+    }
+
+    /**
+     * 获取资源详情
+     */
+    @Override
+    @PreAuthorize("@pms.hasPermission('system:resource:query')")
+    @GetMapping("/{id}")
+    public Result<SysResource> get(@PathVariable Integer id) {
+        return super.get(id);
     }
 }

@@ -41,6 +41,11 @@
 
         <dependency>
             <groupId>com.strr</groupId>
+            <artifactId>strr-common-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.strr</groupId>
             <artifactId>strr-api-system</artifactId>
         </dependency>
 
