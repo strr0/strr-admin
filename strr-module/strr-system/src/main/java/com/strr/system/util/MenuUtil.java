@@ -16,7 +16,7 @@ import java.util.List;
 public class MenuUtil {
     private static final int ROOT_ID = 0;
 
-    private static final String CATALOG_TYPE = "C";  // 目录
+    private static final String DIRECTORY_TYPE = "D";  // 目录
     private static final String MENU_TYPE = "M";  // 菜单
     private static final String BTN_TYPE = "B";  // 按钮
 
@@ -40,7 +40,6 @@ public class MenuUtil {
             vo.setName(resource.getName());
             vo.setPath(resource.getPath());
             vo.setComponent(resource.getComponent());
-            vo.setTitle(resource.getTitle());
             vo.setType(resource.getType());
             vo.setFrame(resource.getFrame());
             vo.setCache(resource.getCache());
@@ -66,9 +65,9 @@ public class MenuUtil {
                 .build();
         return TreeUtil.build(resources, config, resource -> {
             SysRouteVo route = new SysRouteVo();
-            route.setName(resource.getName());
+            route.setName(resource.getPath());
             SysRouteMetaVo meta = new SysRouteMetaVo();
-            meta.setTitle(resource.getTitle());
+            meta.setTitle(resource.getName());
             meta.setType(resource.getType());
             meta.setIcon(resource.getIcon());
             meta.setOrder(resource.getOrder());
@@ -78,11 +77,11 @@ public class MenuUtil {
             if (Constant.YES.equals(resource.getFrame())) {
                 meta.setHref(resource.getPath());
             } else {
-                route.setPath(resource.getPath());
+                route.setPath("/" + resource.getPath());
             }
             // 路由组件
             boolean topLevel = resource.getParentId() == null || resource.getParentId() == ROOT_ID;
-            if (CATALOG_TYPE.equals(resource.getType())) {
+            if (DIRECTORY_TYPE.equals(resource.getType())) {
                 if (topLevel) {
                     route.setComponent(BASE_LAYOUT);
                 }

@@ -19,10 +19,11 @@ public class SysResource extends BaseModel {
     /**
      * 名称
      */
+    @Column(fuzzy = true)
     private String name;
 
     /**
-     * 类型 (F.目录 M.菜单 B.按钮)
+     * 类型 (D.目录 M.菜单 B.按钮)
      */
     private String type;
 
@@ -35,12 +36,6 @@ public class SysResource extends BaseModel {
      * 路由组件
      */
     private String component;
-
-    /**
-     * 标题
-     */
-    @Column(fuzzy = true)
-    private String title;
 
     /**
      * 父菜单
@@ -127,14 +122,6 @@ public class SysResource extends BaseModel {
 
     public void setComponent(String component) {
         this.component = component;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public Integer getParentId() {

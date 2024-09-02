@@ -31,8 +31,8 @@ public class SysResourceController extends CrudController<SysResource, Integer> 
      * 菜单树
      */
     @PreAuthorize("@pms.hasPermission('system:resource:list')")
-    @GetMapping("/menuTree")
-    public Result<List<SysResourceVo>> menuTree(SysResource param) {
+    @GetMapping("/tree")
+    public Result<List<SysResourceVo>> tree(SysResource param) {
         List<SysResource> sysResourceList = sysResourceService.listByParam(param);
         return Result.ok(MenuUtil.buildMenuTree(sysResourceList));
     }
