@@ -1,5 +1,7 @@
 package com.strr.system.controller;
 
+import com.strr.base.model.Page;
+import com.strr.base.model.Pageable;
 import com.strr.system.model.SysRole;
 import com.strr.system.service.SysRoleService;
 import com.strr.base.controller.CrudController;
@@ -21,6 +23,15 @@ public class SysRoleController extends CrudController<SysRole, Integer> {
     @Override
     protected SysRoleService getService() {
         return sysRoleService;
+    }
+
+    /**
+     * 查询角色列表
+     */
+    @PreAuthorize("@pms.hasPermission('system:role:list')")
+    @GetMapping("/page")
+    public Page<SysRole> page(SysRole param, Pageable pageable) {
+        return super.page(param, pageable);
     }
 
     /**
@@ -49,7 +60,7 @@ public class SysRoleController extends CrudController<SysRole, Integer> {
     @Override
     @PreAuthorize("@pms.hasPermission('system:role:update')")
     @PutMapping
-    public Result<SysRole> update(SysRole sysRole) {
+    public Result<SysRole> update(@RequestBody SysRole sysRole) {
         return super.update(sysRole);
     }
 

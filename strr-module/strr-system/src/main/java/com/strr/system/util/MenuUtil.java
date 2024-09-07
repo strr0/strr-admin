@@ -8,7 +8,10 @@ import com.strr.system.model.vo.SysRouteVo;
 import com.strr.tree.TreeConfig;
 import com.strr.util.TreeUtil;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 菜单工具
@@ -40,10 +43,12 @@ public class MenuUtil {
             vo.setName(resource.getName());
             vo.setPath(resource.getPath());
             vo.setComponent(resource.getComponent());
+            vo.setI18nKey(resource.getI18nKey());
             vo.setType(resource.getType());
             vo.setFrame(resource.getFrame());
             vo.setCache(resource.getCache());
             vo.setIcon(resource.getIcon());
+            vo.setIconType(resource.getIconType());
             vo.setOrder(resource.getOrder());
             vo.setVisible(resource.getVisible());
             vo.setPerms(resource.getPerms());
@@ -57,22 +62,25 @@ public class MenuUtil {
      * 路由树
      */
     public static List<SysRouteVo> buildRouteTree(List<SysResource> resources) {
-        TreeConfig<SysResource, SysRouteVo, Integer> config = new TreeConfig.Builder<SysResource, SysRouteVo, Integer>()
-                .getId(SysResource::getId)
-                .getParentId(SysResource::getParentId)
-                .getChildren(SysRouteVo::getChildren)
-                .setChildren(SysRouteVo::setChildren)
-                .build();
-        return TreeUtil.build(resources, config, resource -> {
+        Map<Integer, SysRouteVo> routeMap = new HashMap<>();
+        List<SysRouteVo> routeTree = new ArrayList<>();
+        resources.forEach(resource -> {
+            // 获取父级路由
+            SysRouteVo parent = routeMap.get(resource.getParentId());
+            // 构建 route
             SysRouteVo route = new SysRouteVo();
             route.setName(resource.getPath());
             SysRouteMetaVo meta = new SysRouteMetaVo();
             meta.setTitle(resource.getName());
+            meta.setI18nKey(resource.getI18nKey());
             meta.setType(resource.getType());
             meta.setIcon(resource.getIcon());
             meta.setOrder(resource.getOrder());
             meta.setKeepAlive(Constant.YES.equals(resource.getCache()));
-            meta.setHideInMenu(Constant.NO.equals(resource.getVisible()));
+            if (Constant.NO.equals(resource.getVisible())) {
+                meta.setHideInMenu(true);
+                meta.setActiveMenu(parent != null ? parent.getPath() : null);
+            }
             // 是否外链
             if (Constant.YES.equals(resource.getFrame())) {
                 meta.setHref(resource.getPath());
@@ -92,7 +100,19 @@ public class MenuUtil {
                 route.setComponent(resource.getComponent());
             }
             route.setMeta(meta);
-            return route;
+            // 添加到 routeTree
+            if (parent != null) {
+                List<SysRouteVo> children = parent.getChildren();
+                if (children == null) {
+                    children = new ArrayList<>();
+                    parent.setChildren(children);
+                }
+                children.add(route);
+            } else {
+                routeTree.add(route);
+            }
+            routeMap.put(resource.getId(), route);
         });
+        return routeTree;
     }
 }

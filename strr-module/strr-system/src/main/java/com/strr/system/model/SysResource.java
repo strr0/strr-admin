@@ -38,18 +38,23 @@ public class SysResource extends BaseModel {
     private String component;
 
     /**
+     * 国际化 key
+     */
+    private String i18nKey;
+
+    /**
      * 父菜单
      */
     @Column("parent_id")
     private Integer parentId;
 
     /**
-     * 是否为外链（1是 0否）
+     * 是否外链（1.是 0.否）
      */
     private String frame;
 
     /**
-     * 是否缓存（1缓存 0不缓存）
+     * 是否缓存（1.缓存 0.不缓存）
      */
     private String cache;
 
@@ -59,13 +64,18 @@ public class SysResource extends BaseModel {
     private String icon;
 
     /**
+     * 图标类型（1.iconify图标 2.本地图标）
+     */
+    private String iconType;
+
+    /**
      * 排序
      */
     @Column("`order`")
     private Integer order;
 
     /**
-     * 隐藏
+     * 是否展示（1.是 0.否）
      */
     private String visible;
 
@@ -124,6 +134,14 @@ public class SysResource extends BaseModel {
         this.component = component;
     }
 
+    public String getI18nKey() {
+        return i18nKey;
+    }
+
+    public void setI18nKey(String i18nKey) {
+        this.i18nKey = i18nKey;
+    }
+
     public Integer getParentId() {
         return parentId;
     }
@@ -154,6 +172,14 @@ public class SysResource extends BaseModel {
 
     public void setIcon(String icon) {
         this.icon = icon;
+    }
+
+    public String getIconType() {
+        return iconType;
+    }
+
+    public void setIconType(String iconType) {
+        this.iconType = iconType;
     }
 
     public Integer getOrder() {

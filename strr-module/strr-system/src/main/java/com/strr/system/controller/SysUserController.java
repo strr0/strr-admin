@@ -44,7 +44,7 @@ public class SysUserController extends CrudController<SysUser, Integer> {
      */
     @PreAuthorize("@pms.hasPermission('system:user:save')")
     @PostMapping
-    public Result<Void> saveInfo(SysUserBo sysUser) {
+    public Result<Void> saveInfo(@RequestBody SysUserBo sysUser) {
         sysUserService.saveInfo(sysUser);
         return Result.ok();
     }

@@ -10,6 +10,11 @@ public class SysRouteMetaVo {
     private String title;
 
     /**
+     * 国际化 key
+     */
+    private String i18nKey;
+
+    /**
      * 类型 (F.目录 M.菜单 B.按钮)
      */
     private String type;
@@ -44,12 +49,25 @@ public class SysRouteMetaVo {
      */
     private Boolean hideInMenu;
 
+    /**
+     * 激活菜单
+     */
+    private String activeMenu;
+
     public String getTitle() {
         return title;
     }
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getI18nKey() {
+        return i18nKey;
+    }
+
+    public void setI18nKey(String i18nKey) {
+        this.i18nKey = i18nKey;
     }
 
     public String getType() {
@@ -106,5 +124,13 @@ public class SysRouteMetaVo {
 
     public void setHideInMenu(Boolean hideInMenu) {
         this.hideInMenu = hideInMenu;
+    }
+
+    public String getActiveMenu() {
+        return activeMenu;
+    }
+
+    public void setActiveMenu(String activeMenu) {
+        this.activeMenu = activeMenu;
     }
 }
