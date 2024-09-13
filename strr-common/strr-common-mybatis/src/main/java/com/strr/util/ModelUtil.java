@@ -6,12 +6,17 @@ import com.strr.base.annotation.Table;
 import com.strr.base.exception.KeyNotFoundException;
 
 import java.lang.reflect.Field;
+import java.util.Locale;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * 实体类注解工具
  */
 public class ModelUtil {
+    private static final Pattern UNDERSCORE = Pattern.compile("_(\\S)");
+
     /**
      * 获取表名注解
      */
@@ -81,7 +86,15 @@ public class ModelUtil {
     /**
      * 驼峰转下划线
      */
-    public static String toUnderscore(String str) {
-        return str.replaceAll("([a-z])([A-Z])", "$1_$2").toLowerCase();
+    public static String toUnderscore(String camelCase) {
+        return camelCase.replaceAll("(.)(\\p{Upper})", "$1_$2").toLowerCase();
+    }
+
+    /**
+     * 下划线转驼峰
+     */
+    public static String toCamelCase(String underscore) {
+        Matcher matcher = UNDERSCORE.matcher(underscore);
+        return matcher.replaceAll(r -> r.group(1).toUpperCase(Locale.ROOT));
     }
 }

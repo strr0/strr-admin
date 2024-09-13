@@ -15,7 +15,7 @@ public class CrudMapperFactoryBean<T> extends MapperFactoryBean<T> {
     protected void checkDaoConfig() {
         super.checkDaoConfig();
         // 添加Crud方法
-        CrudMappedStatement crudMappedStatement = new CrudMappedStatement.Builder(super.getSqlSession().getConfiguration(), super.getMapperInterface()).build();
-        crudMappedStatement.addCrudStatement();
+        CrudMappedStatement crudMappedStatement = new CrudMappedStatement.Builder(super.getMapperInterface()).build();
+        crudMappedStatement.addCrudStatement(super.getSqlSession().getConfiguration());
     }
 }

@@ -21,3 +21,10 @@ spring:
             - Path=/system/**
           filters:
             - StripPrefix=1
+        # 数据模块
+        - id: strr-data
+          uri: lb://strr-data
+          predicates:
+            - Path=/data/**
+          filters:
+            - StripPrefix=1

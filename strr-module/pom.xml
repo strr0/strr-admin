@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>strr-system</module>
+        <module>strr-data</module>
     </modules>
 
     <properties>

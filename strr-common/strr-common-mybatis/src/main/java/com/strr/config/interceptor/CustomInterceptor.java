@@ -98,6 +98,8 @@ public class CustomInterceptor implements Interceptor {
         if (count > 0) {
             List<Object> list = pageQuery(executor, ms, parameter, rowBounds, resultHandler, boundSql, cacheKey, pageable);
             page.setContent(list);
+        } else {
+            page.setContent(Collections.emptyList());
         }
 
         return Collections.singletonList(page);
