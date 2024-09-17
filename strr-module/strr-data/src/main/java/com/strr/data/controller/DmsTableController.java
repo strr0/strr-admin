@@ -6,6 +6,7 @@ import com.strr.base.model.Result;
 import com.strr.constant.Constant;
 import com.strr.data.model.DmsTable;
 import com.strr.data.model.bo.DmsTableBo;
+import com.strr.data.model.vo.DmsModuleVo;
 import com.strr.data.service.DmsHandleService;
 import com.strr.data.service.DmsTableService;
 import org.springframework.web.bind.annotation.*;
@@ -50,12 +51,30 @@ public class DmsTableController {
     }
 
     /**
+     * 更新模块信息
+     */
+    @PutMapping
+    public Result<Void> update(@RequestBody DmsModuleVo moduleVo) {
+        dmsTableService.updateModuleInfo(moduleVo);
+        return Result.ok();
+    }
+
+    /**
      * 删除业务表信息
      */
     @DeleteMapping("/{id}")
     public Result<Void> remove(@PathVariable Integer id) {
         dmsTableService.removeTableInfo(id);
         return Result.ok();
+    }
+
+    /**
+     * 获取模块信息
+     */
+    @GetMapping("/{id}")
+    public Result<DmsModuleVo> getModuleInfo(@PathVariable Integer id) {
+        DmsModuleVo moduleInfo = dmsTableService.getModuleInfo(id);
+        return Result.ok(moduleInfo);
     }
 
     /**

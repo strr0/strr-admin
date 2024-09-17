@@ -10,7 +10,9 @@ import com.strr.data.model.DmsColumn;
 import com.strr.data.model.DmsModule;
 import com.strr.data.model.DmsTable;
 import com.strr.data.model.bo.DmsTableBo;
+import com.strr.data.model.vo.DmsModuleVo;
 import com.strr.data.service.DmsTableService;
+import com.strr.data.util.KeywordUtil;
 import com.strr.util.ModelUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -73,6 +75,8 @@ public class DmsTableServiceImpl implements DmsTableService {
                 List<DmsColumn> dmsColumns = dmsColumnMapper.listDbColumnByTable(dmsTable.getName());
                 for (DmsColumn dmsColumn : dmsColumns) {
                     dmsColumn.setTableId(dmsTable.getId());
+                    // 处理关键字
+                    dmsColumn.setName(KeywordUtil.getName(dmsColumn.getName()));
                     if (!baseColumns.contains(dmsColumn.getName()) && dmsColumn.getOrder() < 10) {
                         dmsColumn.setForm(Constant.YES);
                         dmsColumn.setVisible(Constant.YES);
@@ -80,6 +84,31 @@ public class DmsTableServiceImpl implements DmsTableService {
                     dmsColumnMapper.save(dmsColumn);
                 }
             }
+        }
+    }
+
+    /**
+     * 更新模块信息
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void updateModuleInfo(DmsModuleVo moduleVo) {
+        DmsModule module = new DmsModule();
+        module.setId(moduleVo.getId());
+        module.setTableId(moduleVo.getTableId());
+        module.setName(moduleVo.getName());
+        module.setCode(moduleVo.getCode());
+        module.setPath(moduleVo.getPath());
+        module.setRemark(moduleVo.getRemark());
+        module.setStatus(moduleVo.getStatus());
+        dmsModuleMapper.update(module);
+        DmsTable table = moduleVo.getTable();
+        if (table != null) {
+            dmsTableMapper.update(table);
+        }
+        List<DmsColumn> columns = moduleVo.getColumns();
+        if (columns != null && !columns.isEmpty()) {
+            columns.forEach(dmsColumnMapper::update);
         }
     }
 
@@ -92,6 +121,14 @@ public class DmsTableServiceImpl implements DmsTableService {
         dmsColumnMapper.removeByTableId(id);
         dmsModuleMapper.removeByTableId(id);
         dmsTableMapper.remove(id);
+    }
+
+    /**
+     * 获取模块信息
+     */
+    @Override
+    public DmsModuleVo getModuleInfo(Integer id) {
+        return dmsModuleMapper.getInfoByTableId(id);
     }
 
     /**

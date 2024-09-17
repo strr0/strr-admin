@@ -63,13 +63,18 @@ public class MenuUtil {
      */
     public static List<SysRouteVo> buildRouteTree(List<SysResource> resources) {
         Map<Integer, SysRouteVo> routeMap = new HashMap<>();
+        Map<Integer, SysRouteVo> parentRouteMap = new HashMap<>();
         List<SysRouteVo> routeTree = new ArrayList<>();
         resources.forEach(resource -> {
             // 获取父级路由
             SysRouteVo parent = routeMap.get(resource.getParentId());
             // 构建 route
             SysRouteVo route = new SysRouteVo();
-            route.setName(resource.getPath());
+            if (resource.getPath().contains("/:")) {
+                route.setName(resource.getPath().split("/:")[0]);
+            } else {
+                route.setName(resource.getPath());
+            }
             SysRouteMetaVo meta = new SysRouteMetaVo();
             meta.setTitle(resource.getName());
             meta.setI18nKey(resource.getI18nKey());
@@ -77,9 +82,10 @@ public class MenuUtil {
             meta.setIcon(resource.getIcon());
             meta.setOrder(resource.getOrder());
             meta.setKeepAlive(Constant.YES.equals(resource.getCache()));
-            if (Constant.NO.equals(resource.getVisible())) {
+            boolean hide = Constant.NO.equals(resource.getVisible());
+            if (hide) {
                 meta.setHideInMenu(true);
-                meta.setActiveMenu(parent != null ? parent.getPath() : null);
+                meta.setActiveMenu(parent != null ? parent.getName() : null);
             }
             // 是否外链
             if (Constant.YES.equals(resource.getFrame())) {
@@ -100,6 +106,10 @@ public class MenuUtil {
                 route.setComponent(resource.getComponent());
             }
             route.setMeta(meta);
+            if (hide) {
+                // 获取父节点的父节点
+                parent = parentRouteMap.get(resource.getParentId());
+            }
             // 添加到 routeTree
             if (parent != null) {
                 List<SysRouteVo> children = parent.getChildren();
@@ -112,6 +122,7 @@ public class MenuUtil {
                 routeTree.add(route);
             }
             routeMap.put(resource.getId(), route);
+            parentRouteMap.put(resource.getId(), parent);
         });
         return routeTree;
     }
