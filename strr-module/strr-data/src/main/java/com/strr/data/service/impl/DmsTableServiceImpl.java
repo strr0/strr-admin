@@ -12,7 +12,6 @@ import com.strr.data.model.DmsTable;
 import com.strr.data.model.bo.DmsTableBo;
 import com.strr.data.model.vo.DmsModuleVo;
 import com.strr.data.service.DmsTableService;
-import com.strr.data.util.KeywordUtil;
 import com.strr.util.ModelUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -75,8 +74,6 @@ public class DmsTableServiceImpl implements DmsTableService {
                 List<DmsColumn> dmsColumns = dmsColumnMapper.listDbColumnByTable(dmsTable.getName());
                 for (DmsColumn dmsColumn : dmsColumns) {
                     dmsColumn.setTableId(dmsTable.getId());
-                    // 处理关键字
-                    dmsColumn.setName(KeywordUtil.getName(dmsColumn.getName()));
                     if (!baseColumns.contains(dmsColumn.getName()) && dmsColumn.getOrder() < 10) {
                         dmsColumn.setForm(Constant.YES);
                         dmsColumn.setVisible(Constant.YES);

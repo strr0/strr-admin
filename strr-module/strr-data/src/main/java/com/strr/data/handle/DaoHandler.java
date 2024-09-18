@@ -4,6 +4,7 @@ import com.strr.constant.Constant;
 import com.strr.data.model.DmsColumn;
 import com.strr.data.model.DmsTable;
 import com.strr.data.model.vo.DmsModuleVo;
+import com.strr.data.util.KeywordUtil;
 import com.strr.util.ModelUtil;
 import org.apache.ibatis.jdbc.SQL;
 import org.apache.ibatis.mapping.MappedStatement;
@@ -95,16 +96,17 @@ public class DaoHandler {
         DmsColumn keyColumn = null;
         for (DmsColumn column : columns) {
             String columnName = column.getName();
+            String realName = KeywordUtil.getName(columnName);
             String camelCaseName = ModelUtil.toCamelCase(columnName);
-            selectSql.SELECT(columnName);
+            selectSql.SELECT(realName);
             if (Constant.YES.equals(column.getPk())) {
                 keyColumn = column;
                 continue;
             }
-            String pageCondition = String.format(" and %s = #{param.%s} ", columnName, camelCaseName);
+            String pageCondition = String.format(" and %s = #{param.%s} ", realName, camelCaseName);
             pageIfNodes.add(new IfSqlNode(new TextSqlNode(pageCondition), String.format("param.%s != null && param.%s != ''", camelCaseName, camelCaseName)));
-            insertSql.VALUES(columnName, String.format("#{%s}", camelCaseName));
-            updateIfNodes.add(new IfSqlNode(new TextSqlNode(String.format("%s = #{%s},", columnName, camelCaseName)),
+            insertSql.VALUES(realName, String.format("#{%s}", camelCaseName));
+            updateIfNodes.add(new IfSqlNode(new TextSqlNode(String.format("%s = #{%s},", realName, camelCaseName)),
                     String.format("%s != null && %s != ''", camelCaseName, camelCaseName)));
         }
         selectSql.FROM(table.getName());
@@ -118,18 +120,19 @@ public class DaoHandler {
         // 主键不为空
         if (keyColumn != null) {
             String columnName = keyColumn.getName();
+            String realName = KeywordUtil.getName(columnName);
             String camelCaseName = ModelUtil.toCamelCase(columnName);
             // 修改
             SqlNode updateSqlNode = new StaticTextSqlNode(updateSql.toString());
-            SqlNode updateWhereSqlNode = new StaticTextSqlNode(String.format("WHERE %s = #{%s}", columnName, camelCaseName));
+            SqlNode updateWhereSqlNode = new StaticTextSqlNode(String.format("WHERE %s = #{%s}", realName, camelCaseName));
             SqlNode updateSetSqlNode = new TrimSqlNode(configuration, new MixedSqlNode(updateIfNodes), "SET", null, null, ",");
             buildUpdateMappedStatement(configuration, new DynamicSqlSource(configuration, new MixedSqlNode(Arrays.asList(updateSqlNode, updateSetSqlNode, updateWhereSqlNode))), simpleResultMaps);
             // 删除
-            deleteSql.WHERE(String.format("%s = #{%s}", columnName, camelCaseName));
+            deleteSql.WHERE(String.format("%s = #{%s}", realName, camelCaseName));
             SqlNode removeSqlNode = new StaticTextSqlNode(deleteSql.toString());
             buildRemoveMappedStatement(configuration, new RawSqlSource(configuration, removeSqlNode, Map.class), simpleResultMaps);
             // 详情
-            selectSql.WHERE(String.format("%s = #{%s}", columnName, camelCaseName));
+            selectSql.WHERE(String.format("%s = #{%s}", realName, camelCaseName));
             SqlNode getSqlNode = new StaticTextSqlNode(selectSql.toString());
             buildGetMappedStatement(configuration, new RawSqlSource(configuration, getSqlNode, Map.class), resultMaps);
         }
