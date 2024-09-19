@@ -35,7 +35,7 @@ public class SysUserController extends CrudController<SysUser, Integer> {
     @Override
     @PreAuthorize("@pms.hasPermission('system:user:list')")
     @GetMapping("/page")
-    public Page<SysUser> page(SysUser param, Pageable pageable) {
+    public Result<Page<SysUser>> page(SysUser param, Pageable pageable) {
         return super.page(param, pageable);
     }
 

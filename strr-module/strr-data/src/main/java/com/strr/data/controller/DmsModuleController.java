@@ -30,16 +30,18 @@ public class DmsModuleController {
      * 查询模块信息
      */
     @GetMapping("/page")
-    public Page<DmsModule> page(DmsModule param, Pageable pageable) {
-        return dmsModuleService.page(param, pageable);
+    public Result<Page<DmsModule>> page(DmsModule param, Pageable pageable) {
+        Page<DmsModule> page = dmsModuleService.page(param, pageable);
+        return Result.ok(page);
     }
 
     /**
      * 查询数据库表信息
      */
     @GetMapping("/db/page")
-    public Page<DmsTable> pageDbTable(DmsTableBo param, Pageable pageable) {
-        return dmsModuleService.pageDbTable(param, pageable);
+    public Result<Page<DmsTable>> pageDbTable(DmsTableBo param, Pageable pageable) {
+        Page<DmsTable> page = dmsModuleService.pageDbTable(param, pageable);
+        return Result.ok(page);
     }
 
     /**

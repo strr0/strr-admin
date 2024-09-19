@@ -22,14 +22,14 @@ public class WebHandlerFactory {
         Result<Void> ERROR = Result.error();
         return new WebHandler() {
             @Override
-            public Page<?> page(Map<String, Object> param, Pageable pageable) {
+            public Result<Page<?>> page(Map<String, Object> param, Pageable pageable) {
                 SqlSession sqlSession = sqlSessionFactory.openSession();
                 Map<String, Object> map = new HashMap<>();
                 map.put("param", param);
                 map.put("page", pageable);
                 Page<?> page = sqlSession.selectOne(String.format("%s.page", code), map);
                 sqlSession.close();
-                return page;
+                return Result.ok(page);
             }
 
             @Override

@@ -15,7 +15,7 @@ import java.util.Map;
  */
 public interface WebHandler {
     @ResponseBody
-    Page<?> page(@RequestParam Map<String, Object> param, Pageable pageable);
+    Result<Page<?>> page(@RequestParam Map<String, Object> param, Pageable pageable);
 
     @ResponseBody
     Result<Void> save(@RequestBody Map<String, Object> entity);

@@ -10,8 +10,9 @@ import java.io.Serializable;
 public abstract class CrudController<T, ID extends Serializable> {
     protected abstract CrudService<T, ID> getService();
 
-    public Page<T> page(T param, Pageable pageable) {
-        return getService().page(param, pageable);
+    public Result<Page<T>> page(T param, Pageable pageable) {
+        Page<T> page = getService().page(param, pageable);
+        return Result.ok(page);
     }
 
     public Result<T> save(T entity) {

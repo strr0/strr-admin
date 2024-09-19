@@ -30,7 +30,7 @@ public class SysRoleController extends CrudController<SysRole, Integer> {
      */
     @PreAuthorize("@pms.hasPermission('system:role:list')")
     @GetMapping("/page")
-    public Page<SysRole> page(SysRole param, Pageable pageable) {
+    public Result<Page<SysRole>> page(SysRole param, Pageable pageable) {
         return super.page(param, pageable);
     }
 
