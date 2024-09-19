@@ -112,8 +112,8 @@ INSERT INTO `sys_resource` VALUES (15, '添加', 'B', NULL, NULL, NULL, 5, NULL,
 INSERT INTO `sys_resource` VALUES (16, '修改', 'B', NULL, NULL, NULL, 5, NULL, NULL, '', NULL, NULL, '0', 'system:resource:update', NULL, '1', NULL, NULL, NULL, NULL);
 INSERT INTO `sys_resource` VALUES (17, '删除', 'B', NULL, NULL, NULL, 5, NULL, NULL, '', NULL, NULL, '0', 'system:resource:remove', NULL, '1', NULL, NULL, NULL, NULL);
 INSERT INTO `sys_resource` VALUES (18, '数据管理', 'D', 'data', NULL, 'route.data', 0, NULL, '0', 'carbon:cloud-service-management', '1', 0, '1', '', NULL, '1', NULL, NULL, NULL, NULL);
-INSERT INTO `sys_resource` VALUES (19, '表管理', 'M', 'tableInfo', 'data/table/index', 'route.table', 18, '0', '0', 'material-symbols:route', '1', 0, '1', '', NULL, '1', NULL, NULL, NULL, NULL);
-INSERT INTO `sys_resource` VALUES (20, '表详情', 'M', 'tableItem/:id', 'data/table-item/index', 'route.table-item', 19, '0', '0', '', '1', 0, '0', '', NULL, '1', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (19, '模块管理', 'M', 'module', 'data/module/index', 'route.module', 18, '0', '0', 'material-symbols:route', '1', 0, '1', '', NULL, '1', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (20, '模块详情', 'M', 'moduleItem/:id', 'data/module-item/index', 'route.module-item', 19, '0', '0', '', '1', 0, '0', '', NULL, '1', NULL, NULL, NULL, NULL);
 INSERT INTO `sys_resource` VALUES (21, '数据详情', 'M', 'dataItem/:id', 'data/data-item/index', 'route.data-item', 19, '0', '0', '', '1', 0, '0', '', NULL, '1', NULL, NULL, NULL, NULL);
 
 -- ----------------------------

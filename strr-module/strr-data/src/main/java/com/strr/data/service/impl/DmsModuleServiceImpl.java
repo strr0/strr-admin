@@ -11,7 +11,7 @@ import com.strr.data.model.DmsModule;
 import com.strr.data.model.DmsTable;
 import com.strr.data.model.bo.DmsTableBo;
 import com.strr.data.model.vo.DmsModuleVo;
-import com.strr.data.service.DmsTableService;
+import com.strr.data.service.DmsModuleService;
 import com.strr.util.ModelUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,27 +20,27 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * 元数据信息
+ * 模块信息
  */
 @Service
-public class DmsTableServiceImpl implements DmsTableService {
+public class DmsModuleServiceImpl implements DmsModuleService {
     private static final List<String> baseColumns = Arrays.asList("create_by", "create_time", "update_by", "update_time");
     private final DmsTableMapper dmsTableMapper;
     private final DmsColumnMapper dmsColumnMapper;
     private final DmsModuleMapper dmsModuleMapper;
 
-    public DmsTableServiceImpl(DmsTableMapper dmsTableMapper, DmsColumnMapper dmsColumnMapper, DmsModuleMapper dmsModuleMapper) {
+    public DmsModuleServiceImpl(DmsTableMapper dmsTableMapper, DmsColumnMapper dmsColumnMapper, DmsModuleMapper dmsModuleMapper) {
         this.dmsTableMapper = dmsTableMapper;
         this.dmsColumnMapper = dmsColumnMapper;
         this.dmsModuleMapper = dmsModuleMapper;
     }
 
     /**
-     * 查询业务表信息
+     * 查询模块信息
      */
     @Override
-    public Page<DmsTable> pageTable(DmsTable param, Pageable pageable) {
-        return dmsTableMapper.page(param, pageable);
+    public Page<DmsModule> page(DmsModule param, Pageable pageable) {
+        return dmsModuleMapper.page(param, pageable);
     }
 
     /**
@@ -89,7 +89,7 @@ public class DmsTableServiceImpl implements DmsTableService {
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void updateModuleInfo(DmsModuleVo moduleVo) {
+    public void updateInfo(DmsModuleVo moduleVo) {
         DmsModule module = new DmsModule();
         module.setId(moduleVo.getId());
         module.setTableId(moduleVo.getTableId());
@@ -114,28 +114,28 @@ public class DmsTableServiceImpl implements DmsTableService {
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void removeTableInfo(Integer id) {
-        dmsColumnMapper.removeByTableId(id);
-        dmsModuleMapper.removeByTableId(id);
-        dmsTableMapper.remove(id);
+    public void removeInfoByTableId(Integer tableId) {
+        dmsColumnMapper.removeByTableId(tableId);
+        dmsModuleMapper.removeByTableId(tableId);
+        dmsTableMapper.remove(tableId);
     }
 
     /**
      * 获取模块信息
      */
     @Override
-    public DmsModuleVo getModuleInfo(Integer id) {
-        return dmsModuleMapper.getInfoByTableId(id);
+    public DmsModuleVo getInfo(Integer id) {
+        return dmsModuleMapper.getInfo(id);
     }
 
     /**
      * 更新业务表状态
      */
     @Override
-    public void updateTableStatus(Integer id, String status) {
-        DmsTable table = new DmsTable();
-        table.setId(id);
-        table.setStatus(status);
-        dmsTableMapper.update(table);
+    public void updateStatus(Integer id, String status) {
+        DmsModule module = new DmsModule();
+        module.setId(id);
+        module.setStatus(status);
+        dmsModuleMapper.update(module);
     }
 }

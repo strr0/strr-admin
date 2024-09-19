@@ -9,9 +9,9 @@ import com.strr.data.model.vo.DmsModuleVo;
  */
 public interface DmsModuleMapper extends CrudMapper<DmsModule, Integer> {
     /**
-     * 根据 tableId 获取模块信息
+     * 获取模块信息
      */
-    DmsModuleVo getInfoByTableId(Integer tableId);
+    DmsModuleVo getInfo(Integer id);
 
     /**
      * 根据 tableId 删除字段信息

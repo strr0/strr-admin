@@ -32,8 +32,8 @@ public class DmsHandleServiceImpl implements DmsHandleService {
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void register(Integer tableId) throws NoSuchMethodException {
-        DmsModuleVo module = dmsModuleMapper.getInfoByTableId(tableId);
+    public void register(Integer id) throws NoSuchMethodException {
+        DmsModuleVo module = dmsModuleMapper.getInfo(id);
         // 构建数据库查询
         DaoHandler daoHandler = new DaoHandler.Builder(module).build();
         daoHandler.handle(sqlSessionFactory.getConfiguration());

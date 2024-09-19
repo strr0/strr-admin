@@ -7,5 +7,5 @@ public interface DmsHandleService {
     /**
      * 注册
      */
-    void register(Integer tableId) throws Exception;
+    void register(Integer id) throws Exception;
 }
