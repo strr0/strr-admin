@@ -111,10 +111,13 @@ INSERT INTO `sys_resource` VALUES (14, '查看', 'B', NULL, NULL, NULL, 5, NULL,
 INSERT INTO `sys_resource` VALUES (15, '添加', 'B', NULL, NULL, NULL, 5, NULL, NULL, '', NULL, NULL, '0', 'system:resource:save', NULL, '1', NULL, NULL, NULL, NULL);
 INSERT INTO `sys_resource` VALUES (16, '修改', 'B', NULL, NULL, NULL, 5, NULL, NULL, '', NULL, NULL, '0', 'system:resource:update', NULL, '1', NULL, NULL, NULL, NULL);
 INSERT INTO `sys_resource` VALUES (17, '删除', 'B', NULL, NULL, NULL, 5, NULL, NULL, '', NULL, NULL, '0', 'system:resource:remove', NULL, '1', NULL, NULL, NULL, NULL);
-INSERT INTO `sys_resource` VALUES (18, '数据管理', 'D', 'data', NULL, 'route.data', 0, NULL, '0', 'carbon:cloud-service-management', '1', 0, '1', '', NULL, '1', NULL, NULL, NULL, NULL);
-INSERT INTO `sys_resource` VALUES (19, '模块管理', 'M', 'module', 'data/module/index', 'route.module', 18, '0', '0', 'material-symbols:route', '1', 0, '1', '', NULL, '1', NULL, NULL, NULL, NULL);
-INSERT INTO `sys_resource` VALUES (20, '模块详情', 'M', 'moduleItem/:id', 'data/module-item/index', 'route.module-item', 19, '0', '0', '', '1', 0, '0', '', NULL, '1', NULL, NULL, NULL, NULL);
-INSERT INTO `sys_resource` VALUES (21, '数据详情', 'M', 'dataItem/:id', 'data/data-item/index', 'route.data-item', 19, '0', '0', '', '1', 0, '0', '', NULL, '1', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (18, '数据管理', 'D', 'data', NULL, 'route.data', 0, NULL, '0', 'icon-park-outline:all-application', '1', 0, '1', '', NULL, '1', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (19, '模块管理', 'M', 'module', 'data/module/index', 'route.module', 18, '0', '0', 'material-symbols:route', '1', 0, '1', 'data:module:list', NULL, '1', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (20, '模块详情', 'M', 'moduleItem/:id', 'data/module-item/index', 'route.module-item', 19, '0', '0', '', '1', 0, '0', 'data:module:update', NULL, '1', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (21, '数据详情', 'M', 'dataItem/:id', 'data/data-item/index', 'route.data-item', 19, '0', '0', '', '1', 0, '0', 'data:module:query', NULL, '1', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (22, '导入', 'B', NULL, NULL, NULL, 19, NULL, NULL, '', NULL, NULL, '0', 'data:module:import', NULL, '1', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (23, '删除', 'B', NULL, NULL, NULL, 19, NULL, NULL, '', NULL, NULL, '0', 'data:module:remove', NULL, '1', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (24, '注册', 'B', NULL, NULL, NULL, 19, NULL, NULL, '', NULL, NULL, '0', 'data:module:register', NULL, '1', NULL, NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for sys_role

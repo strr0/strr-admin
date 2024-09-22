@@ -41,7 +41,7 @@
 
         <dependency>
             <groupId>com.strr</groupId>
-            <artifactId>strr-common-core</artifactId>
+            <artifactId>strr-common-web</artifactId>
         </dependency>
 
         <dependency>

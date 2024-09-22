@@ -4,20 +4,20 @@ package com.strr.base.model;
  * 结果
  */
 public class Result<T> {
-    private static final String SUCCESS_CODE = "200";
-    private static final String FAIL_CODE = "500";
+    private static final int SUCCESS_CODE = 200;
+    private static final int FAIL_CODE = 500;
 
-    private String code;
+    private Integer code;
 
     private String msg;
 
     private T data;
 
-    public String getCode() {
+    public Integer getCode() {
         return code;
     }
 
-    public void setCode(String code) {
+    public void setCode(Integer code) {
         this.code = code;
     }
 
@@ -37,7 +37,7 @@ public class Result<T> {
         this.data = data;
     }
 
-    public Result<T> code(String code) {
+    public Result<T> code(Integer code) {
         this.code = code;
         return this;
     }
@@ -54,6 +54,14 @@ public class Result<T> {
 
     public static <T> Result<T> error() {
         return new Result<T>().code(FAIL_CODE);
+    }
+
+    public static <T> Result<T> error(String msg) {
+        return new Result<T>().code(FAIL_CODE).msg(msg);
+    }
+
+    public static <T> Result<T> error(Integer code, String msg) {
+        return new Result<T>().code(code).msg(msg);
     }
 
     public static <T> Result<T> ok() {
