@@ -219,4 +219,30 @@ CREATE TABLE `sys_user_role`  (
 -- ----------------------------
 INSERT INTO `sys_user_role` VALUES (1, 1);
 
+-- ----------------------------
+-- Table structure for sys_oauth_client
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_oauth_client`;
+CREATE TABLE `sys_oauth_client`  (
+  `id` int NOT NULL AUTO_INCREMENT COMMENT '编号',
+  `client_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '客户端id',
+  `client_secret` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '客户端密钥',
+  `grant_type` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '授权方式',
+  `scope` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '作用域',
+  `redirect_uri` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '回调地址',
+  `access_timeout` bigint NULL DEFAULT NULL,
+  `refresh_timeout` bigint NULL DEFAULT NULL,
+  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '状态',
+  `create_by` int NULL DEFAULT NULL COMMENT '创建人',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `update_by` int NULL DEFAULT NULL COMMENT '更新人',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of sys_oauth_client
+-- ----------------------------
+INSERT INTO `sys_oauth_client` VALUES (1, 'client', '$2a$10$OwiieKeJGCMZHj3aR5x.ieshDi9F2a4s0bJQADZ2QfdLYStLOc.zO', 'authorization_code,refresh_token,client_credentials,password', 'openid,profile,resource.all', 'http://127.0.0.1:8080/login/oauth2/code/default-client', 3600, 604800, '1', NULL, NULL, NULL, NULL);
+
 SET FOREIGN_KEY_CHECKS = 1;
