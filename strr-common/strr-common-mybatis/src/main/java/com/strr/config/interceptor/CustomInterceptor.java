@@ -11,6 +11,7 @@ import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.mapping.ResultMap;
+import org.apache.ibatis.mapping.SqlCommandType;
 import org.apache.ibatis.plugin.*;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.ResultHandler;
@@ -66,29 +67,33 @@ public class CustomInterceptor implements Interceptor {
             boundSql = (BoundSql) args[5];
         }
 
-        // 基础参数
-        ParameterUtils.getBaseModel(parameter).ifPresent(model -> {
-            Integer userId = LoginUtil.getLoginId();
-            if (model.getCreateBy() == null) {
-                model.setCreateBy(userId);
-            }
-            if (model.getCreateTime() == null) {
-                model.setCreateTime(new Date());
-            }
-            if (model.getUpdateBy() == null) {
-                model.setUpdateBy(userId);
-            }
-            if (model.getUpdateTime() == null) {
-                model.setUpdateTime(new Date());
-            }
-        });
-
-        // 分页参数
-        Optional<Pageable> opt = ParameterUtils.getPageable(parameter);
-        if (opt.isEmpty()) {
+        SqlCommandType type = ms.getSqlCommandType();
+        if (SqlCommandType.INSERT.equals(type) || SqlCommandType.UPDATE.equals(type)) {
+            // 基础参数
+            ParameterUtils.getBaseModel(parameter).ifPresent(model -> {
+                Integer userId = LoginUtil.getLoginId();
+                if (model.getCreateBy() == null) {
+                    model.setCreateBy(userId);
+                }
+                if (model.getCreateTime() == null) {
+                    model.setCreateTime(new Date());
+                }
+                if (model.getUpdateBy() == null) {
+                    model.setUpdateBy(userId);
+                }
+                if (model.getUpdateTime() == null) {
+                    model.setUpdateTime(new Date());
+                }
+            });
             return invocation.proceed();
         }
-        Pageable pageable = opt.get();
+
+        // 分页参数
+        Optional<Pageable> optional = ParameterUtils.getPageable(parameter);
+        if (optional.isEmpty()) {
+            return invocation.proceed();
+        }
+        Pageable pageable = optional.get();
 
         Page<Object> page = pageable.page();
         MappedStatement countMs = buildCountMappedStatement(ms);

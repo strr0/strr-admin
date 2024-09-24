@@ -4,14 +4,14 @@ import com.strr.constant.Constant;
 import com.strr.system.mapper.SysRoleResourceMapper;
 import com.strr.system.mapper.SysResourceMapper;
 import com.strr.system.model.SysResource;
-import com.strr.system.service.SysResourceService;
+import com.strr.system.service.ISysResourceService;
 import com.strr.base.service.impl.CrudServiceImpl;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class SysResourceServiceImpl extends CrudServiceImpl<SysResource, Integer> implements SysResourceService {
+public class SysResourceServiceImpl extends CrudServiceImpl<SysResource, Integer> implements ISysResourceService {
     private final SysResourceMapper sysResourceMapper;
     private final SysRoleResourceMapper sysRoleResourceMapper;
 

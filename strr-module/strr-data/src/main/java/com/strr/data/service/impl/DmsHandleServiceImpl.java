@@ -5,7 +5,7 @@ import com.strr.data.handle.WebHandler;
 import com.strr.data.handle.factory.WebHandlerFactory;
 import com.strr.data.mapper.DmsModuleMapper;
 import com.strr.data.model.vo.DmsModuleVo;
-import com.strr.data.service.DmsHandleService;
+import com.strr.data.service.IDmsHandleService;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +15,7 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
  * 数据处理
  */
 @Service
-public class DmsHandleServiceImpl implements DmsHandleService {
+public class DmsHandleServiceImpl implements IDmsHandleService {
     private final RequestMappingHandlerMapping requestMappingHandlerMapping;
     private final SqlSessionFactory sqlSessionFactory;
     private final DmsModuleMapper dmsModuleMapper;

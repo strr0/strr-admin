@@ -1,11 +1,11 @@
 package com.strr.system.service;
 
 import com.strr.system.model.SysRole;
-import com.strr.base.service.CrudService;
+import com.strr.base.service.ICrudService;
 
 import java.util.List;
 
-public interface SysRoleService extends CrudService<SysRole, Integer> {
+public interface ISysRoleService extends ICrudService<SysRole, Integer> {
     /**
      * 获取角色列表
      */

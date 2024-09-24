@@ -2,11 +2,11 @@ package com.strr.system.service;
 
 import com.strr.system.model.SysUser;
 import com.strr.system.model.bo.SysUserBo;
-import com.strr.base.service.CrudService;
+import com.strr.base.service.ICrudService;
 
 import java.util.List;
 
-public interface SysUserService extends CrudService<SysUser, Integer> {
+public interface ISysUserService extends ICrudService<SysUser, Integer> {
     /**
      * 保存用户
      */

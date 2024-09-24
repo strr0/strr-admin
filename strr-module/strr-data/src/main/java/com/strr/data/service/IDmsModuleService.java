@@ -10,7 +10,7 @@ import com.strr.data.model.vo.DmsModuleVo;
 /**
  * 模块信息
  */
-public interface DmsModuleService {
+public interface IDmsModuleService {
     /**
      * 查询模块信息
      */

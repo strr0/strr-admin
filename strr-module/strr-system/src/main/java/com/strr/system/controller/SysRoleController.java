@@ -3,7 +3,7 @@ package com.strr.system.controller;
 import com.strr.base.model.Page;
 import com.strr.base.model.Pageable;
 import com.strr.system.model.SysRole;
-import com.strr.system.service.SysRoleService;
+import com.strr.system.service.ISysRoleService;
 import com.strr.base.controller.CrudController;
 import com.strr.base.model.Result;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -14,14 +14,14 @@ import java.util.List;
 @RestController
 @RequestMapping("/role")
 public class SysRoleController extends CrudController<SysRole, Integer> {
-    private final SysRoleService sysRoleService;
+    private final ISysRoleService sysRoleService;
 
-    public SysRoleController(SysRoleService sysRoleService) {
+    public SysRoleController(ISysRoleService sysRoleService) {
         this.sysRoleService = sysRoleService;
     }
 
     @Override
-    protected SysRoleService getService() {
+    protected ISysRoleService getService() {
         return sysRoleService;
     }
 

@@ -13,7 +13,7 @@ public class PermissionService {
         if (!StringUtils.hasLength(permission)) {
             return false;
         }
-        return LoginUtil.getClaimsOpt().map(map -> (List<String>) map.get("resources"))
+        return LoginUtil.getClaimsOptional().map(map -> (List<String>) map.get("resources"))
                 .map(resources -> resources.contains(permission)).orElse(false);
     }
 }

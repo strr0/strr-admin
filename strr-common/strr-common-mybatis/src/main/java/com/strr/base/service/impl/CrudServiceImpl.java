@@ -3,11 +3,11 @@ package com.strr.base.service.impl;
 import com.strr.base.mapper.CrudMapper;
 import com.strr.base.model.Page;
 import com.strr.base.model.Pageable;
-import com.strr.base.service.CrudService;
+import com.strr.base.service.ICrudService;
 
 import java.io.Serializable;
 
-public abstract class CrudServiceImpl<T, ID extends Serializable> implements CrudService<T, ID> {
+public abstract class CrudServiceImpl<T, ID extends Serializable> implements ICrudService<T, ID> {
     protected abstract CrudMapper<T, ID> getMapper();
 
     @Override

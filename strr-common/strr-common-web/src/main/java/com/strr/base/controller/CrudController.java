@@ -3,12 +3,12 @@ package com.strr.base.controller;
 import com.strr.base.model.Page;
 import com.strr.base.model.Pageable;
 import com.strr.base.model.Result;
-import com.strr.base.service.CrudService;
+import com.strr.base.service.ICrudService;
 
 import java.io.Serializable;
 
 public abstract class CrudController<T, ID extends Serializable> {
-    protected abstract CrudService<T, ID> getService();
+    protected abstract ICrudService<T, ID> getService();
 
     public Result<Page<T>> page(T param, Pageable pageable) {
         Page<T> page = getService().page(param, pageable);

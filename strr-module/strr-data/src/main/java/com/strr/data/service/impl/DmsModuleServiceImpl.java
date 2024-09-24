@@ -11,7 +11,7 @@ import com.strr.data.model.DmsModule;
 import com.strr.data.model.DmsTable;
 import com.strr.data.model.bo.DmsTableBo;
 import com.strr.data.model.vo.DmsModuleVo;
-import com.strr.data.service.DmsModuleService;
+import com.strr.data.service.IDmsModuleService;
 import com.strr.util.ModelUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,7 +23,7 @@ import java.util.List;
  * 模块信息
  */
 @Service
-public class DmsModuleServiceImpl implements DmsModuleService {
+public class DmsModuleServiceImpl implements IDmsModuleService {
     private static final List<String> baseColumns = Arrays.asList("create_by", "create_time", "update_by", "update_time");
     private final DmsTableMapper dmsTableMapper;
     private final DmsColumnMapper dmsColumnMapper;

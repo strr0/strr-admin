@@ -4,14 +4,14 @@ import com.strr.system.mapper.SysUserRoleMapper;
 import com.strr.system.mapper.SysUserMapper;
 import com.strr.system.model.SysUser;
 import com.strr.system.model.bo.SysUserBo;
-import com.strr.system.service.SysUserService;
+import com.strr.system.service.ISysUserService;
 import com.strr.base.service.impl.CrudServiceImpl;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class SysUserServiceImpl extends CrudServiceImpl<SysUser, Integer> implements SysUserService {
+public class SysUserServiceImpl extends CrudServiceImpl<SysUser, Integer> implements ISysUserService {
     private final SysUserMapper sysUserMapper;
     private final SysUserRoleMapper sysUserRoleMapper;
 

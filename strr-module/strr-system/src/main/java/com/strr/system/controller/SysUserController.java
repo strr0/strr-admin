@@ -4,7 +4,7 @@ import com.strr.base.model.Page;
 import com.strr.base.model.Pageable;
 import com.strr.system.model.SysUser;
 import com.strr.system.model.bo.SysUserBo;
-import com.strr.system.service.SysUserService;
+import com.strr.system.service.ISysUserService;
 import com.strr.base.controller.CrudController;
 import com.strr.base.model.Result;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -18,14 +18,14 @@ import java.util.Map;
 @RestController
 @RequestMapping("/user")
 public class SysUserController extends CrudController<SysUser, Integer> {
-    private final SysUserService sysUserService;
+    private final ISysUserService sysUserService;
 
-    public SysUserController(SysUserService sysUserService) {
+    public SysUserController(ISysUserService sysUserService) {
         this.sysUserService = sysUserService;
     }
 
     @Override
-    protected SysUserService getService() {
+    protected ISysUserService getService() {
         return sysUserService;
     }
 

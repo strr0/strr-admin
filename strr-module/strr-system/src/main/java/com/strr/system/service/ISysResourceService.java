@@ -1,11 +1,11 @@
 package com.strr.system.service;
 
 import com.strr.system.model.SysResource;
-import com.strr.base.service.CrudService;
+import com.strr.base.service.ICrudService;
 
 import java.util.List;
 
-public interface SysResourceService extends CrudService<SysResource, Integer> {
+public interface ISysResourceService extends ICrudService<SysResource, Integer> {
     /**
      * 权限列表
      */

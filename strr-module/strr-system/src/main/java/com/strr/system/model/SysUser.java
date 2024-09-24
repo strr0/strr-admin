@@ -1,12 +1,10 @@
 package com.strr.system.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.strr.base.annotation.Column;
 import com.strr.base.annotation.Id;
 import com.strr.base.annotation.Table;
 import com.strr.base.model.BaseModel;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -67,8 +65,6 @@ public class SysUser extends BaseModel {
      * 登录时间
      */
     @Column("login_time")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date loginTime;
 
     /**

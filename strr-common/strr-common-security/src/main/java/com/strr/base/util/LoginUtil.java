@@ -12,7 +12,7 @@ import java.util.Optional;
  * 登录工具类
  */
 public class LoginUtil {
-    public static Optional<Map<String, Object>> getClaimsOpt() {
+    public static Optional<Map<String, Object>> getClaimsOptional() {
         return Optional.ofNullable(SecurityContextHolder.getContext())
                 .map(SecurityContext::getAuthentication)
                 .map(Authentication::getPrincipal)
@@ -20,11 +20,11 @@ public class LoginUtil {
                 .map(Jwt::getClaims);
     }
 
-    public static Optional<Integer> getLoginIdOpt() {
-        return getClaimsOpt().map(map -> (Long) map.get("id")).map(Long::intValue);
+    public static Optional<Integer> getLoginIdOptional() {
+        return getClaimsOptional().map(map -> (Long) map.get("id")).map(Long::intValue);
     }
 
     public static Integer getLoginId() {
-        return getLoginIdOpt().orElse(null);
+        return getLoginIdOptional().orElse(null);
     }
 }

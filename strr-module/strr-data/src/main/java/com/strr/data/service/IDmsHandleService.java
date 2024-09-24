@@ -3,7 +3,7 @@ package com.strr.data.service;
 /**
  * 数据处理
  */
-public interface DmsHandleService {
+public interface IDmsHandleService {
     /**
      * 注册
      */

@@ -8,8 +8,8 @@ import com.strr.data.model.DmsModule;
 import com.strr.data.model.DmsTable;
 import com.strr.data.model.bo.DmsTableBo;
 import com.strr.data.model.vo.DmsModuleVo;
-import com.strr.data.service.DmsHandleService;
-import com.strr.data.service.DmsModuleService;
+import com.strr.data.service.IDmsHandleService;
+import com.strr.data.service.IDmsModuleService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,10 +19,10 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/module")
 public class DmsModuleController {
-    private final DmsModuleService dmsModuleService;
-    private final DmsHandleService dmsHandleService;
+    private final IDmsModuleService dmsModuleService;
+    private final IDmsHandleService dmsHandleService;
 
-    public DmsModuleController(DmsModuleService dmsModuleService, DmsHandleService dmsHandleService) {
+    public DmsModuleController(IDmsModuleService dmsModuleService, IDmsHandleService dmsHandleService) {
         this.dmsModuleService = dmsModuleService;
         this.dmsHandleService = dmsHandleService;
     }

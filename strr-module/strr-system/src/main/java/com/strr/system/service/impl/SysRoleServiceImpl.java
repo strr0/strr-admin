@@ -4,14 +4,14 @@ import com.strr.system.mapper.SysRoleResourceMapper;
 import com.strr.system.mapper.SysUserRoleMapper;
 import com.strr.system.mapper.SysRoleMapper;
 import com.strr.system.model.SysRole;
-import com.strr.system.service.SysRoleService;
+import com.strr.system.service.ISysRoleService;
 import com.strr.base.service.impl.CrudServiceImpl;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class SysRoleServiceImpl extends CrudServiceImpl<SysRole, Integer> implements SysRoleService {
+public class SysRoleServiceImpl extends CrudServiceImpl<SysRole, Integer> implements ISysRoleService {
     private final SysRoleMapper sysRoleMapper;
     private final SysUserRoleMapper sysUserRoleMapper;
     private final SysRoleResourceMapper sysRoleResourceMapper;

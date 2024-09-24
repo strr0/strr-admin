@@ -20,7 +20,7 @@ public class ModelUtil {
     /**
      * 获取表名注解
      */
-    public static Optional<Table> getTableOpt(Class<?> clazz) {
+    public static Optional<Table> getTableOptional(Class<?> clazz) {
         return Optional.ofNullable(clazz.getAnnotation(Table.class));
     }
 
@@ -28,13 +28,13 @@ public class ModelUtil {
      * 获取表名
      */
     public static String getTable(Class<?> clazz) {
-        return getTableOpt(clazz).map(Table::value).orElse(toUnderscore(clazz.getSimpleName()));
+        return getTableOptional(clazz).map(Table::value).orElse(toUnderscore(clazz.getSimpleName()));
     }
 
     /**
      * 获取字段名注解
      */
-    public static Optional<Column> getColumnOpt(Field field) {
+    public static Optional<Column> getColumnOptional(Field field) {
         return Optional.ofNullable(field.getAnnotation(Column.class));
     }
 
@@ -42,14 +42,14 @@ public class ModelUtil {
      * 获取字段名
      */
     public static String getColumn(Field field) {
-        return getColumnOpt(field).map(Column::value).filter(str -> str.length() > 0).orElse(toUnderscore(field.getName()));
+        return getColumnOptional(field).map(Column::value).filter(str -> str.length() > 0).orElse(toUnderscore(field.getName()));
     }
 
     /**
      * 模糊查询
      */
     public static boolean isFuzzy(Field field) {
-        return getColumnOpt(field).map(Column::fuzzy).orElse(false);
+        return getColumnOptional(field).map(Column::fuzzy).orElse(false);
     }
 
     /**

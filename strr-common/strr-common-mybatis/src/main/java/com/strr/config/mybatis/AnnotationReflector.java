@@ -34,7 +34,7 @@ public class AnnotationReflector extends Reflector {
         }
         for (Field field : fields) {
             // 下划线转驼峰
-            String column = ModelUtil.getColumnOpt(field).map(Column::value).map(value -> value.replace("_", ""))
+            String column = ModelUtil.getColumnOptional(field).map(Column::value).map(value -> value.replace("_", ""))
                     .orElse(field.getName());
             annotationPropertyMap.put(column.toUpperCase(Locale.ENGLISH), field.getName());
         }

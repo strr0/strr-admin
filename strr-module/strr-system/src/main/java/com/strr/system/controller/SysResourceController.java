@@ -4,7 +4,7 @@ import com.strr.base.util.LoginUtil;
 import com.strr.system.model.SysResource;
 import com.strr.system.model.vo.SysResourceVo;
 import com.strr.system.model.vo.SysRouteVo;
-import com.strr.system.service.SysResourceService;
+import com.strr.system.service.ISysResourceService;
 import com.strr.system.util.MenuUtil;
 import com.strr.base.controller.CrudController;
 import com.strr.base.model.Result;
@@ -16,14 +16,14 @@ import java.util.List;
 @RestController
 @RequestMapping("/resource")
 public class SysResourceController extends CrudController<SysResource, Integer> {
-    private final SysResourceService sysResourceService;
+    private final ISysResourceService sysResourceService;
 
-    public SysResourceController(SysResourceService sysResourceService) {
+    public SysResourceController(ISysResourceService sysResourceService) {
         this.sysResourceService = sysResourceService;
     }
 
     @Override
-    protected SysResourceService getService() {
+    protected ISysResourceService getService() {
         return sysResourceService;
     }
 
