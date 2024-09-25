@@ -1,6 +1,6 @@
 package com.strr.util;
 
-import com.strr.tree.TreeConfig;
+import com.strr.base.model.Treeable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,23 +12,43 @@ import java.util.function.Function;
  * 树工具类
  */
 public class TreeUtil {
-    public static <S, T, K> List<T> build(List<S> list, TreeConfig<S, T, K> config, Function<S, T> transform) {
+    public static <T extends Treeable<T, K>, K> List<T> build(List<T> list) {
+        Map<K, T> itemMap = new HashMap<>();
+        List<T> tree = new ArrayList<>();
+        list.forEach(item -> {
+            T parent = itemMap.get(item.getParentId());
+            if (parent != null) {
+                List<T> children = parent.getChildren();
+                if (children == null) {
+                    children = new ArrayList<>();
+                    parent.setChildren(children);
+                }
+                children.add(item);
+            } else {
+                tree.add(item);
+            }
+            itemMap.put(item.getId(), item);
+        });
+        return tree;
+    }
+
+    public static <S, T extends Treeable<T, K>, K> List<T> build(List<S> list, Function<S, T> transform) {
         Map<K, T> itemMap = new HashMap<>();
         List<T> tree = new ArrayList<>();
         list.forEach(source -> {
             T target = transform.apply(source);
-            T parent = itemMap.get(config.getParentIdApply(source));
+            T parent = itemMap.get(target.getParentId());
             if (parent != null) {
-                List<T> children = config.getChildrenApply(parent);
+                List<T> children = parent.getChildren();
                 if (children == null) {
                     children = new ArrayList<>();
-                    config.setChildrenAccept(parent, children);
+                    parent.setChildren(children);
                 }
                 children.add(target);
             } else {
                 tree.add(target);
             }
-            itemMap.put(config.getIdApply(source), target);
+            itemMap.put(target.getId(), target);
         });
         return tree;
     }

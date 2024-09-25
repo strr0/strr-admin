@@ -5,7 +5,6 @@ import com.strr.system.model.SysResource;
 import com.strr.system.model.vo.SysResourceVo;
 import com.strr.system.model.vo.SysRouteMetaVo;
 import com.strr.system.model.vo.SysRouteVo;
-import com.strr.tree.TreeConfig;
 import com.strr.util.TreeUtil;
 
 import java.util.ArrayList;
@@ -30,13 +29,7 @@ public class MenuUtil {
      * 菜单树
      */
     public static List<SysResourceVo> buildMenuTree(List<SysResource> resources) {
-        TreeConfig<SysResource, SysResourceVo, Integer> config = new TreeConfig.Builder<SysResource, SysResourceVo, Integer>()
-                .getId(SysResource::getId)
-                .getParentId(SysResource::getParentId)
-                .getChildren(SysResourceVo::getChildren)
-                .setChildren(SysResourceVo::setChildren)
-                .build();
-        return TreeUtil.build(resources, config, resource -> {
+        return TreeUtil.build(resources, resource -> {
             SysResourceVo vo = new SysResourceVo();
             vo.setId(resource.getId());
             vo.setParentId(resource.getParentId());
