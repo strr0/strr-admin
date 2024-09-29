@@ -13,11 +13,23 @@ import java.io.PrintWriter;
 public class ResponseUtil {
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
-    public static <T> void writeResult(HttpServletResponse response, T data) throws IOException {
+    public static void write(HttpServletResponse response, Result<?> result) throws IOException {
         response.setContentType("application/json;charset=utf-8");
         PrintWriter out = response.getWriter();
-        out.write(objectMapper.writeValueAsString(Result.ok(data)));
+        out.write(objectMapper.writeValueAsString(result));
         out.flush();
         out.close();
+    }
+
+    public static <T> void writeOk(HttpServletResponse response, T data) throws IOException {
+        write(response, Result.ok(data));
+    }
+
+    public static void writeError(HttpServletResponse response, String msg) throws IOException {
+        write(response, Result.error(msg));
+    }
+
+    public static void writeError(HttpServletResponse response, Integer code, String msg) throws IOException {
+        write(response, Result.error(code, msg));
     }
 }

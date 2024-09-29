@@ -30,6 +30,6 @@ public class CustomAccessTokenResponseHandler implements AuthenticationSuccessHa
         if (refreshToken != null) {
             loginToken.setRefreshToken(refreshToken.getTokenValue());
         }
-        ResponseUtil.writeResult(response, loginToken);
+        ResponseUtil.writeOk(response, loginToken);
     }
 }
