@@ -52,8 +52,8 @@ CREATE TABLE `dms_module`  (
 DROP TABLE IF EXISTS `dms_table`;
 CREATE TABLE `dms_table`  (
   `id` bigint NOT NULL AUTO_INCREMENT COMMENT '编号',
-  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '表名称',
-  `comment` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '表描述',
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '表名称',
+  `comment` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '表描述',
   `remark` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
   `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '状态',
   `create_by` bigint NULL DEFAULT NULL COMMENT '创建者',
@@ -95,29 +95,29 @@ CREATE TABLE `sys_resource`  (
 -- Records of sys_resource
 -- ----------------------------
 INSERT INTO `sys_resource` VALUES (1, '首页', 'M', 'home', 'home/index', 'route.home', 0, NULL, NULL, 'mdi:monitor-dashboard', '1', NULL, '1', NULL, NULL, '1', NULL, NULL, NULL, NULL);
-INSERT INTO `sys_resource` VALUES (2, '系统管理', 'D', 'system', '', 'route.system', 0, NULL, NULL, 'carbon:cloud-service-management', '1', NULL, '1', NULL, NULL, '1', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (2, '系统管理', 'D', 'system', NULL, 'route.system', 0, NULL, NULL, 'carbon:cloud-service-management', '1', NULL, '1', NULL, NULL, '1', NULL, NULL, NULL, NULL);
 INSERT INTO `sys_resource` VALUES (3, '用户管理', 'M', 'user', 'system/user/index', 'route.user', 2, NULL, NULL, 'ic:round-manage-accounts', '1', NULL, '1', 'system:user:list', NULL, '1', NULL, NULL, NULL, NULL);
 INSERT INTO `sys_resource` VALUES (4, '角色管理', 'M', 'role', 'system/role/index', 'route.role', 2, NULL, NULL, 'carbon:user-role', '1', NULL, '1', 'system:role:list', NULL, '1', NULL, NULL, NULL, NULL);
 INSERT INTO `sys_resource` VALUES (5, '资源管理', 'M', 'resource', 'system/resource/index', 'route.resource', 2, NULL, NULL, 'material-symbols:route', '1', NULL, '1', 'system:resource:list', NULL, '1', NULL, NULL, NULL, NULL);
-INSERT INTO `sys_resource` VALUES (6, '查看', 'B', NULL, NULL, NULL, 3, NULL, NULL, '', NULL, NULL, '0', 'system:user:query', NULL, '1', NULL, NULL, NULL, NULL);
-INSERT INTO `sys_resource` VALUES (7, '添加', 'B', NULL, NULL, NULL, 3, NULL, NULL, '', NULL, NULL, '0', 'system:user:save', NULL, '1', NULL, NULL, NULL, NULL);
-INSERT INTO `sys_resource` VALUES (8, '修改', 'B', NULL, NULL, NULL, 3, NULL, NULL, '', NULL, NULL, '0', 'system:user:update', NULL, '1', NULL, NULL, NULL, NULL);
-INSERT INTO `sys_resource` VALUES (9, '删除', 'B', NULL, NULL, NULL, 3, NULL, NULL, '', NULL, NULL, '0', 'system:user:remove', NULL, '1', NULL, NULL, NULL, NULL);
-INSERT INTO `sys_resource` VALUES (10, '权限', 'B', NULL, NULL, NULL, 4, NULL, NULL, '', NULL, NULL, '0', 'system:role:query', NULL, '1', NULL, NULL, NULL, NULL);
-INSERT INTO `sys_resource` VALUES (11, '添加', 'B', NULL, NULL, NULL, 4, NULL, NULL, '', NULL, NULL, '0', 'system:role:save', NULL, '1', NULL, NULL, NULL, NULL);
-INSERT INTO `sys_resource` VALUES (12, '修改', 'B', NULL, NULL, NULL, 4, NULL, NULL, '', NULL, NULL, '0', 'system:role:update', NULL, '1', NULL, NULL, NULL, NULL);
-INSERT INTO `sys_resource` VALUES (13, '删除', 'B', NULL, NULL, NULL, 4, NULL, NULL, '', NULL, NULL, '0', 'system:role:remove', NULL, '1', NULL, NULL, NULL, NULL);
-INSERT INTO `sys_resource` VALUES (14, '查看', 'B', NULL, NULL, NULL, 5, NULL, NULL, '', NULL, NULL, '0', 'system:resource:query', NULL, '1', NULL, NULL, NULL, NULL);
-INSERT INTO `sys_resource` VALUES (15, '添加', 'B', NULL, NULL, NULL, 5, NULL, NULL, '', NULL, NULL, '0', 'system:resource:save', NULL, '1', NULL, NULL, NULL, NULL);
-INSERT INTO `sys_resource` VALUES (16, '修改', 'B', NULL, NULL, NULL, 5, NULL, NULL, '', NULL, NULL, '0', 'system:resource:update', NULL, '1', NULL, NULL, NULL, NULL);
-INSERT INTO `sys_resource` VALUES (17, '删除', 'B', NULL, NULL, NULL, 5, NULL, NULL, '', NULL, NULL, '0', 'system:resource:remove', NULL, '1', NULL, NULL, NULL, NULL);
-INSERT INTO `sys_resource` VALUES (18, '数据管理', 'D', 'data', NULL, 'route.data', 0, NULL, '0', 'icon-park-outline:all-application', '1', 0, '1', '', NULL, '1', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (6, '查看', 'B', NULL, NULL, NULL, 3, NULL, NULL, NULL, NULL, NULL, '0', 'system:user:query', NULL, '1', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (7, '添加', 'B', NULL, NULL, NULL, 3, NULL, NULL, NULL, NULL, NULL, '0', 'system:user:save', NULL, '1', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (8, '修改', 'B', NULL, NULL, NULL, 3, NULL, NULL, NULL, NULL, NULL, '0', 'system:user:update', NULL, '1', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (9, '删除', 'B', NULL, NULL, NULL, 3, NULL, NULL, NULL, NULL, NULL, '0', 'system:user:remove', NULL, '1', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (10, '权限', 'B', NULL, NULL, NULL, 4, NULL, NULL, NULL, NULL, NULL, '0', 'system:role:query', NULL, '1', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (11, '添加', 'B', NULL, NULL, NULL, 4, NULL, NULL, NULL, NULL, NULL, '0', 'system:role:save', NULL, '1', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (12, '修改', 'B', NULL, NULL, NULL, 4, NULL, NULL, NULL, NULL, NULL, '0', 'system:role:update', NULL, '1', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (13, '删除', 'B', NULL, NULL, NULL, 4, NULL, NULL, NULL, NULL, NULL, '0', 'system:role:remove', NULL, '1', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (14, '查看', 'B', NULL, NULL, NULL, 5, NULL, NULL, NULL, NULL, NULL, '0', 'system:resource:query', NULL, '1', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (15, '添加', 'B', NULL, NULL, NULL, 5, NULL, NULL, NULL, NULL, NULL, '0', 'system:resource:save', NULL, '1', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (16, '修改', 'B', NULL, NULL, NULL, 5, NULL, NULL, NULL, NULL, NULL, '0', 'system:resource:update', NULL, '1', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (17, '删除', 'B', NULL, NULL, NULL, 5, NULL, NULL, NULL, NULL, NULL, '0', 'system:resource:remove', NULL, '1', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (18, '数据管理', 'D', 'data', NULL, 'route.data', 0, NULL, '0', 'icon-park-outline:all-application', '1', 0, '1', NULL, NULL, '1', NULL, NULL, NULL, NULL);
 INSERT INTO `sys_resource` VALUES (19, '模块管理', 'M', 'module', 'data/module/index', 'route.module', 18, '0', '0', 'material-symbols:route', '1', 0, '1', 'data:module:list', NULL, '1', NULL, NULL, NULL, NULL);
-INSERT INTO `sys_resource` VALUES (20, '模块详情', 'M', 'moduleItem/:id', 'data/module-item/index', 'route.module-item', 19, '0', '0', '', '1', 0, '0', 'data:module:update', NULL, '1', NULL, NULL, NULL, NULL);
-INSERT INTO `sys_resource` VALUES (21, '数据详情', 'M', 'dataItem/:id', 'data/data-item/index', 'route.data-item', 19, '0', '0', '', '1', 0, '0', 'data:module:query', NULL, '1', NULL, NULL, NULL, NULL);
-INSERT INTO `sys_resource` VALUES (22, '导入', 'B', NULL, NULL, NULL, 19, NULL, NULL, '', NULL, NULL, '0', 'data:module:import', NULL, '1', NULL, NULL, NULL, NULL);
-INSERT INTO `sys_resource` VALUES (23, '删除', 'B', NULL, NULL, NULL, 19, NULL, NULL, '', NULL, NULL, '0', 'data:module:remove', NULL, '1', NULL, NULL, NULL, NULL);
-INSERT INTO `sys_resource` VALUES (24, '注册', 'B', NULL, NULL, NULL, 19, NULL, NULL, '', NULL, NULL, '0', 'data:module:register', NULL, '1', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (20, '模块详情', 'M', 'moduleItem/:id', 'data/module-item/index', 'route.module-item', 19, '0', '0', NULL, '1', 0, '0', 'data:module:update', NULL, '1', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (21, '数据详情', 'M', 'dataItem/:id', 'data/data-item/index', 'route.data-item', 19, '0', '0', NULL, '1', 0, '0', 'data:module:query', NULL, '1', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (22, '导入', 'B', NULL, NULL, NULL, 19, NULL, NULL, NULL, NULL, NULL, '0', 'data:module:import', NULL, '1', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (23, '删除', 'B', NULL, NULL, NULL, 19, NULL, NULL, NULL, NULL, NULL, '0', 'data:module:remove', NULL, '1', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (24, '注册', 'B', NULL, NULL, NULL, 19, NULL, NULL, NULL, NULL, NULL, '0', 'data:module:register', NULL, '1', NULL, NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for sys_role
@@ -139,7 +139,7 @@ CREATE TABLE `sys_role`  (
 -- ----------------------------
 -- Records of sys_role
 -- ----------------------------
-INSERT INTO `sys_role` VALUES (1, '管理员', 'ROLE_ADMIN', '', '1', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_role` VALUES (1, '管理员', 'ROLE_ADMIN', NULL, '1', NULL, NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for sys_role_resource
@@ -153,8 +153,6 @@ CREATE TABLE `sys_role_resource`  (
 -- ----------------------------
 -- Records of sys_role_resource
 -- ----------------------------
-INSERT INTO `sys_role_resource` VALUES (2, 1);
-INSERT INTO `sys_role_resource` VALUES (2, 2);
 INSERT INTO `sys_role_resource` VALUES (1, 1);
 INSERT INTO `sys_role_resource` VALUES (1, 2);
 INSERT INTO `sys_role_resource` VALUES (1, 3);
@@ -176,6 +174,9 @@ INSERT INTO `sys_role_resource` VALUES (1, 18);
 INSERT INTO `sys_role_resource` VALUES (1, 19);
 INSERT INTO `sys_role_resource` VALUES (1, 20);
 INSERT INTO `sys_role_resource` VALUES (1, 21);
+INSERT INTO `sys_role_resource` VALUES (1, 22);
+INSERT INTO `sys_role_resource` VALUES (1, 23);
+INSERT INTO `sys_role_resource` VALUES (1, 24);
 
 -- ----------------------------
 -- Table structure for sys_user
@@ -238,7 +239,7 @@ CREATE TABLE `sys_oauth_client`  (
   `update_by` int NULL DEFAULT NULL COMMENT '更新人',
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '客户端配置' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_oauth_client
