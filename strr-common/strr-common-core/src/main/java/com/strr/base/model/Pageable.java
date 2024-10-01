@@ -22,8 +22,4 @@ public class Pageable {
     public void setSize(Integer size) {
         this.size = size;
     }
-
-    public <T> Page<T> page() {
-        return new Page<>(page, size);
-    }
 }

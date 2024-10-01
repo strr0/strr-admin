@@ -95,7 +95,7 @@ public class CustomInterceptor implements Interceptor {
         }
         Pageable pageable = optional.get();
 
-        Page<Object> page = pageable.page();
+        Page<Object> page = Page.of(pageable);
         MappedStatement countMs = buildCountMappedStatement(ms);
         Integer count = executeCount(executor, countMs, parameter, boundSql, rowBounds, resultHandler);
         page.setTotal(count);

@@ -12,6 +12,20 @@ import java.util.function.Function;
  * 树工具类
  */
 public class TreeUtil {
+    public static <T extends Treeable<T, K>, K> List<T> build(List<T> list, K pid) {
+        if (list == null || list.isEmpty()) {
+            return null;
+        }
+        List<T> tree = new ArrayList<>();
+        list.forEach(item -> {
+            if (pid.equals(item.getParentId())) {
+                item.setChildren(build(list, item.getId()));
+                tree.add(item);
+            }
+        });
+        return tree;
+    }
+
     public static <T extends Treeable<T, K>, K> List<T> build(List<T> list) {
         Map<K, T> itemMap = new HashMap<>();
         List<T> tree = new ArrayList<>();

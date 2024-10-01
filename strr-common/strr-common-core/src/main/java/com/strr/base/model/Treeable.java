@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * 可树化
  */
-public interface Treeable<T extends Treeable<T, K>, K> {
+public interface Treeable<T, K> {
     /**
      * 获取 id
      */

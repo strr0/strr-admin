@@ -29,4 +29,8 @@ public class Page<T> extends Pageable {
     public void setContent(List<T> content) {
         this.content = content;
     }
+
+    public static <T> Page<T> of(Pageable pageable) {
+        return new Page<>(pageable.getPage(), pageable.getSize());
+    }
 }
