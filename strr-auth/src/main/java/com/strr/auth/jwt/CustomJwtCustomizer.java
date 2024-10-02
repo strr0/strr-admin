@@ -1,6 +1,7 @@
 package com.strr.auth.jwt;
 
 import com.strr.auth.model.LoginUserDetails;
+import com.strr.constant.Constant;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
 import org.springframework.security.oauth2.server.authorization.OAuth2TokenType;
@@ -16,9 +17,9 @@ public class CustomJwtCustomizer implements OAuth2TokenCustomizer<JwtEncodingCon
         if (OAuth2TokenType.ACCESS_TOKEN.equals(context.getTokenType()) && context.getPrincipal() instanceof UsernamePasswordAuthenticationToken principal) {
             if (principal.getPrincipal() instanceof LoginUserDetails user) {
                 JwtClaimsSet.Builder claims = context.getClaims();
-                claims.claim("id", user.getId());
-                claims.claim("username", user.getUsername());
-                claims.claim("resources", user.getResources());
+                claims.claim(Constant.USER_ID, user.getId());
+                claims.claim(Constant.USERNAME, user.getUsername());
+                claims.claim(Constant.PERMS, user.getResources());
             }
         }
     }

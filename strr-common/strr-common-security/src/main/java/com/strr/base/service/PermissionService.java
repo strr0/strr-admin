@@ -1,6 +1,7 @@
 package com.strr.base.service;
 
 import com.strr.base.util.LoginUtil;
+import com.strr.constant.Constant;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
@@ -13,7 +14,7 @@ public class PermissionService {
         if (!StringUtils.hasLength(permission)) {
             return false;
         }
-        return LoginUtil.getClaimsOptional().map(map -> (List<String>) map.get("resources"))
+        return LoginUtil.getClaimsOptional().map(map -> (List<String>) map.get(Constant.PERMS))
                 .map(resources -> resources.contains(permission)).orElse(false);
     }
 }

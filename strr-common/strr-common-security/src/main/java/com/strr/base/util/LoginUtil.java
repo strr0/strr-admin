@@ -1,5 +1,6 @@
 package com.strr.base.util;
 
+import com.strr.constant.Constant;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,7 +22,7 @@ public class LoginUtil {
     }
 
     public static Optional<Integer> getLoginIdOptional() {
-        return getClaimsOptional().map(map -> (Long) map.get("id")).map(Long::intValue);
+        return getClaimsOptional().map(map -> (Long) map.get(Constant.USER_ID)).map(Long::intValue);
     }
 
     public static Integer getLoginId() {

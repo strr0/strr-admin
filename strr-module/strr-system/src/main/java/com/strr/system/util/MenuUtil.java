@@ -74,6 +74,7 @@ public class MenuUtil {
             meta.setType(resource.getType());
             meta.setIcon(resource.getIcon());
             meta.setOrder(resource.getOrder());
+            meta.setPerms(resource.getPerms());
             meta.setKeepAlive(Constant.YES.equals(resource.getCache()));
             boolean hide = Constant.NO.equals(resource.getVisible());
             if (hide) {

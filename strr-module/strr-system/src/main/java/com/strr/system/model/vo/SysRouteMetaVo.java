@@ -54,6 +54,11 @@ public class SysRouteMetaVo {
      */
     private String activeMenu;
 
+    /**
+     * 权限
+     */
+    private String perms;
+
     public String getTitle() {
         return title;
     }
@@ -132,5 +137,13 @@ public class SysRouteMetaVo {
 
     public void setActiveMenu(String activeMenu) {
         this.activeMenu = activeMenu;
+    }
+
+    public String getPerms() {
+        return perms;
+    }
+
+    public void setPerms(String perms) {
+        this.perms = perms;
     }
 }
