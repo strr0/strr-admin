@@ -2,7 +2,6 @@ package com.strr.config.interceptor;
 
 import com.strr.base.model.Page;
 import com.strr.base.model.Pageable;
-import com.strr.base.util.LoginUtil;
 import com.strr.config.interceptor.page.IDialect;
 import com.strr.config.interceptor.page.MySqlDialect;
 import com.strr.util.ParameterUtils;
@@ -11,7 +10,6 @@ import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.mapping.ResultMap;
-import org.apache.ibatis.mapping.SqlCommandType;
 import org.apache.ibatis.plugin.*;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.ResultHandler;
@@ -22,7 +20,7 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * 自定义插件
+ * 分页插件
  */
 @Intercepts({@Signature(
         type = Executor.class,
@@ -33,7 +31,7 @@ import java.util.concurrent.ConcurrentHashMap;
         method = "query",
         args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class, CacheKey.class, BoundSql.class}
 )})
-public class CustomInterceptor implements Interceptor {
+public class PageInterceptor implements Interceptor {
     /**
      * countSql 后缀
      */
@@ -65,27 +63,6 @@ public class CustomInterceptor implements Interceptor {
         } else {
             cacheKey = (CacheKey) args[4];
             boundSql = (BoundSql) args[5];
-        }
-
-        SqlCommandType type = ms.getSqlCommandType();
-        if (SqlCommandType.INSERT.equals(type) || SqlCommandType.UPDATE.equals(type)) {
-            // 基础参数
-            ParameterUtils.getBaseModel(parameter).ifPresent(model -> {
-                Integer userId = LoginUtil.getLoginId();
-                if (model.getCreateBy() == null) {
-                    model.setCreateBy(userId);
-                }
-                if (model.getCreateTime() == null) {
-                    model.setCreateTime(new Date());
-                }
-                if (model.getUpdateBy() == null) {
-                    model.setUpdateBy(userId);
-                }
-                if (model.getUpdateTime() == null) {
-                    model.setUpdateTime(new Date());
-                }
-            });
-            return invocation.proceed();
         }
 
         // 分页参数

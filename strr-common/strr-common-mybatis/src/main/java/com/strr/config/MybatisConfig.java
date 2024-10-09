@@ -1,6 +1,7 @@
 package com.strr.config;
 
-import com.strr.config.interceptor.CustomInterceptor;
+import com.strr.config.interceptor.ModelInterceptor;
+import com.strr.config.interceptor.PageInterceptor;
 import com.strr.config.mybatis.AnnotationReflectorFactory;
 import com.strr.config.mybatis.CrudMapperFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
@@ -17,7 +18,10 @@ public class MybatisConfig {
             config.setReflectorFactory(new AnnotationReflectorFactory());
             // 开启下划线转驼峰
             config.setMapUnderscoreToCamelCase(true);
-            config.addInterceptor(new CustomInterceptor());
+            // 分页插件
+            config.addInterceptor(new PageInterceptor());
+            // 数据填充
+            config.addInterceptor(new ModelInterceptor());
         };
     }
 }
