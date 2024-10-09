@@ -89,7 +89,7 @@ CREATE TABLE `sys_resource`  (
   `update_by` int NULL DEFAULT NULL COMMENT '更新人',
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 22 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '资源' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 36 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '资源' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_resource
@@ -111,13 +111,24 @@ INSERT INTO `sys_resource` VALUES (14, '查看', 'B', NULL, NULL, NULL, 5, NULL,
 INSERT INTO `sys_resource` VALUES (15, '添加', 'B', NULL, NULL, NULL, 5, NULL, NULL, NULL, NULL, NULL, '0', 'system:resource:save', NULL, '1', NULL, NULL, NULL, NULL);
 INSERT INTO `sys_resource` VALUES (16, '修改', 'B', NULL, NULL, NULL, 5, NULL, NULL, NULL, NULL, NULL, '0', 'system:resource:update', NULL, '1', NULL, NULL, NULL, NULL);
 INSERT INTO `sys_resource` VALUES (17, '删除', 'B', NULL, NULL, NULL, 5, NULL, NULL, NULL, NULL, NULL, '0', 'system:resource:remove', NULL, '1', NULL, NULL, NULL, NULL);
-INSERT INTO `sys_resource` VALUES (18, '数据管理', 'D', 'data', NULL, 'route.data', 0, NULL, '0', 'icon-park-outline:all-application', '1', 0, '1', NULL, NULL, '1', NULL, NULL, NULL, NULL);
-INSERT INTO `sys_resource` VALUES (19, '模块管理', 'M', 'module', 'data/module/index', 'route.module', 18, '0', '0', 'material-symbols:route', '1', 0, '1', 'data:module:list', NULL, '1', NULL, NULL, NULL, NULL);
-INSERT INTO `sys_resource` VALUES (20, '模块详情', 'M', 'moduleItem/:id', 'data/module-item/index', 'route.module-item', 19, '0', '0', NULL, '1', 0, '0', 'data:module:update', NULL, '1', NULL, NULL, NULL, NULL);
-INSERT INTO `sys_resource` VALUES (21, '数据详情', 'M', 'dataItem/:id', 'data/data-item/index', 'route.data-item', 19, '0', '0', NULL, '1', 0, '0', 'data:module:query', NULL, '1', NULL, NULL, NULL, NULL);
-INSERT INTO `sys_resource` VALUES (22, '导入', 'B', NULL, NULL, NULL, 19, NULL, NULL, NULL, NULL, NULL, '0', 'data:module:import', NULL, '1', NULL, NULL, NULL, NULL);
-INSERT INTO `sys_resource` VALUES (23, '删除', 'B', NULL, NULL, NULL, 19, NULL, NULL, NULL, NULL, NULL, '0', 'data:module:remove', NULL, '1', NULL, NULL, NULL, NULL);
-INSERT INTO `sys_resource` VALUES (24, '注册', 'B', NULL, NULL, NULL, 19, NULL, NULL, NULL, NULL, NULL, '0', 'data:module:register', NULL, '1', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (18, '字典管理', 'M', 'dict', 'system/dict/index', NULL, 2, '0', '0', 'material-symbols:route', '1', 0, '1', 'system:dict:list', NULL, '1', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (19, '查看', 'B', NULL, NULL, NULL, 18, NULL, NULL, NULL, '1', NULL, NULL, 'system:dict:query', NULL, '1', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (20, '添加', 'B', NULL, NULL, NULL, 18, NULL, NULL, NULL, '1', NULL, NULL, 'system:dict:save', NULL, '1', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (21, '修改', 'B', NULL, NULL, NULL, 18, NULL, NULL, NULL, '1', NULL, NULL, 'system:dict:update', NULL, '1', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (22, '删除', 'B', NULL, NULL, NULL, 18, NULL, NULL, NULL, '1', NULL, NULL, 'system:dict:remove', NULL, '1', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (23, '字典数据', 'M', 'dictData/:type', 'system/dict-data/index', 'route.dict-data', 18, '0', '0', NULL, '1', 0, '0', 'system:dict:save', NULL, '1', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (24, '客户端管理', 'M', 'oauthClient', 'system/oauth-client/index', 'route.oauth-client', 2, '0', '0', 'material-symbols:route', '1', 0, '1', 'system:client:list', NULL, '1', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (25, '查看', 'B', NULL, NULL, NULL, 24, NULL, NULL, NULL, '1', NULL, NULL, 'system:client:query', NULL, '1', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (26, '添加', 'B', NULL, NULL, NULL, 24, NULL, NULL, NULL, '1', NULL, NULL, 'system:client:save', NULL, '1', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (27, '修改', 'B', NULL, NULL, NULL, 24, NULL, NULL, NULL, '1', NULL, NULL, 'system:client:update', NULL, '1', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (28, '删除', 'B', NULL, NULL, NULL, 24, NULL, NULL, NULL, '1', NULL, NULL, 'system:client:remove', NULL, '1', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (29, '数据管理', 'D', 'data', NULL, 'route.data', 0, NULL, '0', 'icon-park-outline:all-application', '1', 0, '1', NULL, NULL, '1', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (30, '模块管理', 'M', 'module', 'data/module/index', 'route.module', 29, '0', '0', 'material-symbols:route', '1', 0, '1', 'data:module:list', NULL, '1', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (31, '模块详情', 'M', 'moduleItem/:id', 'data/module-item/index', 'route.module-item', 30, '0', '0', NULL, '1', 0, '0', 'data:module:update', NULL, '1', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (32, '数据详情', 'M', 'dataItem/:id', 'data/data-item/index', 'route.data-item', 30, '0', '0', NULL, '1', 0, '0', 'data:module:query', NULL, '1', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (33, '导入', 'B', NULL, NULL, NULL, 30, NULL, NULL, NULL, NULL, NULL, '0', 'data:module:import', NULL, '1', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (34, '删除', 'B', NULL, NULL, NULL, 30, NULL, NULL, NULL, NULL, NULL, '0', 'data:module:remove', NULL, '1', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (35, '注册', 'B', NULL, NULL, NULL, 30, NULL, NULL, NULL, NULL, NULL, '0', 'data:module:register', NULL, '1', NULL, NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for sys_role
@@ -127,7 +138,7 @@ CREATE TABLE `sys_role`  (
   `id` int NOT NULL AUTO_INCREMENT COMMENT '主键',
   `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '角色名称',
   `code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '角色代码',
-  `remark` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '标题',
+  `remark` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
   `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '状态',
   `create_by` int NULL DEFAULT NULL COMMENT '创建人',
   `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
@@ -177,6 +188,17 @@ INSERT INTO `sys_role_resource` VALUES (1, 21);
 INSERT INTO `sys_role_resource` VALUES (1, 22);
 INSERT INTO `sys_role_resource` VALUES (1, 23);
 INSERT INTO `sys_role_resource` VALUES (1, 24);
+INSERT INTO `sys_role_resource` VALUES (1, 25);
+INSERT INTO `sys_role_resource` VALUES (1, 26);
+INSERT INTO `sys_role_resource` VALUES (1, 27);
+INSERT INTO `sys_role_resource` VALUES (1, 28);
+INSERT INTO `sys_role_resource` VALUES (1, 29);
+INSERT INTO `sys_role_resource` VALUES (1, 30);
+INSERT INTO `sys_role_resource` VALUES (1, 31);
+INSERT INTO `sys_role_resource` VALUES (1, 32);
+INSERT INTO `sys_role_resource` VALUES (1, 33);
+INSERT INTO `sys_role_resource` VALUES (1, 34);
+INSERT INTO `sys_role_resource` VALUES (1, 35);
 
 -- ----------------------------
 -- Table structure for sys_user
@@ -221,6 +243,42 @@ CREATE TABLE `sys_user_role`  (
 INSERT INTO `sys_user_role` VALUES (1, 1);
 
 -- ----------------------------
+-- Table structure for sys_dict_data
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_dict_data`;
+CREATE TABLE `sys_dict_data`  (
+  `id` int NOT NULL AUTO_INCREMENT COMMENT '字典编码',
+  `sort` int NULL DEFAULT 0 COMMENT '字典排序',
+  `label` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '字典标签',
+  `value` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '字典键值',
+  `dict_type` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '字典类型',
+  `remark` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '状态',
+  `create_by` int NULL DEFAULT NULL COMMENT '创建人',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `update_by` int NULL DEFAULT NULL COMMENT '更新人',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '字典数据' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for sys_dict_type
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_dict_type`;
+CREATE TABLE `sys_dict_type`  (
+  `id` int NOT NULL AUTO_INCREMENT COMMENT '字典主键',
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '字典名称',
+  `type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '字典类型',
+  `remark` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '状态',
+  `create_by` int NULL DEFAULT NULL COMMENT '创建人',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `update_by` int NULL DEFAULT NULL COMMENT '更新人',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '字典类型' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
 -- Table structure for sys_oauth_client
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_oauth_client`;
@@ -239,7 +297,7 @@ CREATE TABLE `sys_oauth_client`  (
   `update_by` int NULL DEFAULT NULL COMMENT '更新人',
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '客户端配置' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '客户端配置' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_oauth_client
