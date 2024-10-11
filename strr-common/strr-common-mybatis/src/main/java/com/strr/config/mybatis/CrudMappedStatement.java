@@ -136,8 +136,10 @@ public class CrudMappedStatement {
                 continue;
             }
             insertSql.VALUES(column, String.format("#{%s}", property));
+            String propertyNotNull = String.format("%s != null", property);
+            String propertyNotBlank = String.format("%s && %s != ''", propertyNotNull, property);
             updateIfNodes.add(new IfSqlNode(new TextSqlNode(String.format("%s = #{%s},", ModelUtil.getColumn(field), property)),
-                    String.format("%s != null && %s != ''", property, property)));
+                    String.class.equals(field.getType()) ? propertyNotBlank : propertyNotNull));
             // applyWhere
             String condition;
             String pageCondition;
@@ -158,8 +160,10 @@ public class CrudMappedStatement {
                 String column = ModelUtil.getColumn(field);
                 selectSql.SELECT(column);
                 insertSql.VALUES(column, String.format("#{%s}", property));
+                String propertyNotNull = String.format("%s != null", property);
+                String propertyNotBlank = String.format("%s && %s != ''", propertyNotNull, property);
                 updateIfNodes.add(new IfSqlNode(new TextSqlNode(String.format("%s = #{%s},", ModelUtil.getColumn(field), property)),
-                        String.format("%s != null && %s != ''", property, property)));
+                        String.class.equals(field.getType()) ? propertyNotBlank : propertyNotNull));
             }
         }
         countSql.FROM(table);

@@ -4,6 +4,7 @@ import com.strr.base.util.LoginUtil;
 import com.strr.util.ParameterUtils;
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.mapping.MappedStatement;
+import org.apache.ibatis.mapping.SqlCommandType;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.plugin.Intercepts;
 import org.apache.ibatis.plugin.Invocation;
@@ -23,20 +24,20 @@ public class ModelInterceptor implements Interceptor {
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
         Object[] args = invocation.getArgs();
+        MappedStatement ms = (MappedStatement) args[0];
         Object parameter = args[1];
         // 基础参数
         ParameterUtils.getBaseModel(parameter).ifPresent(model -> {
             Integer userId = LoginUtil.getLoginId();
-            if (model.getCreateBy() == null) {
+            SqlCommandType type = ms.getSqlCommandType();
+            // 新增
+            if (SqlCommandType.INSERT.equals(type)) {
                 model.setCreateBy(userId);
-            }
-            if (model.getCreateTime() == null) {
                 model.setCreateTime(new Date());
             }
-            if (model.getUpdateBy() == null) {
+            // 修改
+            if (SqlCommandType.UPDATE.equals(type)) {
                 model.setUpdateBy(userId);
-            }
-            if (model.getUpdateTime() == null) {
                 model.setUpdateTime(new Date());
             }
         });
