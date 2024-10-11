@@ -19,6 +19,7 @@
         <module>strr-common-alibaba-bom</module>
         <module>strr-common-dubbo</module>
         <module>strr-common-security</module>
+        <module>strr-common-oss</module>
     </modules>
 
     <properties>

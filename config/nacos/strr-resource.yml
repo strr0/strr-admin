@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${datasource.system.url}
+    username: ${datasource.system.username}
+    password: ${datasource.system.password}
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:8080/auth/oauth2/jwks
+
+mybatis:
+  crud-mapper-package: com.strr.resource.mapper

@@ -21,6 +21,13 @@ spring:
             - Path=/system/**
           filters:
             - StripPrefix=1
+        # 资源模块
+        - id: strr-resource
+          uri: lb://strr-resource
+          predicates:
+            - Path=/resource/**
+          filters:
+            - StripPrefix=1
         # 数据模块
         - id: strr-data
           uri: lb://strr-data

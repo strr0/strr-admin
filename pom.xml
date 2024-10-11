@@ -28,6 +28,7 @@
         <mybatis.version>3.5.13</mybatis.version>
         <mybatis-spring.version>3.0.3</mybatis-spring.version>
         <swagger.version>2.1.0</swagger.version>
+        <aws-java-sdk-s3.version>1.12.600</aws-java-sdk-s3.version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
     </properties>
@@ -141,6 +142,13 @@
                 <groupId>org.springdoc</groupId>
                 <artifactId>springdoc-openapi-starter-webmvc-api</artifactId>
                 <version>${swagger.version}</version>
+            </dependency>
+
+            <!--  OSS 配置  -->
+            <dependency>
+                <groupId>com.amazonaws</groupId>
+                <artifactId>aws-java-sdk-s3</artifactId>
+                <version>${aws-java-sdk-s3.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

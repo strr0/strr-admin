@@ -51,6 +51,13 @@
                 <artifactId>strr-common-security</artifactId>
                 <version>${revision}</version>
             </dependency>
+
+            <!-- oss 服务 -->
+            <dependency>
+                <groupId>com.strr</groupId>
+                <artifactId>strr-common-oss</artifactId>
+                <version>${revision}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 </project>
