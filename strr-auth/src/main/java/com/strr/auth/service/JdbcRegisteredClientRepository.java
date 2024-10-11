@@ -2,6 +2,7 @@ package com.strr.auth.service;
 
 import com.strr.system.api.RemoteOauthClientService;
 import com.strr.system.api.model.OauthClient;
+import com.strr.util.StringUtil;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
@@ -48,21 +49,21 @@ public class JdbcRegisteredClientRepository implements RegisteredClientRepositor
 
         // 授权方式
         for (String grantType : clientInfo.getGrantTypes()) {
-            if (grantType != null && !"".equals(grantType)) {
+            if (StringUtil.isNotBlank(grantType)) {
                 builder.authorizationGrantType(new AuthorizationGrantType(grantType));
             }
         }
 
         // 作用域
         for (String scope : clientInfo.getScopes()) {
-            if (scope != null && !"".equals(scope)) {
+            if (StringUtil.isNotBlank(scope)) {
                 builder.scope(scope);
             }
         }
 
         // 回调地址
         for (String redirectUri : clientInfo.getRedirectUris()) {
-            if (redirectUri != null && !"".equals(redirectUri)) {
+            if (StringUtil.isNotBlank(redirectUri)) {
                 builder.redirectUri(redirectUri);
             }
         }

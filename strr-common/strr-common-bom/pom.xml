@@ -45,10 +45,22 @@
                 <version>${revision}</version>
             </dependency>
 
+            <dependency>
+                <groupId>com.strr</groupId>
+                <artifactId>strr-common-dubbo-oauth2</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
             <!-- security 服务 -->
             <dependency>
                 <groupId>com.strr</groupId>
                 <artifactId>strr-common-security</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.strr</groupId>
+                <artifactId>strr-common-oauth2</artifactId>
                 <version>${revision}</version>
             </dependency>
 
