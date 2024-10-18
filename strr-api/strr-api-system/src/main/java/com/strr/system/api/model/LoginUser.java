@@ -2,7 +2,6 @@ package com.strr.system.api.model;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.List;
 
 public class LoginUser implements Serializable {
     @Serial
@@ -27,11 +26,6 @@ public class LoginUser implements Serializable {
      * 昵称
      */
     private String nickname;
-
-    /**
-     * 资源
-     */
-    private List<String> resources;
 
     public Integer getId() {
         return id;
@@ -63,13 +57,5 @@ public class LoginUser implements Serializable {
 
     public void setNickname(String nickname) {
         this.nickname = nickname;
-    }
-
-    public List<String> getResources() {
-        return resources;
-    }
-
-    public void setResources(List<String> resources) {
-        this.resources = resources;
     }
 }

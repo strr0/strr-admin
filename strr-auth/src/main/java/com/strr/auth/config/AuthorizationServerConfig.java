@@ -5,8 +5,8 @@ import com.nimbusds.jose.proc.SecurityContext;
 import com.strr.auth.handle.CustomAccessDeniedHandler;
 import com.strr.auth.handle.CustomAccessTokenResponseHandler;
 import com.strr.auth.handle.CustomErrorResponseHandler;
-import com.strr.auth.jwt.CustomJWKSource;
-import com.strr.auth.jwt.CustomJwtCustomizer;
+import com.strr.auth.jwt.JwkFactory;
+import com.strr.auth.service.LoginUserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -71,7 +71,7 @@ public class AuthorizationServerConfig {
 
     @Bean
     public JWKSource<SecurityContext> jwkSource() {
-        return new CustomJWKSource();
+        return JwkFactory.jwkSource();
     }
 
     @Bean
@@ -90,9 +90,9 @@ public class AuthorizationServerConfig {
     }
 
     @Bean
-    public OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator(JWKSource<SecurityContext> jwkSource) {
+    public OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator(JWKSource<SecurityContext> jwkSource, LoginUserService loginUserService) {
         JwtGenerator jwtGenerator = new JwtGenerator(new NimbusJwtEncoder(jwkSource));
-        jwtGenerator.setJwtCustomizer(new CustomJwtCustomizer());
+        jwtGenerator.setJwtCustomizer(JwkFactory.jwtCustomizer(loginUserService));
         OAuth2AccessTokenGenerator accessTokenGenerator = new OAuth2AccessTokenGenerator();
         OAuth2RefreshTokenGenerator refreshTokenGenerator = new OAuth2RefreshTokenGenerator();
         return new DelegatingOAuth2TokenGenerator(jwtGenerator, accessTokenGenerator, refreshTokenGenerator);

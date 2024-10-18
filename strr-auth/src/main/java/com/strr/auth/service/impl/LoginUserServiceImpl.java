@@ -1,19 +1,21 @@
-package com.strr.auth.service;
+package com.strr.auth.service.impl;
 
 import com.strr.auth.model.LoginUserDetails;
+import com.strr.auth.service.LoginUserService;
 import com.strr.system.api.RemoteUserService;
 import com.strr.system.api.model.LoginUser;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 用户
  */
 @Service
-public class LoginUserDetailsService implements UserDetailsService {
+public class LoginUserServiceImpl implements LoginUserService {
     @DubboReference
     private RemoteUserService remoteUserService;
 
@@ -26,9 +28,13 @@ public class LoginUserDetailsService implements UserDetailsService {
             loginUser.setUsername(user.getUsername());
             loginUser.setPassword(user.getPassword());
             loginUser.setNickname(user.getNickname());
-            loginUser.setResources(user.getResources());
             return loginUser;
         }
         throw new UsernameNotFoundException(String.format("User %s not found.", username));
+    }
+
+    @Override
+    public List<String> listPermsByUserId(Integer userId) {
+        return remoteUserService.listPerms(userId);
     }
 }

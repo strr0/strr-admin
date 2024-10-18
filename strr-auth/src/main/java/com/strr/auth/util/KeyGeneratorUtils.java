@@ -15,6 +15,8 @@
  */
 package com.strr.auth.util;
 
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
 import java.math.BigInteger;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
@@ -23,19 +25,16 @@ import java.security.spec.ECParameterSpec;
 import java.security.spec.ECPoint;
 import java.security.spec.EllipticCurve;
 
-import javax.crypto.KeyGenerator;
-import javax.crypto.SecretKey;
-
 /**
  * @author Joe Grandja
  * @since 1.1
  */
-final class KeyGeneratorUtils {
+public class KeyGeneratorUtils {
 
     private KeyGeneratorUtils() {
     }
 
-    static SecretKey generateSecretKey() {
+    public static SecretKey generateSecretKey() {
         SecretKey hmacKey;
         try {
             hmacKey = KeyGenerator.getInstance("HmacSha256").generateKey();
@@ -45,7 +44,7 @@ final class KeyGeneratorUtils {
         return hmacKey;
     }
 
-    static KeyPair generateRsaKey() {
+    public static KeyPair generateRsaKey() {
         KeyPair keyPair;
         try {
             KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
@@ -57,7 +56,7 @@ final class KeyGeneratorUtils {
         return keyPair;
     }
 
-    static KeyPair generateEcKey() {
+    public static KeyPair generateEcKey() {
         EllipticCurve ellipticCurve = new EllipticCurve(
                 new ECFieldFp(
                         new BigInteger("115792089210356248762697446949407573530086143415290314195533631308867097853951")),

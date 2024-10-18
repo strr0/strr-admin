@@ -11,6 +11,7 @@ import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -39,11 +40,18 @@ public class RemoteUserServiceImpl implements RemoteUserService {
             loginUser.setUsername(user.getUsername());
             loginUser.setPassword(user.getPassword());
             loginUser.setNickname(user.getNickname());
-            loginUser.setResources(sysResourceMapper.listByUserId(user.getId(), Constant.NO)
-                    .stream().map(SysResource::getPerms).filter(StringUtils::hasLength).distinct()
-                    .collect(Collectors.toList()));
             return loginUser;
         }
         return null;
+    }
+
+    /**
+     * 获取用户权限
+     */
+    @Override
+    public List<String> listPerms(Integer userId) {
+        return sysResourceMapper.listByUserId(userId, Constant.NO)
+                .stream().map(SysResource::getPerms).filter(StringUtils::hasLength).distinct()
+                .collect(Collectors.toList());
     }
 }
