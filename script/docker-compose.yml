@@ -64,6 +64,15 @@ services:
     container_name: strr-gateway
     networks:
       - dev
+#  admin-ui:
+#    build:
+#      context: ../config/ui
+#    image: strr-admin-ui:1.0
+#    container_name: strr-admin-ui
+#    ports:
+#      - 8000:8000
+#    networks:
+#      - dev
 
 networks:
   dev:
