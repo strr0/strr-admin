@@ -9,12 +9,13 @@ import com.strr.auth.jwt.JwkFactory;
 import com.strr.auth.service.LoginUserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.OAuth2Token;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
@@ -40,7 +41,6 @@ import java.util.Map;
 @Configuration(proxyBeanMethods = false)
 public class AuthorizationServerConfig {
     @Bean
-    @Order(1)
     public SecurityFilterChain authorizationServerSecurityFilterChain(
             HttpSecurity http, AuthenticationManager authenticationManager, OAuth2AuthorizationService authorizationService,
             OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator) throws Exception {
@@ -75,16 +75,6 @@ public class AuthorizationServerConfig {
     }
 
     @Bean
-    public JWKSource<SecurityContext> jwkSource() {
-        return JwkFactory.jwkSource();
-    }
-
-    @Bean
-    public JwtDecoder jwtDecoder(JWKSource<SecurityContext> jwkSource) {
-        return OAuth2AuthorizationServerConfiguration.jwtDecoder(jwkSource);
-    }
-
-    @Bean
     public AuthorizationServerSettings authorizationServerSettings(Environment environment) {
         String auth = environment.getProperty("module.auth", "");
         Map<String, Object> settings = new HashMap<>();
@@ -104,6 +94,21 @@ public class AuthorizationServerConfig {
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
         return configuration.getAuthenticationManager();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public JWKSource<SecurityContext> jwkSource() {
+        return JwkFactory.jwkSource();
+    }
+
+    @Bean
+    public JwtDecoder jwtDecoder(JWKSource<SecurityContext> jwkSource) {
+        return OAuth2AuthorizationServerConfiguration.jwtDecoder(jwkSource);
     }
 
     @Bean
