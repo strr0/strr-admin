@@ -1,0 +1,59 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    # 应用名称
+    name: strr-admin
+  profiles:
+    # 环境配置
+    active: @profiles.active@
+  servlet:
+    multipart:
+      # 整个请求大小限制
+      max-request-size: 20MB
+      # 上传单个文件大小限制
+      max-file-size: 10MB
+  mvc:
+    format:
+      date-time: yyyy-MM-dd HH:mm:ss
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  #jackson配置
+  jackson:
+    # 日期格式化
+    date-format: yyyy-MM-dd HH:mm:ss
+    serialization:
+      # 格式化输出
+      INDENT_OUTPUT: false
+      # 忽略无法转换的对象
+      fail_on_empty_beans: false
+    deserialization:
+      # 允许对象忽略json中不存在的属性
+      fail_on_unknown_properties: false
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/strr-cloud?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true
+    username: root
+    password: password
+  # redis通用配置 子服务可以自行配置进行覆盖
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      # 密码(如没有密码请注释掉)
+      # password:
+      database: 0
+      timeout: 10s
+      ssl.enabled: false
+
+mybatis:
+  mapper-locations: classpath:mapper/**/*.xml
+  crud-mapper-package: com.strr.**.mapper
+
+module:
+  auth: /auth
+  system: /system
+  data: /data
+  resource: /resource

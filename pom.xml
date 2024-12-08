@@ -15,6 +15,7 @@
         <module>strr-api</module>
         <module>strr-auth</module>
         <module>strr-gateway</module>
+        <module>strr-boot</module>
     </modules>
 
     <properties>
