@@ -40,6 +40,11 @@
             <artifactId>strr-resource</artifactId>
             <version>${revision}</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.strr</groupId>
+            <artifactId>strr-api-annotation</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

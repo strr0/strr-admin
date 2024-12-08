@@ -19,6 +19,12 @@
         <dependencies>
             <dependency>
                 <groupId>com.strr</groupId>
+                <artifactId>strr-api-annotation</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.strr</groupId>
                 <artifactId>strr-api-system</artifactId>
                 <version>${revision}</version>
             </dependency>
