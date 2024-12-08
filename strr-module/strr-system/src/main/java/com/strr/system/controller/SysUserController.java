@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("${module.system:}/user")
 public class SysUserController extends CrudController<SysUser, Integer> {
     private final ISysUserService sysUserService;
 

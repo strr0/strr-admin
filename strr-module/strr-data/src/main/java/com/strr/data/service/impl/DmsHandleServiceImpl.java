@@ -7,6 +7,7 @@ import com.strr.data.mapper.DmsModuleMapper;
 import com.strr.data.model.vo.DmsModuleVo;
 import com.strr.data.service.IDmsHandleService;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
@@ -19,12 +20,14 @@ public class DmsHandleServiceImpl implements IDmsHandleService {
     private final RequestMappingHandlerMapping requestMappingHandlerMapping;
     private final SqlSessionFactory sqlSessionFactory;
     private final DmsModuleMapper dmsModuleMapper;
+    private final String basePath;
 
     public DmsHandleServiceImpl(RequestMappingHandlerMapping requestMappingHandlerMapping, SqlSessionFactory sqlSessionFactory,
-                                DmsModuleMapper dmsModuleMapper) {
+                                DmsModuleMapper dmsModuleMapper, Environment environment) {
         this.requestMappingHandlerMapping = requestMappingHandlerMapping;
         this.sqlSessionFactory = sqlSessionFactory;
         this.dmsModuleMapper = dmsModuleMapper;
+        this.basePath = environment.getProperty("module.data", "");
     }
 
     /**
@@ -39,6 +42,6 @@ public class DmsHandleServiceImpl implements IDmsHandleService {
         daoHandler.handle(sqlSessionFactory.getConfiguration());
         // 构建接口
         WebHandler webHandler = WebHandlerFactory.buildWebHandler(sqlSessionFactory, module.getCode());
-        WebHandlerFactory.registerMapping(requestMappingHandlerMapping, webHandler, module.getPath());
+        WebHandlerFactory.registerMapping(requestMappingHandlerMapping, webHandler, basePath + module.getPath());
     }
 }

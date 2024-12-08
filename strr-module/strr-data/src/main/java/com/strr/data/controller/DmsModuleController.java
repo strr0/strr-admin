@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
  * 模块信息
  */
 @RestController
-@RequestMapping("/module")
+@RequestMapping("${module.data:}/module")
 public class DmsModuleController {
     private final IDmsModuleService dmsModuleService;
     private final IDmsHandleService dmsHandleService;

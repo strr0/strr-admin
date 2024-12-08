@@ -10,7 +10,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/oss/config")
+@RequestMapping("${module.resource:}/oss/config")
 public class SysOssConfigController extends CrudController<SysOssConfig, Integer> {
     private final ISysOssConfigService sysOssConfigService;
 

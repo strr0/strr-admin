@@ -10,6 +10,7 @@ import com.strr.auth.service.LoginUserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -22,12 +23,16 @@ import org.springframework.security.oauth2.server.authorization.authentication.O
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configuration.OAuth2AuthorizationServerConfiguration;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer;
 import org.springframework.security.oauth2.server.authorization.settings.AuthorizationServerSettings;
+import org.springframework.security.oauth2.server.authorization.settings.ConfigurationSettingNames;
 import org.springframework.security.oauth2.server.authorization.token.*;
 import org.springframework.security.oauth2.server.authorization.web.authentication.OAuth2AuthorizationCodeAuthenticationConverter;
 import org.springframework.security.oauth2.server.authorization.web.authentication.OAuth2ClientCredentialsAuthenticationConverter;
 import org.springframework.security.oauth2.server.authorization.web.authentication.OAuth2PasswordAuthenticationConverter;
 import org.springframework.security.oauth2.server.authorization.web.authentication.OAuth2RefreshTokenAuthenticationConverter;
 import org.springframework.security.web.SecurityFilterChain;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 授權中心配置
@@ -80,8 +85,20 @@ public class AuthorizationServerConfig {
     }
 
     @Bean
-    public AuthorizationServerSettings authorizationServerSettings() {
-        return AuthorizationServerSettings.builder().build();
+    public AuthorizationServerSettings authorizationServerSettings(Environment environment) {
+        String auth = environment.getProperty("module.auth", "");
+        Map<String, Object> settings = new HashMap<>();
+        settings.put(ConfigurationSettingNames.AuthorizationServer.AUTHORIZATION_ENDPOINT, auth + "/oauth2/authorize");
+        settings.put(ConfigurationSettingNames.AuthorizationServer.DEVICE_AUTHORIZATION_ENDPOINT, auth + "/oauth2/device_authorization");
+        settings.put(ConfigurationSettingNames.AuthorizationServer.DEVICE_VERIFICATION_ENDPOINT, auth + "/oauth2/device_verification");
+        settings.put(ConfigurationSettingNames.AuthorizationServer.TOKEN_ENDPOINT, auth + "/oauth2/token");
+        settings.put(ConfigurationSettingNames.AuthorizationServer.JWK_SET_ENDPOINT, auth + "/oauth2/jwks");
+        settings.put(ConfigurationSettingNames.AuthorizationServer.TOKEN_REVOCATION_ENDPOINT, auth + "/oauth2/revoke");
+        settings.put(ConfigurationSettingNames.AuthorizationServer.TOKEN_INTROSPECTION_ENDPOINT, auth + "/oauth2/introspect");
+        settings.put(ConfigurationSettingNames.AuthorizationServer.OIDC_CLIENT_REGISTRATION_ENDPOINT, auth + "/connect/register");
+        settings.put(ConfigurationSettingNames.AuthorizationServer.OIDC_USER_INFO_ENDPOINT, auth + "/userinfo");
+        settings.put(ConfigurationSettingNames.AuthorizationServer.OIDC_LOGOUT_ENDPOINT, auth + "/connect/logout");
+        return AuthorizationServerSettings.withSettings(settings).build();
     }
 
     @Bean

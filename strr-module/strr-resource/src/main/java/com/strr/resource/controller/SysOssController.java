@@ -14,7 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 @RestController
-@RequestMapping("/oss")
+@RequestMapping("${module.resource:}/oss")
 public class SysOssController extends CrudController<SysOss, Integer> {
     private final ISysOssService sysOssService;
 

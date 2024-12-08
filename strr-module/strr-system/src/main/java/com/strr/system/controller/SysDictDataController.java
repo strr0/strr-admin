@@ -10,7 +10,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/dict/data")
+@RequestMapping("${module.system:}/dict/data")
 public class SysDictDataController extends CrudController<SysDictData, Integer> {
     private final ISysDictDataService sysDictDataService;
 

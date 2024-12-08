@@ -1,8 +1,8 @@
-package com.strr.system.config;
+package com.strr.base.config;
 
 import com.strr.base.service.PermissionService;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -11,7 +11,7 @@ import org.springframework.security.web.SecurityFilterChain;
 /**
  * 资源服务配置
  */
-@Configuration
+@AutoConfiguration
 @EnableMethodSecurity
 public class ResourceServerConfig {
     @Bean

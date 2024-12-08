@@ -10,7 +10,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/oauth/client")
+@RequestMapping("${module.system:}/oauth/client")
 public class SysOauthClientController extends CrudController<SysOauthClient, Integer> {
     private final ISysOauthClientService sysOauthClientService;
 

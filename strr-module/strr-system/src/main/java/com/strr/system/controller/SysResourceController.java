@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/resource")
+@RequestMapping("${module.system:}/resource")
 public class SysResourceController extends CrudController<SysResource, Integer> {
     private final ISysResourceService sysResourceService;
 
