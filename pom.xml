@@ -10,11 +10,11 @@
     <version>${revision}</version>
     <modules>
         <module>strr-common</module>
-        <module>strr-module</module>
-        <module>strr-visual</module>
         <module>strr-api</module>
+        <module>strr-module</module>
         <module>strr-auth</module>
         <module>strr-gateway</module>
+        <module>strr-visual</module>
         <module>strr-boot</module>
     </modules>
 

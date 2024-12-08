@@ -21,12 +21,14 @@
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <!-- SpringCloud Alibaba Nacos Config -->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <!-- OAuth2 -->
@@ -63,6 +65,7 @@
         <dependency>
             <groupId>com.strr</groupId>
             <artifactId>strr-common-dubbo</artifactId>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 

@@ -12,8 +12,8 @@
     <artifactId>strr-api</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>strr-api-system</module>
         <module>strr-api-bom</module>
+        <module>strr-api-system</module>
     </modules>
 
     <properties>
