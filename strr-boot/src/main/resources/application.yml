@@ -49,7 +49,7 @@ spring:
       ssl.enabled: false
 
 mybatis:
-  mapper-locations: classpath:mapper/**/*.xml
+  mapper-locations: classpath*:mapper/**/*.xml
   crud-mapper-package: com.strr.**.mapper
 
 module:
