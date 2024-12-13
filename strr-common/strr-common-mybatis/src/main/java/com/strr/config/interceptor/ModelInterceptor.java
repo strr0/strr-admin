@@ -1,6 +1,6 @@
 package com.strr.config.interceptor;
 
-import com.strr.base.util.LoginUtil;
+import com.strr.security.util.LoginUtil;
 import com.strr.util.ParameterUtils;
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.mapping.MappedStatement;

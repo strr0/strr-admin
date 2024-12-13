@@ -2,12 +2,12 @@ package com.strr.system.controller;
 
 import com.strr.base.model.Page;
 import com.strr.base.model.Pageable;
+import com.strr.security.annotation.CheckPermission;
 import com.strr.system.model.SysUser;
 import com.strr.system.model.bo.SysUserBo;
 import com.strr.system.service.ISysUserService;
 import com.strr.base.controller.CrudController;
 import com.strr.base.model.Result;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
@@ -33,7 +33,7 @@ public class SysUserController extends CrudController<SysUser, Integer> {
      * 查询用户列表
      */
     @Override
-    @PreAuthorize("@pms.hasPermission('system:user:list')")
+    @CheckPermission("system:user:list")
     @GetMapping("/page")
     public Result<Page<SysUser>> page(SysUser param, Pageable pageable) {
         return super.page(param, pageable);
@@ -42,7 +42,7 @@ public class SysUserController extends CrudController<SysUser, Integer> {
     /**
      * 保存用户信息
      */
-    @PreAuthorize("@pms.hasPermission('system:user:save')")
+    @CheckPermission("system:user:save")
     @PostMapping
     public Result<Void> saveInfo(@RequestBody SysUserBo sysUser) {
         sysUserService.saveInfo(sysUser);
@@ -52,7 +52,7 @@ public class SysUserController extends CrudController<SysUser, Integer> {
     /**
      * 获取用户角色
      */
-    @PreAuthorize("@pms.hasPermission('system:user:query')")
+    @CheckPermission("system:user:query")
     @GetMapping("/listRoleId")
     public Result<List<Integer>> listRoleId(Integer userId) {
         List<Integer> data = sysUserService.listRoleId(userId);
@@ -63,7 +63,7 @@ public class SysUserController extends CrudController<SysUser, Integer> {
      * 删除用户
      */
     @Override
-    @PreAuthorize("@pms.hasPermission('system:user:remove')")
+    @CheckPermission("system:user:remove")
     @DeleteMapping("/{id}")
     public Result<Void> remove(@PathVariable Integer id) {
         sysUserService.removeInfo(id);
@@ -74,7 +74,7 @@ public class SysUserController extends CrudController<SysUser, Integer> {
      * 查询用户详情
      */
     @Override
-    @PreAuthorize("@pms.hasPermission('system:user:query')")
+    @CheckPermission("system:user:query")
     @GetMapping("/{id}")
     public Result<SysUser> get(@PathVariable Integer id) {
         return super.get(id);

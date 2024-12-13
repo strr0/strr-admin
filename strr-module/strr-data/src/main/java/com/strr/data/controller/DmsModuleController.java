@@ -10,7 +10,7 @@ import com.strr.data.model.bo.DmsTableBo;
 import com.strr.data.model.vo.DmsModuleVo;
 import com.strr.data.service.IDmsHandleService;
 import com.strr.data.service.IDmsModuleService;
-import org.springframework.security.access.prepost.PreAuthorize;
+import com.strr.security.annotation.CheckPermission;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -30,7 +30,7 @@ public class DmsModuleController {
     /**
      * 查询模块信息
      */
-    @PreAuthorize("@pms.hasPermission('data:module:list')")
+    @CheckPermission("data:module:list")
     @GetMapping("/page")
     public Result<Page<DmsModule>> page(DmsModule param, Pageable pageable) {
         Page<DmsModule> page = dmsModuleService.page(param, pageable);
@@ -40,7 +40,7 @@ public class DmsModuleController {
     /**
      * 查询数据库表信息
      */
-    @PreAuthorize("@pms.hasPermission('data:module:import')")
+    @CheckPermission("data:module:import")
     @GetMapping("/db/page")
     public Result<Page<DmsTable>> pageDbTable(DmsTableBo param, Pageable pageable) {
         Page<DmsTable> page = dmsModuleService.pageDbTable(param, pageable);
@@ -50,7 +50,7 @@ public class DmsModuleController {
     /**
      * 导入表信息
      */
-    @PreAuthorize("@pms.hasPermission('data:module:import')")
+    @CheckPermission("data:module:import")
     @PostMapping("/import")
     public Result<Void> importTable(String[] tables) {
         dmsModuleService.importTable(tables);
@@ -60,7 +60,7 @@ public class DmsModuleController {
     /**
      * 更新模块信息
      */
-    @PreAuthorize("@pms.hasPermission('data:module:update')")
+    @CheckPermission("data:module:update")
     @PutMapping
     public Result<Void> update(@RequestBody DmsModuleVo moduleVo) {
         dmsModuleService.updateInfo(moduleVo);
@@ -70,7 +70,7 @@ public class DmsModuleController {
     /**
      * 删除模块信息
      */
-    @PreAuthorize("@pms.hasPermission('data:module:remove')")
+    @CheckPermission("data:module:remove")
     @DeleteMapping("/{tableId}")
     public Result<Void> remove(@PathVariable Integer tableId) {
         dmsModuleService.removeInfoByTableId(tableId);
@@ -80,7 +80,7 @@ public class DmsModuleController {
     /**
      * 获取模块信息
      */
-    @PreAuthorize("@pms.hasPermission('data:module:query')")
+    @CheckPermission("data:module:query")
     @GetMapping("/{id}")
     public Result<DmsModuleVo> getModuleInfo(@PathVariable Integer id) {
         DmsModuleVo moduleInfo = dmsModuleService.getInfo(id);
@@ -90,7 +90,7 @@ public class DmsModuleController {
     /**
      * 注册信息
      */
-    @PreAuthorize("@pms.hasPermission('data:module:register')")
+    @CheckPermission("data:module:register")
     @PostMapping("/register")
     public Result<Void> register(Integer id) {
         try {

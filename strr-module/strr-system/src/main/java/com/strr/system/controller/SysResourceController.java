@@ -1,6 +1,7 @@
 package com.strr.system.controller;
 
-import com.strr.base.util.LoginUtil;
+import com.strr.security.annotation.CheckPermission;
+import com.strr.security.util.LoginUtil;
 import com.strr.system.model.SysResource;
 import com.strr.system.model.vo.SysResourceVo;
 import com.strr.system.model.vo.SysRouteVo;
@@ -8,7 +9,6 @@ import com.strr.system.service.ISysResourceService;
 import com.strr.system.util.MenuUtil;
 import com.strr.base.controller.CrudController;
 import com.strr.base.model.Result;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,7 +30,7 @@ public class SysResourceController extends CrudController<SysResource, Integer> 
     /**
      * 菜单树
      */
-    @PreAuthorize("@pms.hasPermission('system:resource:list')")
+    @CheckPermission("system:resource:list")
     @GetMapping("/tree")
     public Result<List<SysResourceVo>> tree(SysResource param) {
         List<SysResource> sysResourceList = sysResourceService.listByParam(param);
@@ -53,7 +53,7 @@ public class SysResourceController extends CrudController<SysResource, Integer> 
      * 保存资源
      */
     @Override
-    @PreAuthorize("@pms.hasPermission('system:resource:save')")
+    @CheckPermission("system:resource:save")
     @PostMapping
     public Result<SysResource> save(@RequestBody SysResource sysResource) {
         return super.save(sysResource);
@@ -63,7 +63,7 @@ public class SysResourceController extends CrudController<SysResource, Integer> 
      * 修改资源
      */
     @Override
-    @PreAuthorize("@pms.hasPermission('system:resource:update')")
+    @CheckPermission("system:resource:update")
     @PutMapping
     public Result<SysResource> update(@RequestBody SysResource sysResource) {
         return super.update(sysResource);
@@ -73,7 +73,7 @@ public class SysResourceController extends CrudController<SysResource, Integer> 
      * 删除资源
      */
     @Override
-    @PreAuthorize("@pms.hasPermission('system:resource:remove')")
+    @CheckPermission("system:resource:remove")
     @DeleteMapping("/{id}")
     public Result<Void> remove(@PathVariable Integer id) {
         sysResourceService.removeInfo(id);
@@ -84,7 +84,7 @@ public class SysResourceController extends CrudController<SysResource, Integer> 
      * 获取资源详情
      */
     @Override
-    @PreAuthorize("@pms.hasPermission('system:resource:query')")
+    @CheckPermission("system:resource:query")
     @GetMapping("/{id}")
     public Result<SysResource> get(@PathVariable Integer id) {
         return super.get(id);

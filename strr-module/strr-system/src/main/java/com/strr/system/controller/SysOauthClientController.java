@@ -4,9 +4,9 @@ import com.strr.base.controller.CrudController;
 import com.strr.base.model.Page;
 import com.strr.base.model.Pageable;
 import com.strr.base.model.Result;
+import com.strr.security.annotation.CheckPermission;
 import com.strr.system.model.SysOauthClient;
 import com.strr.system.service.ISysOauthClientService;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -27,7 +27,7 @@ public class SysOauthClientController extends CrudController<SysOauthClient, Int
      * 查询客户端列表
      */
     @Override
-    @PreAuthorize("@pms.hasPermission('system:client:list')")
+    @CheckPermission("system:client:list")
     @GetMapping("/page")
     public Result<Page<SysOauthClient>> page(SysOauthClient param, Pageable pageable) {
         return super.page(param, pageable);
@@ -37,7 +37,7 @@ public class SysOauthClientController extends CrudController<SysOauthClient, Int
      * 新增客户端
      */
     @Override
-    @PreAuthorize("@pms.hasPermission('system:client:save')")
+    @CheckPermission("system:client:save")
     @PostMapping
     public Result<SysOauthClient> save(@RequestBody SysOauthClient entity) {
         return super.save(entity);
@@ -47,7 +47,7 @@ public class SysOauthClientController extends CrudController<SysOauthClient, Int
      * 修改客户端
      */
     @Override
-    @PreAuthorize("@pms.hasPermission('system:client:update')")
+    @CheckPermission("system:client:update")
     @PutMapping
     public Result<SysOauthClient> update(@RequestBody SysOauthClient entity) {
         return super.update(entity);
@@ -57,7 +57,7 @@ public class SysOauthClientController extends CrudController<SysOauthClient, Int
      * 删除客户端
      */
     @Override
-    @PreAuthorize("@pms.hasPermission('system:client:remove')")
+    @CheckPermission("system:client:remove")
     @DeleteMapping("/{id}")
     public Result<Void> remove(@PathVariable Integer id) {
         return super.remove(id);
@@ -67,7 +67,7 @@ public class SysOauthClientController extends CrudController<SysOauthClient, Int
      * 获取客户端详情
      */
     @Override
-    @PreAuthorize("@pms.hasPermission('system:client:query')")
+    @CheckPermission("system:client:query")
     @GetMapping("/{id}")
     public Result<SysOauthClient> get(@PathVariable Integer id) {
         return super.get(id);

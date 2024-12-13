@@ -1,10 +1,9 @@
-package com.strr.base.config;
+package com.strr.security.config;
 
-import com.strr.base.service.PermissionService;
+import com.strr.security.annotation.EnableCheckPermission;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.Customizer;
-import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -12,7 +11,7 @@ import org.springframework.security.web.SecurityFilterChain;
  * 资源服务配置
  */
 @AutoConfiguration
-@EnableMethodSecurity
+@EnableCheckPermission
 public class ResourceServerConfig {
     @Bean
     public SecurityFilterChain resourceServerSecurityFilterChain(HttpSecurity http) throws Exception {
@@ -28,10 +27,5 @@ public class ResourceServerConfig {
         // @formatter:on
 
         return http.build();
-    }
-
-    @Bean("pms")
-    public PermissionService permissionService() {
-        return new PermissionService();
     }
 }

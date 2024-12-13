@@ -6,7 +6,7 @@ import com.strr.base.model.Pageable;
 import com.strr.base.model.Result;
 import com.strr.resource.model.SysOssConfig;
 import com.strr.resource.service.ISysOssConfigService;
-import org.springframework.security.access.prepost.PreAuthorize;
+import com.strr.security.annotation.CheckPermission;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -27,7 +27,7 @@ public class SysOssConfigController extends CrudController<SysOssConfig, Integer
      * 查询对象存储配置列表
      */
     @Override
-    @PreAuthorize("@pms.hasPermission('system:ossConfig:list')")
+    @CheckPermission("system:ossConfig:list")
     @GetMapping("/page")
     public Result<Page<SysOssConfig>> page(SysOssConfig param, Pageable pageable) {
         return super.page(param, pageable);
@@ -37,7 +37,7 @@ public class SysOssConfigController extends CrudController<SysOssConfig, Integer
      * 新增对象存储配置
      */
     @Override
-    @PreAuthorize("@pms.hasPermission('system:ossConfig:save')")
+    @CheckPermission("system:ossConfig:save")
     @PostMapping
     public Result<SysOssConfig> save(@RequestBody SysOssConfig entity) {
         return super.save(entity);
@@ -47,7 +47,7 @@ public class SysOssConfigController extends CrudController<SysOssConfig, Integer
      * 修改对象存储配置
      */
     @Override
-    @PreAuthorize("@pms.hasPermission('system:ossConfig:update')")
+    @CheckPermission("system:ossConfig:update")
     @PutMapping
     public Result<SysOssConfig> update(@RequestBody SysOssConfig entity) {
         return super.update(entity);
@@ -57,7 +57,7 @@ public class SysOssConfigController extends CrudController<SysOssConfig, Integer
      * 删除对象存储配置
      */
     @Override
-    @PreAuthorize("@pms.hasPermission('system:ossConfig:remove')")
+    @CheckPermission("system:ossConfig:remove")
     @DeleteMapping("/{id}")
     public Result<Void> remove(@PathVariable Integer id) {
         return super.remove(id);
@@ -67,7 +67,7 @@ public class SysOssConfigController extends CrudController<SysOssConfig, Integer
      * 获取对象存储配置详情
      */
     @Override
-    @PreAuthorize("@pms.hasPermission('system:ossConfig:query')")
+    @CheckPermission("system:ossConfig:query")
     @GetMapping("/{id}")
     public Result<SysOssConfig> get(@PathVariable Integer id) {
         return super.get(id);
