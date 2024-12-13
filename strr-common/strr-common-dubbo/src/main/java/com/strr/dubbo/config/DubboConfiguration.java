@@ -1,6 +1,6 @@
 package com.strr.dubbo.config;
 
-import com.strr.factory.YmlPropertySourceFactory;
+import com.strr.base.factory.YmlPropertySourceFactory;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.PropertySource;
 

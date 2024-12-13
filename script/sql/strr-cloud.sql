@@ -368,6 +368,6 @@ CREATE TABLE `sys_oss_config`  (
 -- ----------------------------
 -- Records of sys_oss_config
 -- ----------------------------
-INSERT INTO `sys_oss_config` VALUES (1, 'minio', 'admin', 'password', 'strr', '', 'localhost:9000', '', '0', '', '1', '', '1', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_oss_config` VALUES (1, 'minio', 'admin', 'password', 'strr', '', 'localhost:9000', '', '0', '', '1', '', '0', NULL, NULL, NULL, NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;
