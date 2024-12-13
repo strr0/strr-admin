@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * 业务表信息
  */
-public interface DmsTableMapper extends CrudMapper<DmsTable, Integer> {
+public interface DmsTableMapper extends CrudMapper<DmsTable, Long> {
     /**
      * 获取所有业务表名
      */

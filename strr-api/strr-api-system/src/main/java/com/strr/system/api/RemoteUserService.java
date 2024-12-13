@@ -16,5 +16,5 @@ public interface RemoteUserService {
     /**
      * 获取用户权限
      */
-    List<String> listPerms(Integer userId);
+    List<String> listPerms(Long userId);
 }

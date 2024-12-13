@@ -1,6 +1,6 @@
 package com.strr.system.service.impl;
 
-import com.strr.constant.Constant;
+import com.strr.base.constant.Constant;
 import com.strr.system.mapper.SysRoleResourceMapper;
 import com.strr.system.mapper.SysResourceMapper;
 import com.strr.system.model.SysResource;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class SysResourceServiceImpl extends CrudServiceImpl<SysResource, Integer> implements ISysResourceService {
+public class SysResourceServiceImpl extends CrudServiceImpl<SysResource, Long> implements ISysResourceService {
     private final SysResourceMapper sysResourceMapper;
     private final SysRoleResourceMapper sysRoleResourceMapper;
 
@@ -37,7 +37,7 @@ public class SysResourceServiceImpl extends CrudServiceImpl<SysResource, Integer
      * 获取用户资源
      */
     @Override
-    public List<SysResource> listByUserId(Integer userId) {
+    public List<SysResource> listByUserId(Long userId) {
         return sysResourceMapper.listByUserId(userId, Constant.YES);
     }
 
@@ -45,7 +45,7 @@ public class SysResourceServiceImpl extends CrudServiceImpl<SysResource, Integer
      * 删除资源
      */
     @Override
-    public void removeInfo(Integer id) {
+    public void removeInfo(Long id) {
         sysRoleResourceMapper.removeByResourceId(id);
         sysResourceMapper.remove(id);
     }

@@ -5,7 +5,7 @@ import com.strr.base.service.ICrudService;
 
 import java.util.List;
 
-public interface ISysRoleService extends ICrudService<SysRole, Integer> {
+public interface ISysRoleService extends ICrudService<SysRole, Long> {
     /**
      * 获取角色列表
      */
@@ -14,15 +14,15 @@ public interface ISysRoleService extends ICrudService<SysRole, Integer> {
     /**
      * 更新角色权限
      */
-    void updateRel(Integer roleId, Integer[] resourceIds);
+    void updateRel(Long roleId, Long[] resourceIds);
 
     /**
      * 获取角色权限
      */
-    List<Integer> listResourceId(Integer roleId);
+    List<Long> listResourceId(Long roleId);
 
     /**
      * 删除角色
      */
-    void removeInfo(Integer id);
+    void removeInfo(Long id);
 }

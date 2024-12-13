@@ -7,7 +7,7 @@ import com.strr.system.service.ISysDictDataService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class SysDictDataServiceImpl extends CrudServiceImpl<SysDictData, Integer> implements ISysDictDataService {
+public class SysDictDataServiceImpl extends CrudServiceImpl<SysDictData, Long> implements ISysDictDataService {
     private final SysDictDataMapper sysDictDataMapper;
 
     public SysDictDataServiceImpl(SysDictDataMapper sysDictDataMapper) {

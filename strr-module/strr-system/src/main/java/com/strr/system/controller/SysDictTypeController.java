@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("${module.system:}/dict/type")
-public class SysDictTypeController extends CrudController<SysDictType, Integer> {
+public class SysDictTypeController extends CrudController<SysDictType, Long> {
     private final ISysDictTypeService sysDictTypeService;
 
     public SysDictTypeController(ISysDictTypeService sysDictTypeService) {
@@ -59,7 +59,7 @@ public class SysDictTypeController extends CrudController<SysDictType, Integer> 
     @Override
     @CheckPermission("system:dict:remove")
     @DeleteMapping("/{id}")
-    public Result<Void> remove(@PathVariable Integer id) {
+    public Result<Void> remove(@PathVariable Long id) {
         return super.remove(id);
     }
 
@@ -69,7 +69,7 @@ public class SysDictTypeController extends CrudController<SysDictType, Integer> 
     @Override
     @CheckPermission("system:dict:query")
     @GetMapping("/{id}")
-    public Result<SysDictType> get(@PathVariable Integer id) {
+    public Result<SysDictType> get(@PathVariable Long id) {
         return super.get(id);
     }
 }

@@ -1,8 +1,8 @@
 package com.strr.data.model;
 
-import com.strr.base.annotation.Id;
-import com.strr.base.annotation.Table;
 import com.strr.base.model.BaseModel;
+import com.strr.mybatis.annotation.Id;
+import com.strr.mybatis.annotation.Table;
 
 /**
  * 模块信息
@@ -13,12 +13,12 @@ public class DmsModule extends BaseModel {
      * 编号
      */
     @Id
-    private Integer id;
+    private Long id;
 
     /**
      * 归属表编号
      */
-    private Integer tableId;
+    private Long tableId;
 
     /**
      * 模块名称
@@ -45,19 +45,19 @@ public class DmsModule extends BaseModel {
      */
     private String status;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Integer getTableId() {
+    public Long getTableId() {
         return tableId;
     }
 
-    public void setTableId(Integer tableId) {
+    public void setTableId(Long tableId) {
         this.tableId = tableId;
     }
 

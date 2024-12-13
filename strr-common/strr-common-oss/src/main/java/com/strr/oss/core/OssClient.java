@@ -12,15 +12,15 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.*;
+import com.strr.base.util.DateUtil;
+import com.strr.base.util.IoUtil;
+import com.strr.base.util.StringUtil;
 import com.strr.oss.constant.OssConstant;
 import com.strr.oss.entity.UploadResult;
 import com.strr.oss.enums.AccessPolicyType;
 import com.strr.oss.enums.PolicyType;
 import com.strr.oss.exception.OssException;
 import com.strr.oss.properties.OssProperties;
-import com.strr.util.DateUtil;
-import com.strr.util.IoUtil;
-import com.strr.util.StringUtil;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;

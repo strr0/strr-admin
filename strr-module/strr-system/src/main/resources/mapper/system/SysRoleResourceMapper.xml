@@ -8,7 +8,7 @@
         </foreach>
     </insert>
 
-    <select id="listByRoleId" resultType="java.lang.Integer">
+    <select id="listByRoleId" resultType="java.lang.Long">
         select resource_id from sys_role_resource where role_id = #{roleId}
     </select>
 

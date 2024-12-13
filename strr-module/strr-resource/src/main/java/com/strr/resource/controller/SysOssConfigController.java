@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("${module.resource:}/oss/config")
-public class SysOssConfigController extends CrudController<SysOssConfig, Integer> {
+public class SysOssConfigController extends CrudController<SysOssConfig, Long> {
     private final ISysOssConfigService sysOssConfigService;
 
     public SysOssConfigController(ISysOssConfigService sysOssConfigService) {
@@ -59,7 +59,7 @@ public class SysOssConfigController extends CrudController<SysOssConfig, Integer
     @Override
     @CheckPermission("system:ossConfig:remove")
     @DeleteMapping("/{id}")
-    public Result<Void> remove(@PathVariable Integer id) {
+    public Result<Void> remove(@PathVariable Long id) {
         return super.remove(id);
     }
 
@@ -69,7 +69,7 @@ public class SysOssConfigController extends CrudController<SysOssConfig, Integer
     @Override
     @CheckPermission("system:ossConfig:query")
     @GetMapping("/{id}")
-    public Result<SysOssConfig> get(@PathVariable Integer id) {
+    public Result<SysOssConfig> get(@PathVariable Long id) {
         return super.get(id);
     }
 }

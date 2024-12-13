@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("${module.system:}/role")
-public class SysRoleController extends CrudController<SysRole, Integer> {
+public class SysRoleController extends CrudController<SysRole, Long> {
     private final ISysRoleService sysRoleService;
 
     public SysRoleController(ISysRoleService sysRoleService) {
@@ -69,7 +69,7 @@ public class SysRoleController extends CrudController<SysRole, Integer> {
      */
     @CheckPermission("system:role:update")
     @PostMapping("/updateRel")
-    public Result<Void> updateRel(Integer roleId, Integer[] resourceIds) {
+    public Result<Void> updateRel(Long roleId, Long[] resourceIds) {
         sysRoleService.updateRel(roleId, resourceIds);
         return Result.ok();
     }
@@ -79,8 +79,8 @@ public class SysRoleController extends CrudController<SysRole, Integer> {
      */
     @CheckPermission("system:role:query")
     @GetMapping("/listResourceId")
-    public Result<List<Integer>> listResourceId(Integer roleId) {
-        List<Integer> data = sysRoleService.listResourceId(roleId);
+    public Result<List<Long>> listResourceId(Long roleId) {
+        List<Long> data = sysRoleService.listResourceId(roleId);
         return Result.ok(data);
     }
 
@@ -92,7 +92,7 @@ public class SysRoleController extends CrudController<SysRole, Integer> {
     @Override
     @CheckPermission("system:role:remove")
     @DeleteMapping("/{id}")
-    public Result<Void> remove(@PathVariable Integer id) {
+    public Result<Void> remove(@PathVariable Long id) {
         sysRoleService.removeInfo(id);
         return Result.ok();
     }
@@ -103,7 +103,7 @@ public class SysRoleController extends CrudController<SysRole, Integer> {
     @Override
     @CheckPermission("system:role:query")
     @GetMapping("/{id}")
-    public Result<SysRole> get(Integer id) {
+    public Result<SysRole> get(Long id) {
         return super.get(id);
     }
 }

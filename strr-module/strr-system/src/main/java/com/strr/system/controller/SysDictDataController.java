@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("${module.system:}/dict/data")
-public class SysDictDataController extends CrudController<SysDictData, Integer> {
+public class SysDictDataController extends CrudController<SysDictData, Long> {
     private final ISysDictDataService sysDictDataService;
 
     public SysDictDataController(ISysDictDataService sysDictDataService) {
@@ -59,7 +59,7 @@ public class SysDictDataController extends CrudController<SysDictData, Integer> 
     @Override
     @CheckPermission("system:dict:remove")
     @DeleteMapping("/{id}")
-    public Result<Void> remove(@PathVariable Integer id) {
+    public Result<Void> remove(@PathVariable Long id) {
         return super.remove(id);
     }
 
@@ -69,7 +69,7 @@ public class SysDictDataController extends CrudController<SysDictData, Integer> 
     @Override
     @CheckPermission("system:dict:query")
     @GetMapping("/{id}")
-    public Result<SysDictData> get(@PathVariable Integer id) {
+    public Result<SysDictData> get(@PathVariable Long id) {
         return super.get(id);
     }
 }

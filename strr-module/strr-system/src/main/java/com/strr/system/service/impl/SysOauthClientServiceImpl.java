@@ -7,7 +7,7 @@ import com.strr.system.service.ISysOauthClientService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class SysOauthClientServiceImpl extends CrudServiceImpl<SysOauthClient, Integer> implements ISysOauthClientService {
+public class SysOauthClientServiceImpl extends CrudServiceImpl<SysOauthClient, Long> implements ISysOauthClientService {
     private final SysOauthClientMapper sysOauthClientMapper;
 
     public SysOauthClientServiceImpl(SysOauthClientMapper sysOauthClientMapper) {

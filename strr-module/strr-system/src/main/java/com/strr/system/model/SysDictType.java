@@ -1,8 +1,8 @@
 package com.strr.system.model;
 
-import com.strr.base.annotation.Id;
-import com.strr.base.annotation.Table;
 import com.strr.base.model.BaseModel;
+import com.strr.mybatis.annotation.Id;
+import com.strr.mybatis.annotation.Table;
 
 /**
  * 字典类型
@@ -13,7 +13,7 @@ public class SysDictType extends BaseModel {
      * 字典主键
      */
     @Id
-    private Integer id;
+    private Long id;
 
     /**
      * 字典名称
@@ -35,11 +35,11 @@ public class SysDictType extends BaseModel {
      */
     private String status;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

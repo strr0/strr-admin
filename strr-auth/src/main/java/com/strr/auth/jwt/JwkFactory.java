@@ -6,7 +6,7 @@ import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
 import com.strr.auth.model.LoginUserDetails;
 import com.strr.auth.service.LoginUserService;
-import com.strr.constant.Constant;
+import com.strr.base.constant.Constant;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
 import org.springframework.security.oauth2.server.authorization.OAuth2TokenType;

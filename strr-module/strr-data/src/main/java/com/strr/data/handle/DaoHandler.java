@@ -1,11 +1,11 @@
 package com.strr.data.handle;
 
-import com.strr.constant.Constant;
+import com.strr.base.constant.Constant;
 import com.strr.data.model.DmsColumn;
 import com.strr.data.model.DmsTable;
 import com.strr.data.model.vo.DmsModuleVo;
 import com.strr.data.util.KeywordUtil;
-import com.strr.util.ModelUtil;
+import com.strr.mybatis.util.ModelUtil;
 import org.apache.ibatis.jdbc.SQL;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.mapping.ResultMap;

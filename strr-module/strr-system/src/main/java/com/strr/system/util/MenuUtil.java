@@ -1,11 +1,11 @@
 package com.strr.system.util;
 
-import com.strr.constant.Constant;
+import com.strr.base.constant.Constant;
+import com.strr.base.util.TreeUtil;
 import com.strr.system.model.SysResource;
 import com.strr.system.model.vo.SysResourceVo;
 import com.strr.system.model.vo.SysRouteMetaVo;
 import com.strr.system.model.vo.SysRouteVo;
-import com.strr.util.TreeUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -42,7 +42,7 @@ public class MenuUtil {
             vo.setCache(resource.getCache());
             vo.setIcon(resource.getIcon());
             vo.setIconType(resource.getIconType());
-            vo.setOrder(resource.getOrder());
+            vo.setSort(resource.getSort());
             vo.setVisible(resource.getVisible());
             vo.setPerms(resource.getPerms());
             vo.setRemark(resource.getRemark());
@@ -55,8 +55,8 @@ public class MenuUtil {
      * 路由树
      */
     public static List<SysRouteVo> buildRouteTree(List<SysResource> resources) {
-        Map<Integer, SysRouteVo> routeMap = new HashMap<>();
-        Map<Integer, SysRouteVo> parentRouteMap = new HashMap<>();
+        Map<Long, SysRouteVo> routeMap = new HashMap<>();
+        Map<Long, SysRouteVo> parentRouteMap = new HashMap<>();
         List<SysRouteVo> routeTree = new ArrayList<>();
         resources.forEach(resource -> {
             // 获取父级路由
@@ -73,7 +73,7 @@ public class MenuUtil {
             meta.setI18nKey(resource.getI18nKey());
             meta.setType(resource.getType());
             meta.setIcon(resource.getIcon());
-            meta.setOrder(resource.getOrder());
+            meta.setSort(resource.getSort());
             meta.setPerms(resource.getPerms());
             meta.setKeepAlive(Constant.YES.equals(resource.getCache()));
             boolean hide = Constant.NO.equals(resource.getVisible());

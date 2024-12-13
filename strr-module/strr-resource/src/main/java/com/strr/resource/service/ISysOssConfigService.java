@@ -5,7 +5,7 @@ import com.strr.resource.model.SysOssConfig;
 
 import java.util.List;
 
-public interface ISysOssConfigService extends ICrudService<SysOssConfig, Integer> {
+public interface ISysOssConfigService extends ICrudService<SysOssConfig, Long> {
     /**
      * 获取所有配置
      */

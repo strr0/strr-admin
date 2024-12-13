@@ -3,7 +3,7 @@ package com.strr.system.mapper;
 import com.strr.base.mapper.CrudMapper;
 import com.strr.system.model.SysOauthClient;
 
-public interface SysOauthClientMapper extends CrudMapper<SysOauthClient, Integer> {
+public interface SysOauthClientMapper extends CrudMapper<SysOauthClient, Long> {
     /**
      * 获取客户端配置
      */

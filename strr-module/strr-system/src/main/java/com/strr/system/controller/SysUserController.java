@@ -17,7 +17,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("${module.system:}/user")
-public class SysUserController extends CrudController<SysUser, Integer> {
+public class SysUserController extends CrudController<SysUser, Long> {
     private final ISysUserService sysUserService;
 
     public SysUserController(ISysUserService sysUserService) {
@@ -54,8 +54,8 @@ public class SysUserController extends CrudController<SysUser, Integer> {
      */
     @CheckPermission("system:user:query")
     @GetMapping("/listRoleId")
-    public Result<List<Integer>> listRoleId(Integer userId) {
-        List<Integer> data = sysUserService.listRoleId(userId);
+    public Result<List<Long>> listRoleId(Long userId) {
+        List<Long> data = sysUserService.listRoleId(userId);
         return Result.ok(data);
     }
 
@@ -65,7 +65,7 @@ public class SysUserController extends CrudController<SysUser, Integer> {
     @Override
     @CheckPermission("system:user:remove")
     @DeleteMapping("/{id}")
-    public Result<Void> remove(@PathVariable Integer id) {
+    public Result<Void> remove(@PathVariable Long id) {
         sysUserService.removeInfo(id);
         return Result.ok();
     }
@@ -76,7 +76,7 @@ public class SysUserController extends CrudController<SysUser, Integer> {
     @Override
     @CheckPermission("system:user:query")
     @GetMapping("/{id}")
-    public Result<SysUser> get(@PathVariable Integer id) {
+    public Result<SysUser> get(@PathVariable Long id) {
         return super.get(id);
     }
 

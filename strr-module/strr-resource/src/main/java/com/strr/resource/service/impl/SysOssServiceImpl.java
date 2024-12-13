@@ -1,6 +1,8 @@
 package com.strr.resource.service.impl;
 
 import com.strr.base.service.impl.CrudServiceImpl;
+import com.strr.base.util.FileUtil;
+import com.strr.base.util.IoUtil;
 import com.strr.oss.core.OssClient;
 import com.strr.oss.entity.UploadResult;
 import com.strr.oss.enums.AccessPolicyType;
@@ -8,8 +10,6 @@ import com.strr.oss.factory.OssFactory;
 import com.strr.resource.mapper.SysOssMapper;
 import com.strr.resource.model.SysOss;
 import com.strr.resource.service.ISysOssService;
-import com.strr.util.FileUtil;
-import com.strr.util.IoUtil;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 @Service
-public class SysOssServiceImpl extends CrudServiceImpl<SysOss, Integer> implements ISysOssService {
+public class SysOssServiceImpl extends CrudServiceImpl<SysOss, Long> implements ISysOssService {
     private final SysOssMapper sysOssMapper;
 
     public SysOssServiceImpl(SysOssMapper sysOssMapper) {
@@ -65,7 +65,7 @@ public class SysOssServiceImpl extends CrudServiceImpl<SysOss, Integer> implemen
      * 文件下载
      */
     @Override
-    public void download(Integer id, HttpServletResponse response) throws IOException {
+    public void download(Long id, HttpServletResponse response) throws IOException {
         SysOss sysOss = sysOssMapper.get(id);
         if (sysOss == null) {
             throw new RuntimeException("文件数据不存在!");
@@ -86,7 +86,7 @@ public class SysOssServiceImpl extends CrudServiceImpl<SysOss, Integer> implemen
      * 文件删除
      */
     @Override
-    public int remove(Integer id) {
+    public int remove(Long id) {
         SysOss sysOss = sysOssMapper.get(id);
         OssClient storage = OssFactory.instance(sysOss.getService());
         storage.delete(sysOss.getUrl());

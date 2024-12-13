@@ -34,7 +34,7 @@ public class LoginUserServiceImpl implements LoginUserService {
     }
 
     @Override
-    public List<String> listPermsByUserId(Integer userId) {
+    public List<String> listPermsByUserId(Long userId) {
         return remoteUserService.listPerms(userId);
     }
 }

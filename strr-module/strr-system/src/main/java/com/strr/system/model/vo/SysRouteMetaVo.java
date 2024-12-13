@@ -37,7 +37,7 @@ public class SysRouteMetaVo {
     /**
      * 排序
      */
-    private Integer order;
+    private Integer sort;
 
     /**
      * 外链地址
@@ -107,12 +107,12 @@ public class SysRouteMetaVo {
         this.icon = icon;
     }
 
-    public Integer getOrder() {
-        return order;
+    public Integer getSort() {
+        return sort;
     }
 
-    public void setOrder(Integer order) {
-        this.order = order;
+    public void setSort(Integer sort) {
+        this.sort = sort;
     }
 
     public String getHref() {

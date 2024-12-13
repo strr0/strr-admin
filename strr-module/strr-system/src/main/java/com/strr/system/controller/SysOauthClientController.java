@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("${module.system:}/oauth/client")
-public class SysOauthClientController extends CrudController<SysOauthClient, Integer> {
+public class SysOauthClientController extends CrudController<SysOauthClient, Long> {
     private final ISysOauthClientService sysOauthClientService;
 
     public SysOauthClientController(ISysOauthClientService sysOauthClientService) {
@@ -59,7 +59,7 @@ public class SysOauthClientController extends CrudController<SysOauthClient, Int
     @Override
     @CheckPermission("system:client:remove")
     @DeleteMapping("/{id}")
-    public Result<Void> remove(@PathVariable Integer id) {
+    public Result<Void> remove(@PathVariable Long id) {
         return super.remove(id);
     }
 
@@ -69,7 +69,7 @@ public class SysOauthClientController extends CrudController<SysOauthClient, Int
     @Override
     @CheckPermission("system:client:query")
     @GetMapping("/{id}")
-    public Result<SysOauthClient> get(@PathVariable Integer id) {
+    public Result<SysOauthClient> get(@PathVariable Long id) {
         return super.get(id);
     }
 }

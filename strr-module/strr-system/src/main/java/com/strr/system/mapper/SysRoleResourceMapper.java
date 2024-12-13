@@ -8,20 +8,20 @@ public interface SysRoleResourceMapper {
     /**
      * 添加角色权限
      */
-    int batchSave(@Param("roleId") Integer roleId, @Param("resourceIds") Integer[] resourceIds);
+    int batchSave(@Param("roleId") Long roleId, @Param("resourceIds") Long[] resourceIds);
 
     /**
      * 获取权限id
      */
-    List<Integer> listByRoleId(Integer roleId);
+    List<Long> listByRoleId(Long roleId);
 
     /**
      * 删除角色权限关联(角色id)
      */
-    int removeByRoleId(Integer roleId);
+    int removeByRoleId(Long roleId);
 
     /**
      * 删除角色权限关联(资源id)
      */
-    int removeByResourceId(Integer resourceId);
+    int removeByResourceId(Long resourceId);
 }

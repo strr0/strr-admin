@@ -1,8 +1,8 @@
 package com.strr.auth.service;
 
+import com.strr.base.util.StringUtil;
 import com.strr.system.api.RemoteOauthClientService;
 import com.strr.system.api.model.OauthClient;
-import com.strr.util.StringUtil;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;

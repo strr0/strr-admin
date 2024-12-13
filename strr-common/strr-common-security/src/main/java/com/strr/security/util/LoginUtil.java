@@ -1,6 +1,6 @@
 package com.strr.security.util;
 
-import com.strr.constant.Constant;
+import com.strr.base.constant.Constant;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -35,13 +35,11 @@ public class LoginUtil {
                 .map(Jwt::getClaims);
     }
 
-    public static Integer getLoginId() {
-        return getClaims().map(map -> (Long) map.get(Constant.USER_ID))
-                .map(Long::intValue).orElse(null);
+    public static Long getLoginId() {
+        return getClaims().map(map -> (Long) map.get(Constant.USER_ID)).orElse(null);
     }
 
-    public static Integer getLoginId(Supplier<Authentication> authentication) {
-        return getClaims(authentication).map(map -> (Long) map.get(Constant.USER_ID))
-                .map(Long::intValue).orElse(null);
+    public static Long getLoginId(Supplier<Authentication> authentication) {
+        return getClaims(authentication).map(map -> (Long) map.get(Constant.USER_ID)).orElse(null);
     }
 }

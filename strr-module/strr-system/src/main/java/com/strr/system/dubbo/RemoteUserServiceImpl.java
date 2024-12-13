@@ -1,6 +1,6 @@
 package com.strr.system.dubbo;
 
-import com.strr.constant.Constant;
+import com.strr.base.constant.Constant;
 import com.strr.system.api.RemoteUserService;
 import com.strr.system.api.model.LoginUser;
 import com.strr.system.mapper.SysResourceMapper;
@@ -49,7 +49,7 @@ public class RemoteUserServiceImpl implements RemoteUserService {
      * 获取用户权限
      */
     @Override
-    public List<String> listPerms(Integer userId) {
+    public List<String> listPerms(Long userId) {
         return sysResourceMapper.listByUserId(userId, Constant.NO)
                 .stream().map(SysResource::getPerms).filter(StringUtils::hasLength).distinct()
                 .collect(Collectors.toList());

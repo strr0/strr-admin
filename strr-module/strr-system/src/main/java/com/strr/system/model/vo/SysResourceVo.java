@@ -5,7 +5,7 @@ import com.strr.system.model.SysResource;
 
 import java.util.List;
 
-public class SysResourceVo extends SysResource implements Treeable<SysResourceVo, Integer> {
+public class SysResourceVo extends SysResource implements Treeable<SysResourceVo, Long> {
     private List<SysResourceVo> children;
 
     @Override

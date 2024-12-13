@@ -2,7 +2,7 @@ package com.strr.data.service.impl;
 
 import com.strr.base.model.Page;
 import com.strr.base.model.Pageable;
-import com.strr.constant.Constant;
+import com.strr.base.constant.Constant;
 import com.strr.data.mapper.DmsColumnMapper;
 import com.strr.data.mapper.DmsModuleMapper;
 import com.strr.data.mapper.DmsTableMapper;
@@ -12,7 +12,7 @@ import com.strr.data.model.DmsTable;
 import com.strr.data.model.bo.DmsTableBo;
 import com.strr.data.model.vo.DmsModuleVo;
 import com.strr.data.service.IDmsModuleService;
-import com.strr.util.ModelUtil;
+import com.strr.mybatis.util.ModelUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -74,7 +74,7 @@ public class DmsModuleServiceImpl implements IDmsModuleService {
                 List<DmsColumn> dmsColumns = dmsColumnMapper.listDbColumnByTable(dmsTable.getName());
                 for (DmsColumn dmsColumn : dmsColumns) {
                     dmsColumn.setTableId(dmsTable.getId());
-                    if (!baseColumns.contains(dmsColumn.getName()) && dmsColumn.getOrder() < 10) {
+                    if (!baseColumns.contains(dmsColumn.getName()) && dmsColumn.getSort() < 10) {
                         dmsColumn.setForm(Constant.YES);
                         dmsColumn.setVisible(Constant.YES);
                     }
@@ -114,7 +114,7 @@ public class DmsModuleServiceImpl implements IDmsModuleService {
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void removeInfoByTableId(Integer tableId) {
+    public void removeInfoByTableId(Long tableId) {
         dmsColumnMapper.removeByTableId(tableId);
         dmsModuleMapper.removeByTableId(tableId);
         dmsTableMapper.remove(tableId);
@@ -124,7 +124,7 @@ public class DmsModuleServiceImpl implements IDmsModuleService {
      * 获取模块信息
      */
     @Override
-    public DmsModuleVo getInfo(Integer id) {
+    public DmsModuleVo getInfo(Long id) {
         return dmsModuleMapper.getInfo(id);
     }
 
@@ -132,7 +132,7 @@ public class DmsModuleServiceImpl implements IDmsModuleService {
      * 更新业务表状态
      */
     @Override
-    public void updateStatus(Integer id, String status) {
+    public void updateStatus(Long id, String status) {
         DmsModule module = new DmsModule();
         module.setId(id);
         module.setStatus(status);

@@ -7,5 +7,10 @@ public interface IDmsHandleService {
     /**
      * 注册
      */
-    void register(Integer id) throws Exception;
+    void register(Long id) throws Exception;
+
+    /**
+     * 初始化
+     */
+    void init() throws Exception;
 }

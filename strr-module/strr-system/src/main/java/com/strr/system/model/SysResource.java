@@ -1,9 +1,9 @@
 package com.strr.system.model;
 
-import com.strr.base.annotation.Column;
-import com.strr.base.annotation.Id;
-import com.strr.base.annotation.Table;
 import com.strr.base.model.BaseModel;
+import com.strr.mybatis.annotation.Column;
+import com.strr.mybatis.annotation.Id;
+import com.strr.mybatis.annotation.Table;
 
 /**
  * 资源
@@ -14,7 +14,7 @@ public class SysResource extends BaseModel {
      * 编号
      */
     @Id
-    private Integer id;
+    private Long id;
 
     /**
      * 名称
@@ -46,7 +46,7 @@ public class SysResource extends BaseModel {
      * 父菜单
      */
     @Column("parent_id")
-    private Integer parentId;
+    private Long parentId;
 
     /**
      * 是否外链（1.是 0.否）
@@ -71,8 +71,7 @@ public class SysResource extends BaseModel {
     /**
      * 排序
      */
-    @Column("`order`")
-    private Integer order;
+    private Integer sort;
 
     /**
      * 是否展示（1.是 0.否）
@@ -94,11 +93,11 @@ public class SysResource extends BaseModel {
      */
     private String status;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -142,11 +141,11 @@ public class SysResource extends BaseModel {
         this.i18nKey = i18nKey;
     }
 
-    public Integer getParentId() {
+    public Long getParentId() {
         return parentId;
     }
 
-    public void setParentId(Integer parentId) {
+    public void setParentId(Long parentId) {
         this.parentId = parentId;
     }
 
@@ -182,12 +181,12 @@ public class SysResource extends BaseModel {
         this.iconType = iconType;
     }
 
-    public Integer getOrder() {
-        return order;
+    public Integer getSort() {
+        return sort;
     }
 
-    public void setOrder(Integer order) {
-        this.order = order;
+    public void setSort(Integer sort) {
+        this.sort = sort;
     }
 
     public String getVisible() {

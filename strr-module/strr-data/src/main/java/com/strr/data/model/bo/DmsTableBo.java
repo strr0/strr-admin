@@ -9,7 +9,7 @@ public class DmsTableBo {
     /**
      * 编号
      */
-    private Integer id;
+    private Long id;
 
     /**
      * 表名称
@@ -36,11 +36,11 @@ public class DmsTableBo {
      */
     private List<String> excludeNames;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

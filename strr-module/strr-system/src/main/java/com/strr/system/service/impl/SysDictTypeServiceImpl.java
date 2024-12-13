@@ -7,7 +7,7 @@ import com.strr.system.service.ISysDictTypeService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class SysDictTypeServiceImpl extends CrudServiceImpl<SysDictType, Integer> implements ISysDictTypeService {
+public class SysDictTypeServiceImpl extends CrudServiceImpl<SysDictType, Long> implements ISysDictTypeService {
     private final SysDictTypeMapper sysDictTypeMapper;
 
     public SysDictTypeServiceImpl(SysDictTypeMapper sysDictTypeMapper) {

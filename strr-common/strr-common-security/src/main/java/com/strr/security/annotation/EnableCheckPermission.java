@@ -1,6 +1,6 @@
 package com.strr.security.annotation;
 
-import com.strr.security.config.permission.CheckPermissionSelector;
+import com.strr.security.support.CheckPermissionSelector;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.ElementType;

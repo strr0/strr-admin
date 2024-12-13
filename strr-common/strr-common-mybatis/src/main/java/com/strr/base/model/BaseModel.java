@@ -1,6 +1,6 @@
 package com.strr.base.model;
 
-import com.strr.base.annotation.Column;
+import com.strr.mybatis.annotation.Column;
 
 import java.util.Date;
 
@@ -8,7 +8,7 @@ public class BaseModel {
     /**
      * 创建人
      */
-    private Integer createBy;
+    private Long createBy;
 
     /**
      * 创建时间
@@ -19,7 +19,7 @@ public class BaseModel {
     /**
      * 更新人
      */
-    private Integer updateBy;
+    private Long updateBy;
 
     /**
      * 更新时间
@@ -27,11 +27,11 @@ public class BaseModel {
     @Column("update_time")
     private Date updateTime;
 
-    public Integer getCreateBy() {
+    public Long getCreateBy() {
         return createBy;
     }
 
-    public void setCreateBy(Integer createBy) {
+    public void setCreateBy(Long createBy) {
         this.createBy = createBy;
     }
 
@@ -43,11 +43,11 @@ public class BaseModel {
         this.createTime = createTime;
     }
 
-    public Integer getUpdateBy() {
+    public Long getUpdateBy() {
         return updateBy;
     }
 
-    public void setUpdateBy(Integer updateBy) {
+    public void setUpdateBy(Long updateBy) {
         this.updateBy = updateBy;
     }
 

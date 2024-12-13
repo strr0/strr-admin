@@ -1,10 +1,10 @@
 package com.strr.system.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.strr.base.annotation.Column;
-import com.strr.base.annotation.Id;
-import com.strr.base.annotation.Table;
 import com.strr.base.model.BaseModel;
+import com.strr.mybatis.annotation.Column;
+import com.strr.mybatis.annotation.Id;
+import com.strr.mybatis.annotation.Table;
 
 import java.util.Date;
 
@@ -17,7 +17,7 @@ public class SysUser extends BaseModel {
      * 主键
      */
     @Id
-    private Integer id;
+    private Long id;
 
     /**
      * 用户名
@@ -72,11 +72,11 @@ public class SysUser extends BaseModel {
      */
     private String status;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

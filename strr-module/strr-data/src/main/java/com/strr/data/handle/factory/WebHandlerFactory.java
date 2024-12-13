@@ -76,19 +76,19 @@ public class WebHandlerFactory {
 
     public static void registerMapping(RequestMappingHandlerMapping requestMappingHandlerMapping, WebHandler webHandler, String path) throws NoSuchMethodException {
         // page
-        RequestMappingInfo page = RequestMappingInfo.paths(String.format("/%s/page", path)).methods(RequestMethod.GET).build();
+        RequestMappingInfo page = RequestMappingInfo.paths(String.format("%s/page", path)).methods(RequestMethod.GET).build();
         requestMappingHandlerMapping.registerMapping(page, webHandler, WebHandler.class.getMethod("page", Map.class, Pageable.class));
         // save
-        RequestMappingInfo save = RequestMappingInfo.paths(String.format("/%s", path)).methods(RequestMethod.POST).build();
+        RequestMappingInfo save = RequestMappingInfo.paths(String.format("%s", path)).methods(RequestMethod.POST).build();
         requestMappingHandlerMapping.registerMapping(save, webHandler, WebHandler.class.getMethod("save", Map.class));
         // update
-        RequestMappingInfo update = RequestMappingInfo.paths(String.format("/%s", path)).methods(RequestMethod.PUT).build();
+        RequestMappingInfo update = RequestMappingInfo.paths(String.format("%s", path)).methods(RequestMethod.PUT).build();
         requestMappingHandlerMapping.registerMapping(update, webHandler, WebHandler.class.getMethod("update", Map.class));
         // remove
-        RequestMappingInfo remove = RequestMappingInfo.paths(String.format("/%s/{id}", path)).methods(RequestMethod.DELETE).build();
+        RequestMappingInfo remove = RequestMappingInfo.paths(String.format("%s/{id}", path)).methods(RequestMethod.DELETE).build();
         requestMappingHandlerMapping.registerMapping(remove, webHandler, WebHandler.class.getMethod("remove", String.class));
         // get
-        RequestMappingInfo get = RequestMappingInfo.paths(String.format("/%s/{id}", path)).methods(RequestMethod.GET).build();
+        RequestMappingInfo get = RequestMappingInfo.paths(String.format("%s/{id}", path)).methods(RequestMethod.GET).build();
         requestMappingHandlerMapping.registerMapping(get, webHandler, WebHandler.class.getMethod("get", String.class));
     }
 }

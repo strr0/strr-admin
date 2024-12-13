@@ -5,7 +5,7 @@ import com.strr.base.service.ICrudService;
 
 import java.util.List;
 
-public interface ISysResourceService extends ICrudService<SysResource, Integer> {
+public interface ISysResourceService extends ICrudService<SysResource, Long> {
     /**
      * 权限列表
      */
@@ -14,10 +14,10 @@ public interface ISysResourceService extends ICrudService<SysResource, Integer> 
     /**
      * 获取用户权限
      */
-    List<SysResource> listByUserId(Integer userId);
+    List<SysResource> listByUserId(Long userId);
 
     /**
      * 删除权限
      */
-    void removeInfo(Integer id);
+    void removeInfo(Long id);
 }

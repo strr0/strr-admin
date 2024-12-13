@@ -15,7 +15,7 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("${module.resource:}/oss")
-public class SysOssController extends CrudController<SysOss, Integer> {
+public class SysOssController extends CrudController<SysOss, Long> {
     private final ISysOssService sysOssService;
 
     public SysOssController(ISysOssService sysOssService) {
@@ -52,7 +52,7 @@ public class SysOssController extends CrudController<SysOss, Integer> {
      */
     @CheckPermission("system:oss:download")
     @GetMapping("/download/{id}")
-    public void download(@PathVariable Integer id, HttpServletResponse response) throws IOException {
+    public void download(@PathVariable Long id, HttpServletResponse response) throws IOException {
         sysOssService.download(id, response);
     }
 
@@ -62,7 +62,7 @@ public class SysOssController extends CrudController<SysOss, Integer> {
     @Override
     @CheckPermission("system:oss:remove")
     @DeleteMapping("/{id}")
-    public Result<Void> remove(@PathVariable Integer id) {
+    public Result<Void> remove(@PathVariable Long id) {
         return super.remove(id);
     }
 
@@ -72,7 +72,7 @@ public class SysOssController extends CrudController<SysOss, Integer> {
     @Override
     @CheckPermission("system:oss:query")
     @GetMapping("/{id}")
-    public Result<SysOss> get(@PathVariable Integer id) {
+    public Result<SysOss> get(@PathVariable Long id) {
         return super.get(id);
     }
 }

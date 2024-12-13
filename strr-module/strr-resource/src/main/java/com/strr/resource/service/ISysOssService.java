@@ -7,7 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
-public interface ISysOssService extends ICrudService<SysOss, Integer> {
+public interface ISysOssService extends ICrudService<SysOss, Long> {
     /**
      * 文件上传
      */
@@ -16,5 +16,5 @@ public interface ISysOssService extends ICrudService<SysOss, Integer> {
     /**
      * 文件下载
      */
-    void download(Integer id, HttpServletResponse response) throws IOException;
+    void download(Long id, HttpServletResponse response) throws IOException;
 }

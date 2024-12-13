@@ -1,9 +1,8 @@
 package com.strr.data.model;
 
-import com.strr.base.annotation.Column;
-import com.strr.base.annotation.Id;
-import com.strr.base.annotation.Table;
 import com.strr.base.model.BaseModel;
+import com.strr.mybatis.annotation.Id;
+import com.strr.mybatis.annotation.Table;
 
 /**
  * 业务字段信息
@@ -14,12 +13,12 @@ public class DmsColumn extends BaseModel {
      * 编号
      */
     @Id
-    private Integer id;
+    private Long id;
 
     /**
      * 归属表编号
      */
-    private Integer tableId;
+    private Long tableId;
 
     /**
      * 列名称
@@ -49,22 +48,21 @@ public class DmsColumn extends BaseModel {
     /**
      * 排序
      */
-    @Column("`order`")
-    private Integer order;
+    private Integer sort;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Integer getTableId() {
+    public Long getTableId() {
         return tableId;
     }
 
-    public void setTableId(Integer tableId) {
+    public void setTableId(Long tableId) {
         this.tableId = tableId;
     }
 
@@ -108,11 +106,11 @@ public class DmsColumn extends BaseModel {
         this.visible = visible;
     }
 
-    public Integer getOrder() {
-        return order;
+    public Integer getSort() {
+        return sort;
     }
 
-    public void setOrder(Integer order) {
-        this.order = order;
+    public void setSort(Integer sort) {
+        this.sort = sort;
     }
 }

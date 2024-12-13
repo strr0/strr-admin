@@ -1,8 +1,8 @@
 package com.strr.resource.model;
 
-import com.strr.base.annotation.Id;
-import com.strr.base.annotation.Table;
 import com.strr.base.model.BaseModel;
+import com.strr.mybatis.annotation.Id;
+import com.strr.mybatis.annotation.Table;
 
 /**
  * 对象存储配置
@@ -13,7 +13,7 @@ public class SysOssConfig extends BaseModel {
      * 主建
      */
     @Id
-    private Integer id;
+    private Long id;
 
     /**
      * 配置key
@@ -76,11 +76,11 @@ public class SysOssConfig extends BaseModel {
      */
     private String status;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -3,7 +3,7 @@ package com.strr.data.controller;
 import com.strr.base.model.Page;
 import com.strr.base.model.Pageable;
 import com.strr.base.model.Result;
-import com.strr.constant.Constant;
+import com.strr.base.constant.Constant;
 import com.strr.data.model.DmsModule;
 import com.strr.data.model.DmsTable;
 import com.strr.data.model.bo.DmsTableBo;
@@ -72,7 +72,7 @@ public class DmsModuleController {
      */
     @CheckPermission("data:module:remove")
     @DeleteMapping("/{tableId}")
-    public Result<Void> remove(@PathVariable Integer tableId) {
+    public Result<Void> remove(@PathVariable Long tableId) {
         dmsModuleService.removeInfoByTableId(tableId);
         return Result.ok();
     }
@@ -82,7 +82,7 @@ public class DmsModuleController {
      */
     @CheckPermission("data:module:query")
     @GetMapping("/{id}")
-    public Result<DmsModuleVo> getModuleInfo(@PathVariable Integer id) {
+    public Result<DmsModuleVo> getModuleInfo(@PathVariable Long id) {
         DmsModuleVo moduleInfo = dmsModuleService.getInfo(id);
         return Result.ok(moduleInfo);
     }
@@ -92,7 +92,7 @@ public class DmsModuleController {
      */
     @CheckPermission("data:module:register")
     @PostMapping("/register")
-    public Result<Void> register(Integer id) {
+    public Result<Void> register(Long id) {
         try {
             dmsHandleService.register(id);
             dmsModuleService.updateStatus(id, Constant.YES);

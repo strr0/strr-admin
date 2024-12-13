@@ -34,15 +34,15 @@ public interface IDmsModuleService {
     /**
      * 删除模块信息
      */
-    void removeInfoByTableId(Integer tableId);
+    void removeInfoByTableId(Long tableId);
 
     /**
      * 获取模块信息
      */
-    DmsModuleVo getInfo(Integer id);
+    DmsModuleVo getInfo(Long id);
 
     /**
      * 更新业务表状态
      */
-    void updateStatus(Integer id, String status);
+    void updateStatus(Long id, String status);
 }

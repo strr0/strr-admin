@@ -8,20 +8,20 @@ public interface SysUserRoleMapper {
     /**
      * 添加用户角色
      */
-    int batchSave(@Param("userId") Integer userId, @Param("roleIds") Integer[] roleIds);
+    int batchSave(@Param("userId") Long userId, @Param("roleIds") Long[] roleIds);
 
     /**
      * 获取角色id
      */
-    List<Integer> listByUserId(Integer userId);
+    List<Long> listByUserId(Long userId);
 
     /**
      * 删除用户角色关联
      */
-    int removeByUserId(Integer userId);
+    int removeByUserId(Long userId);
 
     /**
      * 删除用户角色关联
      */
-    int removeByRoleId(Integer roleId);
+    int removeByRoleId(Long roleId);
 }

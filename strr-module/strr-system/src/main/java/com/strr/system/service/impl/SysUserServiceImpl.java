@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class SysUserServiceImpl extends CrudServiceImpl<SysUser, Integer> implements ISysUserService {
+public class SysUserServiceImpl extends CrudServiceImpl<SysUser, Long> implements ISysUserService {
     private final SysUserMapper sysUserMapper;
     private final SysUserRoleMapper sysUserRoleMapper;
 
@@ -44,7 +44,7 @@ public class SysUserServiceImpl extends CrudServiceImpl<SysUser, Integer> implem
      * 获取用户角色
      */
     @Override
-    public List<Integer> listRoleId(Integer userId) {
+    public List<Long> listRoleId(Long userId) {
         return sysUserRoleMapper.listByUserId(userId);
     }
 
@@ -52,7 +52,7 @@ public class SysUserServiceImpl extends CrudServiceImpl<SysUser, Integer> implem
      * 删除用户
      */
     @Override
-    public void removeInfo(Integer id) {
+    public void removeInfo(Long id) {
         sysUserRoleMapper.removeByUserId(id);
         sysUserMapper.remove(id);
     }

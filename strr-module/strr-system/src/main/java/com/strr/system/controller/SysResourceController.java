@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("${module.system:}/resource")
-public class SysResourceController extends CrudController<SysResource, Integer> {
+public class SysResourceController extends CrudController<SysResource, Long> {
     private final ISysResourceService sysResourceService;
 
     public SysResourceController(ISysResourceService sysResourceService) {
@@ -42,7 +42,7 @@ public class SysResourceController extends CrudController<SysResource, Integer> 
      */
     @GetMapping("/getRoutes")
     public Result<List<SysRouteVo>> getRoutes() {
-        Integer userId = LoginUtil.getLoginId();
+        Long userId = LoginUtil.getLoginId();
         if (userId == null) {
             return Result.error();
         }
@@ -75,7 +75,7 @@ public class SysResourceController extends CrudController<SysResource, Integer> 
     @Override
     @CheckPermission("system:resource:remove")
     @DeleteMapping("/{id}")
-    public Result<Void> remove(@PathVariable Integer id) {
+    public Result<Void> remove(@PathVariable Long id) {
         sysResourceService.removeInfo(id);
         return Result.ok();
     }
@@ -86,7 +86,7 @@ public class SysResourceController extends CrudController<SysResource, Integer> 
     @Override
     @CheckPermission("system:resource:query")
     @GetMapping("/{id}")
-    public Result<SysResource> get(@PathVariable Integer id) {
+    public Result<SysResource> get(@PathVariable Long id) {
         return super.get(id);
     }
 }

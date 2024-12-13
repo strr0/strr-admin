@@ -1,10 +1,10 @@
 package com.strr.oss.factory;
 
+import com.strr.base.util.StringUtil;
 import com.strr.oss.constant.OssConstant;
 import com.strr.oss.core.OssClient;
 import com.strr.oss.exception.OssException;
 import com.strr.oss.properties.OssProperties;
-import com.strr.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

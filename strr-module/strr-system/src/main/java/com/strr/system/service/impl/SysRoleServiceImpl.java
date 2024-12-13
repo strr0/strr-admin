@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class SysRoleServiceImpl extends CrudServiceImpl<SysRole, Integer> implements ISysRoleService {
+public class SysRoleServiceImpl extends CrudServiceImpl<SysRole, Long> implements ISysRoleService {
     private final SysRoleMapper sysRoleMapper;
     private final SysUserRoleMapper sysUserRoleMapper;
     private final SysRoleResourceMapper sysRoleResourceMapper;
@@ -39,7 +39,7 @@ public class SysRoleServiceImpl extends CrudServiceImpl<SysRole, Integer> implem
      * 更新角色权限
      */
     @Override
-    public void updateRel(Integer roleId, Integer[] resourceIds) {
+    public void updateRel(Long roleId, Long[] resourceIds) {
         sysRoleResourceMapper.removeByRoleId(roleId);
         sysRoleResourceMapper.batchSave(roleId, resourceIds);
     }
@@ -48,7 +48,7 @@ public class SysRoleServiceImpl extends CrudServiceImpl<SysRole, Integer> implem
      * 获取角色权限
      */
     @Override
-    public List<Integer> listResourceId(Integer roleId) {
+    public List<Long> listResourceId(Long roleId) {
         return sysRoleResourceMapper.listByRoleId(roleId);
     }
 
@@ -56,7 +56,7 @@ public class SysRoleServiceImpl extends CrudServiceImpl<SysRole, Integer> implem
      * 删除角色
      */
     @Override
-    public void removeInfo(Integer id) {
+    public void removeInfo(Long id) {
         sysUserRoleMapper.removeByRoleId(id);
         sysRoleResourceMapper.removeByRoleId(id);
         sysRoleMapper.remove(id);

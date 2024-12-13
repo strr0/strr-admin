@@ -6,7 +6,7 @@ import com.strr.base.service.ICrudService;
 
 import java.util.List;
 
-public interface ISysUserService extends ICrudService<SysUser, Integer> {
+public interface ISysUserService extends ICrudService<SysUser, Long> {
     /**
      * 保存用户
      */
@@ -15,10 +15,10 @@ public interface ISysUserService extends ICrudService<SysUser, Integer> {
     /**
      * 获取用户角色
      */
-    List<Integer> listRoleId(Integer userId);
+    List<Long> listRoleId(Long userId);
 
     /**
      * 删除用户
      */
-    void removeInfo(Integer id);
+    void removeInfo(Long id);
 }

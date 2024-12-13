@@ -11,5 +11,5 @@ public interface LoginUserService extends UserDetailsService {
     /**
      * 获取用户权限
      */
-    List<String> listPermsByUserId(Integer userId);
+    List<String> listPermsByUserId(Long userId);
 }

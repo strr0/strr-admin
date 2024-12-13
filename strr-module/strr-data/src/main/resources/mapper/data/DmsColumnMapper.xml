@@ -3,7 +3,7 @@
 <mapper namespace="com.strr.data.mapper.DmsColumnMapper">
     <select id="listDbColumnByTable" resultType="com.strr.data.model.DmsColumn">
         select column_name name, column_comment comment, (case when column_key = 'PRI' then '1' else '0' end) pk,
-          ordinal_position as `order`
+          ordinal_position as sort
         from information_schema.columns where table_schema = (select database()) and table_name = (#{table})
         order by ordinal_position
     </select>
