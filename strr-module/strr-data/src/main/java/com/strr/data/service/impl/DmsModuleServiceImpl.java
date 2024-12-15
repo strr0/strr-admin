@@ -68,7 +68,7 @@ public class DmsModuleServiceImpl implements IDmsModuleService {
                 String camelCaseName = ModelUtil.toCamelCase(dmsTable.getName());
                 module.setCode(camelCaseName);
                 module.setPath(camelCaseName);
-                module.setStatus(Constant.YES);
+                module.setStatus(Constant.NO);
                 dmsModuleMapper.save(module);
                 // 保存字段信息
                 List<DmsColumn> dmsColumns = dmsColumnMapper.listDbColumnByTable(dmsTable.getName());

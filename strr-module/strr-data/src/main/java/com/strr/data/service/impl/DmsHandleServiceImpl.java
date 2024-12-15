@@ -5,6 +5,7 @@ import com.strr.data.handle.DaoHandler;
 import com.strr.data.handle.WebHandler;
 import com.strr.data.handle.factory.WebHandlerFactory;
 import com.strr.data.mapper.DmsModuleMapper;
+import com.strr.data.model.DmsModule;
 import com.strr.data.model.vo.DmsModuleVo;
 import com.strr.data.service.IDmsHandleService;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -69,5 +70,22 @@ public class DmsHandleServiceImpl implements IDmsHandleService {
             path = basePath + "/" + module.getPath();
         }
         WebHandlerFactory.registerMapping(requestMappingHandlerMapping, webHandler, path);
+    }
+
+    /**
+     * 注销
+     */
+    @Override
+    public void unregister(Long id) throws Exception {
+        DmsModule dmsModule = dmsModuleMapper.get(id);
+        DaoHandler daoHandler = new DaoHandler.Builder(dmsModule).build();
+        daoHandler.remove(sqlSessionFactory.getConfiguration());
+        String path;
+        if (dmsModule.getPath().startsWith("/")) {
+            path = basePath + dmsModule.getPath();
+        } else {
+            path = basePath + "/" + dmsModule.getPath();
+        }
+        WebHandlerFactory.unregisterMapping(requestMappingHandlerMapping, path);
     }
 }

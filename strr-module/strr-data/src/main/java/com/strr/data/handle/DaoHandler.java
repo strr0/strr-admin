@@ -2,6 +2,7 @@ package com.strr.data.handle;
 
 import com.strr.base.constant.Constant;
 import com.strr.data.model.DmsColumn;
+import com.strr.data.model.DmsModule;
 import com.strr.data.model.DmsTable;
 import com.strr.data.model.vo.DmsModuleVo;
 import com.strr.data.util.KeywordUtil;
@@ -15,6 +16,7 @@ import org.apache.ibatis.scripting.defaults.RawSqlSource;
 import org.apache.ibatis.scripting.xmltags.*;
 import org.apache.ibatis.session.Configuration;
 
+import java.lang.reflect.Field;
 import java.util.*;
 
 public class DaoHandler {
@@ -142,6 +144,21 @@ public class DaoHandler {
         buildMappedStatement(configuration);
     }
 
+    public void remove(Configuration configuration) {
+        try {
+            Field field = Configuration.class.getDeclaredField("mappedStatements");
+            field.setAccessible(true);
+            Map<String, MappedStatement> mappedStatements = (Map<String, MappedStatement>) field.get(configuration);
+            mappedStatements.remove(String.format("%s.page", moduleCode));
+            mappedStatements.remove(String.format("%s.save", moduleCode));
+            mappedStatements.remove(String.format("%s.update", moduleCode));
+            mappedStatements.remove(String.format("%s.remove", moduleCode));
+            mappedStatements.remove(String.format("%s.get", moduleCode));
+        } catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static class Builder {
         private final DaoHandler daoHandler = new DaoHandler();
 
@@ -149,6 +166,10 @@ public class DaoHandler {
             this.daoHandler.moduleCode = module.getCode();
             this.daoHandler.table = module.getTable();
             this.daoHandler.columns = module.getColumns();
+        }
+
+        public Builder(DmsModule module) {
+            this.daoHandler.moduleCode = module.getCode();
         }
 
         public DaoHandler build() {

@@ -55,7 +55,6 @@ CREATE TABLE `dms_table`  (
   `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '表名称',
   `comment` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '表描述',
   `remark` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
-  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '状态',
   `create_by` bigint NULL DEFAULT NULL COMMENT '创建者',
   `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `update_by` bigint NULL DEFAULT NULL COMMENT '更新者',
@@ -138,6 +137,7 @@ INSERT INTO `sys_resource` VALUES (41, '数据详情', 'M', 'dataItem/:id', 'dat
 INSERT INTO `sys_resource` VALUES (42, '导入', 'B', NULL, NULL, NULL, 39, NULL, NULL, NULL, NULL, NULL, '0', 'data:module:import', NULL, '1', NULL, NULL, NULL, NULL);
 INSERT INTO `sys_resource` VALUES (43, '删除', 'B', NULL, NULL, NULL, 39, NULL, NULL, NULL, NULL, NULL, '0', 'data:module:remove', NULL, '1', NULL, NULL, NULL, NULL);
 INSERT INTO `sys_resource` VALUES (44, '注册', 'B', NULL, NULL, NULL, 39, NULL, NULL, NULL, NULL, NULL, '0', 'data:module:register', NULL, '1', NULL, NULL, NULL, NULL);
+INSERT INTO `sys_resource` VALUES (45, '注销', 'B', NULL, NULL, NULL, 39, NULL, NULL, NULL, NULL, NULL, '0', 'data:module:unregister', NULL, '1', NULL, NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for sys_role
@@ -217,6 +217,7 @@ INSERT INTO `sys_role_resource` VALUES (1, 41);
 INSERT INTO `sys_role_resource` VALUES (1, 42);
 INSERT INTO `sys_role_resource` VALUES (1, 43);
 INSERT INTO `sys_role_resource` VALUES (1, 44);
+INSERT INTO `sys_role_resource` VALUES (1, 45);
 
 -- ----------------------------
 -- Table structure for sys_user

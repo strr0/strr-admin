@@ -13,4 +13,9 @@ public interface IDmsHandleService {
      * 初始化
      */
     void init() throws Exception;
+
+    /**
+     * 注销
+     */
+    void unregister(Long id) throws Exception;
 }

@@ -30,11 +30,6 @@ public class DmsTable extends BaseModel {
      */
     private String remark;
 
-    /**
-     * 状态
-     */
-    private String status;
-
     public Long getId() {
         return id;
     }
@@ -65,13 +60,5 @@ public class DmsTable extends BaseModel {
 
     public void setRemark(String remark) {
         this.remark = remark;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 }

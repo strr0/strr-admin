@@ -91,4 +91,22 @@ public class WebHandlerFactory {
         RequestMappingInfo get = RequestMappingInfo.paths(String.format("%s/{id}", path)).methods(RequestMethod.GET).build();
         requestMappingHandlerMapping.registerMapping(get, webHandler, WebHandler.class.getMethod("get", String.class));
     }
+
+    public static void unregisterMapping(RequestMappingHandlerMapping requestMappingHandlerMapping, String path) throws NoSuchMethodException {
+        // page
+        RequestMappingInfo page = RequestMappingInfo.paths(String.format("%s/page", path)).methods(RequestMethod.GET).build();
+        requestMappingHandlerMapping.unregisterMapping(page);
+        // save
+        RequestMappingInfo save = RequestMappingInfo.paths(String.format("%s", path)).methods(RequestMethod.POST).build();
+        requestMappingHandlerMapping.unregisterMapping(save);
+        // update
+        RequestMappingInfo update = RequestMappingInfo.paths(String.format("%s", path)).methods(RequestMethod.PUT).build();
+        requestMappingHandlerMapping.unregisterMapping(update);
+        // remove
+        RequestMappingInfo remove = RequestMappingInfo.paths(String.format("%s/{id}", path)).methods(RequestMethod.DELETE).build();
+        requestMappingHandlerMapping.unregisterMapping(remove);
+        // get
+        RequestMappingInfo get = RequestMappingInfo.paths(String.format("%s/{id}", path)).methods(RequestMethod.GET).build();
+        requestMappingHandlerMapping.unregisterMapping(get);
+    }
 }

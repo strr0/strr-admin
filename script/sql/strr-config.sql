@@ -196,22 +196,22 @@ insert into tenant_info(id, kp, tenant_id, tenant_name, tenant_desc, create_sour
 (2, '1', 'prod', 'prod', '生产环境', NULL, 1641741270448, 1641741287236);
 
 CREATE TABLE `users` (
-	`username` varchar(50) NOT NULL PRIMARY KEY,
-	`password` varchar(500) NOT NULL,
-	`enabled` boolean NOT NULL
+  `username` varchar(50) NOT NULL PRIMARY KEY,
+  `password` varchar(500) NOT NULL,
+  `enabled` boolean NOT NULL
 );
 
 CREATE TABLE `roles` (
-	`username` varchar(50) NOT NULL,
-	`role` varchar(50) NOT NULL,
-	UNIQUE INDEX `idx_user_role` (`username` ASC, `role` ASC) USING BTREE
+  `username` varchar(50) NOT NULL,
+  `role` varchar(50) NOT NULL,
+  UNIQUE INDEX `idx_user_role` (`username` ASC, `role` ASC) USING BTREE
 );
 
 CREATE TABLE `permissions` (
-    `role` varchar(50) NOT NULL,
-    `resource` varchar(255) NOT NULL,
-    `action` varchar(8) NOT NULL,
-    UNIQUE INDEX `uk_role_permission` (`role`,`resource`,`action`) USING BTREE
+  `role` varchar(50) NOT NULL,
+  `resource` varchar(255) NOT NULL,
+  `action` varchar(8) NOT NULL,
+  UNIQUE INDEX `uk_role_permission` (`role`,`resource`,`action`) USING BTREE
 );
 
 INSERT INTO users (username, password, enabled) VALUES ('nacos', '$2a$10$EuWPZHzz32dJN7jexM34MOeYirDdFAZm2kuWj7VEOJhhZkDrxfvUu', TRUE);

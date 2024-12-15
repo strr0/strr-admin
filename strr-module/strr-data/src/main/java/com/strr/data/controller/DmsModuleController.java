@@ -102,4 +102,20 @@ public class DmsModuleController {
         }
         return Result.error();
     }
+
+    /**
+     * 注销信息
+     */
+    @CheckPermission("data:module:unregister")
+    @PostMapping("/unregister")
+    public Result<Void> unregister(Long id) {
+        try {
+            dmsHandleService.unregister(id);
+            dmsModuleService.updateStatus(id, Constant.NO);
+            return Result.ok();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Result.error();
+    }
 }
