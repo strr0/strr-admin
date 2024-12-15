@@ -4,11 +4,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.oauth2.core.*;
-import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
 import org.springframework.security.oauth2.core.oidc.OidcIdToken;
 import org.springframework.security.oauth2.core.oidc.OidcScopes;
 import org.springframework.security.oauth2.core.oidc.endpoint.OidcParameterNames;
@@ -31,8 +29,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class OAuth2PasswordAuthenticationProvider implements AuthenticationProvider {
-    private static final Log LOGGER = LogFactory.getLog(OAuth2PasswordAuthenticationProvider.class);
+public class OAuth2ResourceOwnerAuthenticationProvider implements AuthenticationProvider {
+    private static final Log LOGGER = LogFactory.getLog(OAuth2ResourceOwnerAuthenticationProvider.class);
     private static final String ERROR_URI = "https://datatracker.ietf.org/doc/html/rfc6749#section-5.2";
     private static final OAuth2TokenType ID_TOKEN_TOKEN_TYPE = new OAuth2TokenType(OidcParameterNames.ID_TOKEN);
 
@@ -40,8 +38,8 @@ public class OAuth2PasswordAuthenticationProvider implements AuthenticationProvi
     private final OAuth2AuthorizationService authorizationService;
     private final OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator;
 
-    public OAuth2PasswordAuthenticationProvider(AuthenticationManager authenticationManager, OAuth2AuthorizationService authorizationService,
-                                                OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator) {
+    public OAuth2ResourceOwnerAuthenticationProvider(AuthenticationManager authenticationManager, OAuth2AuthorizationService authorizationService,
+                                                     OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator) {
         Assert.notNull(authorizationService, "authorizationService cannot be null");
         Assert.notNull(tokenGenerator, "tokenGenerator cannot be null");
         this.authenticationManager = authenticationManager;
@@ -51,10 +49,10 @@ public class OAuth2PasswordAuthenticationProvider implements AuthenticationProvi
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        OAuth2PasswordAuthenticationToken passwordAuthentication = (OAuth2PasswordAuthenticationToken) authentication;
+        OAuth2ResourceOwnerAuthenticationToken resourceOwnerAuthentication = (OAuth2ResourceOwnerAuthenticationToken) authentication;
 
         OAuth2ClientAuthenticationToken clientPrincipal = OAuth2AuthenticationProviderUtils
-                .getAuthenticatedClientElseThrowInvalidClient(passwordAuthentication);
+                .getAuthenticatedClientElseThrowInvalidClient(resourceOwnerAuthentication);
         RegisteredClient registeredClient = clientPrincipal.getRegisteredClient();
 
         if (LOGGER.isTraceEnabled()) {
@@ -65,15 +63,15 @@ public class OAuth2PasswordAuthenticationProvider implements AuthenticationProvi
             throw new OAuth2AuthenticationException(OAuth2ErrorCodes.UNAUTHORIZED_CLIENT);
         }
 
-        Authentication ownerAuthentication = null;
+        Authentication usernamePasswordAuthentication = null;
         try {
-            ownerAuthentication = getOwnerAuthorization(passwordAuthentication);
+            usernamePasswordAuthentication = authenticationManager.authenticate(new OAuth2UserDetailsAuthenticationToken(resourceOwnerAuthentication.getLoginBody()));
         } catch (AuthenticationException e) {
             throw new OAuth2AuthenticationException(OAuth2ErrorCodes.ACCESS_DENIED);
         }
 
         Set<String> authorizedScopes = registeredClient.getScopes();
-        Set<String> requestedScopes = passwordAuthentication.getScopes();
+        Set<String> requestedScopes = resourceOwnerAuthentication.getScopes();
         if (!CollectionUtils.isEmpty(requestedScopes)) {
             Set<String> unauthorizedScopes = requestedScopes.stream().filter(scope -> !authorizedScopes.contains(scope)).collect(Collectors.toSet());
             if (!CollectionUtils.isEmpty(unauthorizedScopes)) {
@@ -88,11 +86,11 @@ public class OAuth2PasswordAuthenticationProvider implements AuthenticationProvi
         // @formatter:off
         DefaultOAuth2TokenContext.Builder tokenContextBuilder = DefaultOAuth2TokenContext.builder()
                 .registeredClient(registeredClient)
-                .principal(ownerAuthentication)
+                .principal(usernamePasswordAuthentication)
                 .authorizationServerContext(AuthorizationServerContextHolder.getContext())
                 .authorizedScopes(requestedScopes)
                 .authorizationGrantType(AuthorizationGrantType.PASSWORD)
-                .authorizationGrant(passwordAuthentication);
+                .authorizationGrant(resourceOwnerAuthentication);
         // @formatter:on
 
         // ----- Access token -----
@@ -114,10 +112,10 @@ public class OAuth2PasswordAuthenticationProvider implements AuthenticationProvi
 
         // @formatter:off
         OAuth2Authorization.Builder authorizationBuilder = OAuth2Authorization.withRegisteredClient(registeredClient)
-                .principalName(ownerAuthentication.getName())
+                .principalName(usernamePasswordAuthentication.getName())
                 .authorizationGrantType(AuthorizationGrantType.PASSWORD)
                 .authorizedScopes(authorizedScopes)
-                .attribute(Principal.class.getName(), ownerAuthentication);
+                .attribute(Principal.class.getName(), usernamePasswordAuthentication);
         // @formatter:on
 
         if (generatedAccessToken instanceof ClaimAccessor claimAccessor) {
@@ -200,16 +198,6 @@ public class OAuth2PasswordAuthenticationProvider implements AuthenticationProvi
 
     @Override
     public boolean supports(Class<?> authentication) {
-        return OAuth2PasswordAuthenticationToken.class.isAssignableFrom(authentication);
-    }
-
-    private Authentication getOwnerAuthorization(OAuth2PasswordAuthenticationToken authenticationToken) throws AuthenticationException {
-        Map<String, Object> additionalParameters = authenticationToken.getAdditionalParameters();
-
-        String username = (String) additionalParameters.get(OAuth2ParameterNames.USERNAME);
-        String password = (String) additionalParameters.get(OAuth2ParameterNames.PASSWORD);
-
-        UsernamePasswordAuthenticationToken ownerAuthenticationToken = new UsernamePasswordAuthenticationToken(username, password);
-        return authenticationManager.authenticate(ownerAuthenticationToken);
+        return OAuth2ResourceOwnerAuthenticationToken.class.isAssignableFrom(authentication);
     }
 }

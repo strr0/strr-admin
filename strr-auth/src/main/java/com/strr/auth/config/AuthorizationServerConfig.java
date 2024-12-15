@@ -7,12 +7,13 @@ import com.strr.auth.handle.CustomAccessTokenResponseHandler;
 import com.strr.auth.handle.CustomErrorResponseHandler;
 import com.strr.auth.jwt.JwkFactory;
 import com.strr.auth.service.LoginUserService;
+import com.strr.auth.support.OAuth2ResourceOwnerAuthenticationConverter;
+import com.strr.auth.support.OAuth2UserDetailsAuthenticationProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -20,7 +21,7 @@ import org.springframework.security.oauth2.core.OAuth2Token;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationService;
-import org.springframework.security.oauth2.server.authorization.authentication.OAuth2PasswordAuthenticationProvider;
+import org.springframework.security.oauth2.server.authorization.authentication.OAuth2ResourceOwnerAuthenticationProvider;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configuration.OAuth2AuthorizationServerConfiguration;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer;
 import org.springframework.security.oauth2.server.authorization.settings.AuthorizationServerSettings;
@@ -28,8 +29,8 @@ import org.springframework.security.oauth2.server.authorization.settings.Configu
 import org.springframework.security.oauth2.server.authorization.token.*;
 import org.springframework.security.oauth2.server.authorization.web.authentication.OAuth2AuthorizationCodeAuthenticationConverter;
 import org.springframework.security.oauth2.server.authorization.web.authentication.OAuth2ClientCredentialsAuthenticationConverter;
-import org.springframework.security.oauth2.server.authorization.web.authentication.OAuth2PasswordAuthenticationConverter;
 import org.springframework.security.oauth2.server.authorization.web.authentication.OAuth2RefreshTokenAuthenticationConverter;
+import org.springframework.security.web.DefaultSecurityFilterChain;
 import org.springframework.security.web.SecurityFilterChain;
 
 import java.util.HashMap;
@@ -42,8 +43,8 @@ import java.util.Map;
 public class AuthorizationServerConfig {
     @Bean
     public SecurityFilterChain authorizationServerSecurityFilterChain(
-            HttpSecurity http, AuthenticationManager authenticationManager, OAuth2AuthorizationService authorizationService,
-            OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator) throws Exception {
+            HttpSecurity http, OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator,
+            LoginUserService loginUserService, PasswordEncoder passwordEncoder) throws Exception {
 
         OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
 
@@ -54,9 +55,8 @@ public class AuthorizationServerConfig {
                     converters.add(new OAuth2AuthorizationCodeAuthenticationConverter());
                     converters.add(new OAuth2RefreshTokenAuthenticationConverter());
                     converters.add(new OAuth2ClientCredentialsAuthenticationConverter());
-                    converters.add(new OAuth2PasswordAuthenticationConverter());
+                    converters.add(new OAuth2ResourceOwnerAuthenticationConverter());
                 })
-                .authenticationProvider(new OAuth2PasswordAuthenticationProvider(authenticationManager, authorizationService, tokenGenerator))
                 .accessTokenResponseHandler(new CustomAccessTokenResponseHandler())  // 登录成功处理器
                 .errorResponseHandler(new CustomErrorResponseHandler())  // 登录失败处理器
             )
@@ -65,13 +65,20 @@ public class AuthorizationServerConfig {
             })
             .oidc(Customizer.withDefaults());    // Enable OpenID Connect 1.0
         // @formatter:on
+        http.authenticationProvider(new OAuth2UserDetailsAuthenticationProvider(loginUserService, passwordEncoder));  // 处理 OAuth2UserDetailsAuthenticationToken
 
         // @formatter:off
         http.exceptionHandling(exceptions -> {
                 exceptions.accessDeniedHandler(new CustomAccessDeniedHandler());  // 拒绝处理器
             });
         // @formatter:on
-        return http.build();
+
+        DefaultSecurityFilterChain build = http.build();
+        AuthenticationManager authenticationManager = http.getSharedObject(AuthenticationManager.class);
+        OAuth2AuthorizationService authorizationService = http.getSharedObject(OAuth2AuthorizationService.class);
+        http.authenticationProvider(new OAuth2ResourceOwnerAuthenticationProvider(authenticationManager, authorizationService, tokenGenerator));
+
+        return build;
     }
 
     @Bean
@@ -89,11 +96,6 @@ public class AuthorizationServerConfig {
         settings.put(ConfigurationSettingNames.AuthorizationServer.OIDC_USER_INFO_ENDPOINT, auth + "/userinfo");
         settings.put(ConfigurationSettingNames.AuthorizationServer.OIDC_LOGOUT_ENDPOINT, auth + "/connect/logout");
         return AuthorizationServerSettings.withSettings(settings).build();
-    }
-
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
-        return configuration.getAuthenticationManager();
     }
 
     @Bean
