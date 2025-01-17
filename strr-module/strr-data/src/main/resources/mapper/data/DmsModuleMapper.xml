@@ -14,7 +14,6 @@
             <result property="name" column="t_name" />
             <result property="comment" column="t_comment" />
             <result property="remark" column="t_remark" />
-            <result property="status" column="t_status" />
         </association>
         <collection property="columns" ofType="com.strr.data.model.DmsColumn">
             <id property="id" column="c_id" />
@@ -29,7 +28,7 @@
     </resultMap>
 
     <select id="getInfo" resultMap="moduleInfo">
-        select m.id, m.name, m.code, m.path, m.remark, m.status, t.id t_id, t.name t_name, t.comment t_comment, t.remark t_remark, t.status t_status,
+        select m.id, m.name, m.code, m.path, m.remark, m.status, t.id t_id, t.name t_name, t.comment t_comment, t.remark t_remark,
           c.id c_id, c.name c_name, c.comment c_comment, c.pk, c.form, c.visible, c.sort
         from dms_module m
         left join dms_table t on m.table_id = t.id
@@ -43,7 +42,7 @@
     </delete>
 
     <select id="listAll" resultMap="moduleInfo">
-        select m.id, m.name, m.code, m.path, m.remark, m.status, t.id t_id, t.name t_name, t.comment t_comment, t.remark t_remark, t.status t_status,
+        select m.id, m.name, m.code, m.path, m.remark, m.status, t.id t_id, t.name t_name, t.comment t_comment, t.remark t_remark,
           c.id c_id, c.name c_name, c.comment c_comment, c.pk, c.form, c.visible, c.sort
         from dms_module m
         left join dms_table t on m.table_id = t.id
